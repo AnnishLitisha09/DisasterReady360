@@ -134,7 +134,7 @@ export const Otppage = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#FFFFFF', paddingHorizontal: moderateScale(20), paddingTop: moderateScale(30) },
+  container: { flex: 1, backgroundColor: '#F9F9F9', paddingHorizontal: moderateScale(20), paddingTop: moderateScale(30) },
   backButton: { marginTop: moderateScale(10) },
   logo: { width: moderateScale(200), height: moderateScale(200), alignSelf: 'center', marginTop: moderateScale(30), borderRadius: moderateScale(20) },
   title: { fontSize: moderateScale(20), fontWeight: 'bold', color: '#000', textAlign: 'center', marginTop: moderateScale(20) },
