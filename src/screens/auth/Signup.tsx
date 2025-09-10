@@ -29,28 +29,73 @@ export const Signup = () => {
   ];
 
   const states = [
-    { label: 'State X', value: 'State X' },
-    { label: 'State Y', value: 'State Y' },
+    { label: 'Andhra Pradesh', value: 'AP' },
+    { label: 'Arunachal Pradesh', value: 'AR' },
+    { label: 'Assam', value: 'AS' },
+    { label: 'Bihar', value: 'BR' },
+    { label: 'Chhattisgarh', value: 'CG' },
+    { label: 'Goa', value: 'GA' },
+    { label: 'Gujarat', value: 'GJ' },
+    { label: 'Haryana', value: 'HR' },
+    { label: 'Himachal Pradesh', value: 'HP' },
+    { label: 'Jammu and Kashmir', value: 'JK' },
+    { label: 'Jharkhand', value: 'JH' },
+    { label: 'Karnataka', value: 'KA' },
+    { label: 'Kerala', value: 'KL' },
+    { label: 'Madhya Pradesh', value: 'MP' },
+    { label: 'Maharashtra', value: 'MH' },
+    { label: 'Manipur', value: 'MN' },
+    { label: 'Meghalaya', value: 'ML' },
+    { label: 'Mizoram', value: 'MZ' },
+    { label: 'Nagaland', value: 'NL' },
+    { label: 'Odisha', value: 'OR' },
+    { label: 'Punjab', value: 'PB' },
+    { label: 'Rajasthan', value: 'RJ' },
+    { label: 'Sikkim', value: 'SK' },
+    { label: 'Tamil Nadu', value: 'TN' },
+    { label: 'Telangana', value: 'TS' },
+    { label: 'Tripura', value: 'TR' },
+    { label: 'Uttar Pradesh', value: 'UP' },
+    { label: 'Uttarakhand', value: 'UK' },
+    { label: 'West Bengal', value: 'WB' },
   ];
 
   const cities = {
-    'State X': [
-      { label: 'City X1', value: 'City X1' },
-      { label: 'City X2', value: 'City X2' },
-    ],
-    'State Y': [
-      { label: 'City Y1', value: 'City Y1' },
-      { label: 'City Y2', value: 'City Y2' },
-    ],
+    AP: ['Visakhapatnam', 'Vijayawada', 'Guntur', 'Nellore', 'Kurnool'],
+    AR: ['Itanagar', 'Naharlagun', 'Ziro', 'Bomdila', 'Pasighat'],
+    AS: ['Guwahati', 'Dibrugarh', 'Jorhat', 'Tinsukia', 'Silchar'],
+    BR: ['Patna', 'Gaya', 'Bhagalpur', 'Muzaffarpur', 'Darbhanga'],
+    CG: ['Raipur', 'Bilaspur', 'Korba', 'Durg', 'Raigarh'],
+    GA: ['Panaji', 'Margao', 'Vasco da Gama', 'Mapusa', 'Ponda'],
+    GJ: ['Ahmedabad', 'Surat', 'Vadodara', 'Rajkot', 'Bhavnagar'],
+    HR: ['Chandigarh', 'Faridabad', 'Gurgaon', 'Hisar', 'Rohtak'],
+    HP: ['Shimla', 'Dharamshala', 'Kullu', 'Manali', 'Solan'],
+    JK: ['Srinagar', 'Jammu', 'Anantnag', 'Baramulla', 'Kathua'],
+    JH: ['Ranchi', 'Jamshedpur', 'Dhanbad', 'Bokaro', 'Hazaribagh'],
+    KA: ['Bengaluru', 'Mysuru', 'Mangaluru', 'Hubballi', 'Belagavi'],
+    KL: ['Thiruvananthapuram', 'Kochi', 'Kozhikode', 'Kottayam', 'Thrissur'],
+    MP: ['Bhopal', 'Indore', 'Gwalior', 'Jabalpur', 'Ujjain'],
+    MH: ['Mumbai', 'Pune', 'Nagpur', 'Nashik', 'Aurangabad'],
+    MN: ['Imphal', 'Thoubal', 'Kangpokpi', 'Bishnupur', 'Senapati'],
+    ML: ['Shillong', 'Tura', 'Jowai', 'Nongpoh', 'Williamnagar'],
+    MZ: ['Aizawl', 'Lunglei', 'Champhai', 'Serchhip', 'Kolasib'],
+    NL: ['Kohima', 'Dimapur', 'Mokokchung', 'Wokha', 'Mon'],
+    OR: ['Bhubaneswar', 'Cuttack', 'Berhampur', 'Sambalpur', 'Rourkela'],
+    PB: ['Chandigarh', 'Amritsar', 'Ludhiana', 'Jalandhar', 'Patiala'],
+    RJ: ['Jaipur', 'Udaipur', 'Jodhpur', 'Kota', 'Ajmer'],
+    SK: ['Gangtok', 'Namchi', 'Mangan', 'Rangpo', 'Jorethang'],
+    TN: ['Chennai', 'Coimbatore', 'Madurai', 'Tiruchirappalli', 'Salem'],
+    TS: ['Hyderabad', 'Warangal', 'Khammam', 'Nizamabad', 'Karimnagar'],
+    TR: ['Agartala', 'Udaipur', 'Dharmanagar', 'Ambassa', 'Belonia'],
+    UP: ['Lucknow', 'Kanpur', 'Varanasi', 'Agra', 'Meerut'],
+    UK: ['Dehradun', 'Haridwar', 'Nainital', 'Rishikesh', 'Roorkee'],
+    WB: ['Kolkata', 'Siliguri', 'Durgapur', 'Asansol', 'Howrah'],
   };
 
   return (
     <SafeAreaView style={styles.safeContainer}>
       <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigation.goBack()}
-        >
+        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <Arrowback width={moderateScale(24)} height={moderateScale(24)} />
         </TouchableOpacity>
 
@@ -75,12 +120,7 @@ export const Signup = () => {
         {role && (
           <>
             <Text style={styles.label}>Enter your Name</Text>
-            <TextInput
-              style={styles.input}
-              value={name}
-              onChangeText={setName}
-              placeholder="Name"
-            />
+            <TextInput style={styles.input} value={name} onChangeText={setName} placeholder="Name" />
 
             <Text style={styles.label}>Enter your Email</Text>
             <TextInput
@@ -95,7 +135,7 @@ export const Signup = () => {
               <>
                 <Text style={styles.label}>Select Institution</Text>
                 <RNPickerSelect
-                  onValueChange={(value) => setInstitution(value)}
+                  onValueChange={setInstitution}
                   items={institutions}
                   placeholder={{ label: 'Select Institution', value: null }}
                   style={pickerStyle}
@@ -117,8 +157,8 @@ export const Signup = () => {
                   <>
                     <Text style={styles.label}>Select City</Text>
                     <RNPickerSelect
-                      onValueChange={(value) => setCity(value)}
-                      items={cities[state] || []}
+                      onValueChange={setCity}
+                      items={(cities[state] || []).map((c) => ({ label: c, value: c }))}
                       placeholder={{ label: 'Select City', value: null }}
                       style={pickerStyle}
                     />
@@ -147,83 +187,21 @@ export const Signup = () => {
 };
 
 const styles = StyleSheet.create({
-  safeContainer: {
-    flex: 1,
-    backgroundColor: '#F9F9F9',
-    paddingTop: moderateScale(30),
-  },
-  container: {
-    padding: moderateScale(20),
-    paddingBottom: moderateScale(30),
-  },
-  backButton: {
-    marginBottom: moderateScale(20),
-  },
-  heading: {
-    fontSize: moderateScale(24),
-    fontWeight: 'bold',
-    color: '#000',
-    textAlign: 'center',
-    marginBottom: moderateScale(10),
-  },
-  description: {
-    fontSize: moderateScale(14),
-    color: '#333',
-    textAlign: 'center',
-    marginBottom: moderateScale(20),
-  },
-  label: {
-    marginTop: moderateScale(15),
-    marginBottom: moderateScale(5),
-    fontWeight: '600',
-    color: '#000',
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#F0F4F8',
-    padding: moderateScale(10),
-    borderRadius: moderateScale(12),
-    backgroundColor: '#F0F4F8',
-  },
-  button: {
-    marginTop: moderateScale(30),
-    backgroundColor: '#d9673f',
-    padding: moderateScale(15),
-    borderRadius: moderateScale(8),
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: '#fff',
-    fontWeight: '600',
-  },
-  loginContainer: {
-    marginTop: moderateScale(20),
-    alignItems: 'center',
-  },
-  loginText: {
-    fontSize: moderateScale(14),
-    color: '#000',
-  },
-  loginLink: {
-    color: '#E35B33',
-    fontWeight: '600',
-  },
+  safeContainer: { flex: 1, backgroundColor: '#F9F9F9', paddingTop: moderateScale(30) },
+  container: { padding: moderateScale(20), paddingBottom: moderateScale(30) },
+  backButton: { marginBottom: moderateScale(20) },
+  heading: { fontSize: moderateScale(24), fontWeight: 'bold', color: '#000', textAlign: 'center', marginBottom: moderateScale(10) },
+  description: { fontSize: moderateScale(14), color: '#333', textAlign: 'center', marginBottom: moderateScale(20) },
+  label: { marginTop: moderateScale(15), marginBottom: moderateScale(5), fontWeight: '600', color: '#000' },
+  input: { borderWidth: 1, borderColor: '#F0F4F8', padding: moderateScale(10), borderRadius: moderateScale(12), backgroundColor: '#F0F4F8' },
+  button: { marginTop: moderateScale(30), backgroundColor: '#d9673f', padding: moderateScale(15), borderRadius: moderateScale(8), alignItems: 'center' },
+  buttonText: { color: '#fff', fontWeight: '600' },
+  loginContainer: { marginTop: moderateScale(20), alignItems: 'center' },
+  loginText: { fontSize: moderateScale(14), color: '#000' },
+  loginLink: { color: '#E35B33', fontWeight: '600' },
 });
 
 const pickerStyle = {
-  inputIOS: {
-    padding: moderateScale(12),
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: moderateScale(12),
-    backgroundColor: '#F0F4F8',
-  },
-  inputAndroid: {
-    padding: moderateScale(12),
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: moderateScale(12),
-    marginBottom: moderateScale(10),
-    backgroundColor: '#F0F4F8',
-  },
+  inputIOS: { padding: moderateScale(12), borderWidth: 1, borderColor: '#ccc', borderRadius: moderateScale(12), backgroundColor: '#F0F4F8' },
+  inputAndroid: { padding: moderateScale(12), borderWidth: 1, borderColor: '#ccc', borderRadius: moderateScale(12), marginBottom: moderateScale(10), backgroundColor: '#F0F4F8' },
 };
