@@ -2,15 +2,22 @@ import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { moderateScale } from '../../utils/scalingUtils';
+import { useNavigation } from '@react-navigation/native'; // ✅ Import navigation
 
 export const Getstarted = () => {
+  const navigation = useNavigation(); // ✅ Access navigation
+
+  const handleGetStarted = () => {
+    navigation.navigate('Loginpage'); // ✅ Navigate to the Login page
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <LottieView
           source={require('../../assets/lottie/safe.json')}
           autoPlay
-          loop
+          loop={false}
           style={styles.lottie}
         />
 
@@ -23,7 +30,7 @@ export const Getstarted = () => {
             we can all protect ourselves and others.
           </Text>
 
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={handleGetStarted}>
             <Text style={styles.buttonText}>Get Started</Text>
           </TouchableOpacity>
         </View>
@@ -31,6 +38,7 @@ export const Getstarted = () => {
     </SafeAreaView>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -76,7 +84,7 @@ const styles = StyleSheet.create({
     marginTop:moderateScale(20)
   },
   button: {
-    width: moderateScale(283),
+    width: moderateScale(310),
     height: moderateScale(50),
     backgroundColor: '#E35B33',
     borderRadius: moderateScale(56),
