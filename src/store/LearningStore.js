@@ -243,6 +243,237 @@ const initialVideos = [
     image: 'https://imgs.search.brave.com/Z1jy2Ffed7DZR-OKA4sxO7WPoBIN73AHzYNCcPmZHLA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/bm9hYS5nb3Yvc2l0/ZXMvZGVmYXVsdC9m/aWxlcy8yMDIyLTA5/L1J1bUNyZWVrRmly/ZVllbGxvd0phY2tl/dHMuSlBH',
     isViewed: false,
   },
+
+{
+  id: '1',
+  topic: 'flood',
+  topicimg: 'https://example.com/flood-indoors.jpg',
+  title: 'Staying Safe Indoors During a Flood',
+  subtitle: 'Shelter Smartly, Stay Calm',
+  description:
+    'Learn how to remain safe if flooding starts while you are inside your home or building.',
+  keyPoints: [
+    'Move to higher floors or rooftops if water rises.',
+    'Turn off electricity and gas to prevent hazards.',
+    'Keep emergency supplies nearby (food, water, first-aid).',
+    'Avoid contact with floodwater to prevent disease.',
+    'Listen to radio or emergency alerts for updates.'
+  ],
+  duration: '2:51 min',
+  videoId: 'aCSSGYqJqBs',
+  image:'https://imgs.search.brave.com/lnlpwYrWhkFHQC7qwSvDWA0o-mn9GE6eSr1lzlkrUlw/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/Y2RjLmdvdi9mbG9v/ZHMvbWVkaWEvaW1h/Z2VzL3JlZW50ZXJp/bmd5b3VyZmxvb2Rl/ZGhvbWUuanBn',
+  isViewed: true
+},
+{
+  id: '2',
+  topic: 'flood',
+  topicimg: 'https://example.com/flood-evacuation.jpg',
+  title: 'Evacuating Safely During Floods',
+  subtitle: 'Leave Early, Stay Safe',
+  description:
+    'Understand the proper steps to follow when evacuation becomes necessary during flooding.',
+  keyPoints: [
+    'Follow evacuation orders immediately from authorities.',
+    'Carry only essential items and important documents.',
+    'Do not walk or drive through moving floodwaters.',
+    'Help children, elderly, and disabled individuals first.',
+    'Head towards designated safe shelters on higher ground.'
+  ],
+  duration: '4:07 min',
+  videoId: '43M5mZuzHF8',
+  image: 'https://imgs.search.brave.com/Onzp0f5rFfAxiucydZLykIsCkZiU0ygFsjgDrIacKYc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTQ0/MTY0Mzc0MC9waG90/by9mbG9vZHMtaGl0/LWhvbWVzLWFuZC1o/aWdod2F5cy1iZWNh/dXNlLWhpZ2gtcmFp/bmZhbGwtYW5kLWhp/Z2gtdGlkZS1vZi1z/ZWEtd2F0ZXIuanBn/P3M9NjEyeDYxMiZ3/PTAmaz0yMCZjPWRh/bVF3cklkNE5ha3pZ/TmdpbHB3UnhEUWxL/QmFCRVJUeGlnUTEz/Z2NYSnc9',
+  isViewed: true
+},
+{
+  id: '3',
+  topic: 'flood',
+  topicimg: 'https://example.com/flood-outdoors.jpg',
+  title: 'What To Do If Caught Outdoors',
+  subtitle: 'Survive in Open Flood Conditions',
+  description:
+    'Learn survival techniques when a flood occurs and you are outside or traveling.',
+  keyPoints: [
+    'Move to higher ground immediately.',
+    'Avoid low-lying areas, rivers, and drains.',
+    'Stay away from power lines and electrical equipment.',
+    'Use sturdy objects or ropes for support if crossing shallow water is unavoidable.',
+    'Never attempt to swim in strong flood currents.'
+  ],
+  duration: '7:43 min',
+  videoId: 'odUtUlluFmA',
+  image: 'https://imgs.search.brave.com/Zl68oMRAps7mBEzpAPs1JBn_cbdQZVWdarWP1XcR5w8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTY0/ODQ5NDMyNC9waG90/by90YXJwb24tc3By/aW5ncy1mbG9yaWRh/LW1ha2F0bGEtcml0/Y2h0ZXItYW5kLWhl/ci1tb3RoZXIta2Vp/cGhyYS1saW5lLXdh/ZGUtdGhyb3VnaC1m/bG9vZC13YXRlcnMu/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PWdyT3YwbXV5bnhn/RkNvdHJkbk16TE4y/SmtmcmtLQ0hfX2R0/VE12YWxuMWs9',
+  isViewed: true
+},
+{
+  id: '4',
+  topic: 'flood',
+  topicimg: 'https://example.com/flood-children.jpg',
+  title: 'Flood Safety for Families & Children',
+  subtitle: 'Protecting the Vulnerable',
+  description:
+    'Essential flood safety rules designed for children, parents, and families.',
+  keyPoints: [
+    'Teach children not to play near floodwaters.',
+    'Hold hands with young children during evacuation.',
+    'Prepare child-friendly emergency kits with snacks and comfort items.',
+    'Ensure kids know emergency contact numbers.',
+    'Schools should have clear flood evacuation drills.'
+  ],
+  duration: '4:30 min',
+  videoId: 'j4yuzWuMLGQ',
+  image: 'https://imgs.search.brave.com/ZV7NNrTBaaQsQkhx07XAXwvzrWlV7qz39J0-VqxVbh0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvNDU4/MTM2MjUzL3Bob3Rv/L21pZHdlc3QtZmxv/b2QtdmljdGltcy5q/cGc_cz02MTJ4NjEy/Jnc9MCZrPTIwJmM9/UWU0cGdlQm5xVGU3/R1FnaUFaLVc1b19k/d29NZWRtMG1ZekN2/dzFBLUJIYz0',
+  isViewed: true
+},
+{
+  id: '5',
+  topic: 'flood',
+  topicimg: 'https://example.com/flood-after.jpg',
+  title: 'After the Flood: Staying Healthy & Safe',
+  subtitle: 'Recovery Without Risks',
+  description:
+    'Important safety measures to follow after the floodwater recedes.',
+  keyPoints: [
+    'Avoid returning home until authorities declare it safe.',
+    'Boil or purify drinking water to prevent illness.',
+    'Wear gloves and boots when cleaning mud and debris.',
+    'Discard food that came in contact with floodwater.',
+    'Watch for snakes, insects, and hidden hazards in debris.'
+  ],
+  duration: '4:50 min',
+  videoId: 'ypcvGU38OY8',
+  image: 'https://imgs.search.brave.com/-yAQbu1c8CEt1JNPoSNNh080nfR79FQR3qdKemC6Pj4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTI2/MzA1MjA2Ny92ZWN0/b3IvdHN1bmFtaS1j/b25zZXF1ZW5jZXMt/cmVzY3VlLW1hbGUt/ZmVtYWxlLWNoYXJh/Y3Rlci1ldmFjdWF0/aW9uLXNhdmUtaW5m/bGF0YWJsZS1ib2F0/LXBlb3BsZS5qcGc_/cz02MTJ4NjEyJnc9/MCZrPTIwJmM9UTRu/ZE4yQmNxYUs1dGhr/R1RGZGJ1eExZZ1pC/SS10WFRZZjFCeC1Y/eFVtcz0',
+  isViewed: true
+},
+{
+  id: '6',
+  topic: 'flood',
+  topicimg: 'https://example.com/flood-community.jpg',
+  title: 'Community Support in Flood Disasters',
+  subtitle: 'Together We Are Stronger',
+  description:
+    'How communities can unite to recover and support one another during and after floods.',
+  keyPoints: [
+    'Set up local relief centers for food and shelter.',
+    'Coordinate with authorities for rescue operations.',
+    'Distribute clean water and essential medicines.',
+    'Provide psychological support for flood victims.',
+    'Encourage rebuilding with future flood prevention in mind.'
+  ],
+  duration: '7:49 min',
+  videoId: '9IphLkjUZaQ',
+  image: 'https://imgs.search.brave.com/n4BS9tWYWhzaeZjwfrdIzMYuos3rjlDUYhAq3QegSpw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9yZWxp/ZWYtYmFncy1mbG9v/ZC1zdWZmZXJlcnMt/MjIwOTIxOTYuanBn',
+  isViewed: true
+},
+
+
+
+{
+  id: '1',
+  topic: 'cyclone',
+  topicimg: 'https://example.com/cyclone-before.jpg',
+  title: 'Before the Cyclone: Be Prepared',
+  subtitle: 'Readiness Saves Lives',
+  description:
+    'Essential steps to take before a cyclone hits to reduce risks and ensure safety.',
+  keyPoints: [
+    'Secure windows, doors, and loose outdoor items.',
+    'Keep an emergency kit ready with food, water, and medicines.',
+    'Charge your phone and keep power banks ready.',
+    'Know your nearest cyclone shelters or safe locations.',
+    'Stay updated with official cyclone alerts and warnings.'
+  ],
+  duration: '1:55 min',
+  videoId: 'BFtVbuiNgYQ',
+  image: 'https://imgs.search.brave.com/Es9Hmx2GDRYl4UK_MQeNzlZ3NnJ4b8jU24JlgAQZQrA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9uc3Mt/bWFpbi5zMy5hcC1z/b3V0aC0xLmFtYXpv/bmF3cy5jb20vd3At/Y29udGVudC91cGxv/YWRzLzIwMjMvMTIv/MDcxODA2MDMvQmxv/Z0N5Y2xvbmUtMS5q/cGc',
+  isViewed: false,
+},
+
+{
+  id: '2',
+  topic: 'cyclone',
+  topicimg: 'https://example.com/cyclone-during.jpg',
+  title: 'During the Cyclone: Stay Protected',
+  subtitle: 'Survival in the Storm',
+  description:
+    'Safety instructions to follow when a cyclone is in progress.',
+  keyPoints: [
+    'Stay indoors and away from windows.',
+    'Turn off gas, electricity, and water if instructed.',
+    'Listen to radio/official announcements for updates.',
+    'Use flashlights instead of candles to avoid fire hazards.',
+    'Do not step outside until authorities declare it safe.'
+  ],
+  duration: '2.35',
+  videoId: 'sGDeorOg3bQ',
+  image: 'https://imgs.search.brave.com/8TrbKOj5N8Q5Ocf7c7glBe2Ebu-NUj4kV9T1oZxU-W8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvODU3/NTc5MDQvcGhvdG8v/dGVycmEtc2F0ZWxs/aXRlLWltYWdlLW9m/LXRyb3BpY2FsLWN5/Y2xvbmUtaW5ncmlk/LWluLWNvcmFsLXNl/YS5qcGc_cz02MTJ4/NjEyJnc9MCZrPTIw/JmM9QUd1VnpwR0xv/Um85SGRndXhnQ0l4/LXdHdWh0c2liTlFl/LTc5b2djbF9GQT0',
+  isViewed: false,
+},
+
+{
+  id: '3',
+  topic: 'cyclone',
+  topicimg: 'https://example.com/cyclone-after.jpg',
+  title: 'After the Cyclone: Staying Safe',
+  subtitle: 'Recovery and Caution',
+  description:
+    'Tips to follow after a cyclone passes to ensure health and safety.',
+  keyPoints: [
+    'Avoid fallen power lines and damaged structures.',
+    'Do not consume contaminated food or water.',
+    'Wear protective gear while cleaning debris.',
+    'Beware of weakened buildings and flooded areas.',
+    'Assist neighbors and vulnerable individuals if safe.'
+  ],
+  duration: '4:38 min',
+  videoId: 'TqZ3M7xh8jM',
+  image: 'https://imgs.search.brave.com/qNdYxw5zAJGM4K_LA3cgIX0l16HjakikJg2Cs05SDwc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLm5h/dGdlb2ZlLmNvbS9r/LzFkZTVjZWE3LWQy/OTktNDY4NC05YWIw/LWIxNGM4NDYwMDEz/Ni9QYWxtLVRyZWVz/X0h1cnJpY2FuZS1V/cGRhdGVfS0lEU18w/ODIyLmpwZz93PTM3/NCZoPTI0OQ',
+  isViewed: false,
+},
+
+{
+  id: '4',
+  topic: 'cyclone',
+  topicimg: 'https://example.com/cyclone-kit.jpg',
+  title: 'Cyclone Emergency Kit Essentials',
+  subtitle: 'Be Ready Anytime',
+  description:
+    'What to pack in your cyclone survival kit for emergencies.',
+  keyPoints: [
+    'Pack bottled water, dry food, and first aid supplies.',
+    'Keep flashlights, batteries, and power banks ready.',
+    'Carry important documents in waterproof pouches.',
+    'Include extra clothes, blankets, and hygiene items.',
+    'Add whistles, ropes, and multipurpose tools.'
+  ],
+  duration: '3:20 min',
+  videoId: 'p7j9X1OGb7o',
+  image: 'https://imgs.search.brave.com/7VVqol878QXAdOFwsWacH1NlXLL_IwDpbuCV7g2qePM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTMx/NzcyNjgwMS92ZWN0/b3IvZXNzZW50aWFs/LWVtZXJnZW5jeS1r/aXQuanBnP3M9NjEy/eDYxMiZ3PTAmaz0y/MCZjPWZKWU50Ql9E/cUdzVUZXb3JaSzNa/eVh3WDVvTzdkQmpL/MUJNV2tGaHdNc289',
+  isViewed: false,
+},
+
+{
+  id: '5',
+  topic: 'cyclone',
+  topicimg: 'https://example.com/cyclone-community.jpg',
+  title: 'Community Response During Cyclones',
+  subtitle: 'Stronger Together',
+  description:
+    'Guidelines for helping others and working as a community during cyclones.',
+  keyPoints: [
+    'Help evacuate children, elderly, and disabled people.',
+    'Share emergency supplies with neighbors in need.',
+    'Support local rescue teams and follow their directions.',
+    'Stay calm and avoid spreading rumors.',
+    'Report hazards like gas leaks or broken wires immediately.'
+  ],
+  duration: '19:59 min',
+  videoId: '0hMqXQNDAn4',
+  image: 'https://imgs.search.brave.com/62m1z72rqyaCa375a4fxGWtK2fuBkNxIoX3YRlo1WLk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cmVkY3Jvc3Mub3Jn/L2NvbnRlbnQvZGFt/L3JlZGNyb3NzL2Fi/b3V0LXVzL2Rpc2Fz/dGVyLXJlbGllZi9k/aXNhc3Rlci1yZWxp/ZWYtZXJ2LTcxNHg0/MTAuanBnLnRyYW5z/Zm9ybS83NjgvcTcw/L2ZlYXR1cmUvaW1h/Z2UuanBlZw',
+  isViewed: false,
+},
+
+
+
 ];
 
 
@@ -489,7 +720,269 @@ const initialInfographics = [
 
     ],
   },
+
+  {
+  id: '11',
+  topic: 'flood',
+  title: 'Immediate Flood Response',
+  subtitle: 'Act Quickly, Stay Safe',
+  image: 'https://imgs.search.brave.com/We0HRaauzQBVC2pxxdCTfEa4WmLR7q19jWz31gJrC9k/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2UwLzJm/LzljL2UwMmY5Yzhj/MGRhZmI3MjI0N2Rl/YWM3OTE3Y2JlYzE0/LmpwZw',
+  isViewed: false,
+  description:
+    'Guidelines to take immediate action when a flood begins in your area.',
+  keyPoints: [
+    'Move to higher ground immediately.',
+    'Avoid walking or driving through floodwaters.',
+    'Unplug electrical devices if safe to do so.',
+    'Keep emergency supplies ready.',
+    'Stay tuned to weather updates and alerts.',
+  ],
+  infographicsImages: [
+  'https://imgs.search.brave.com/31K-eO4GumKNBbjxhJU7iunfMb9WO1CurIygaG5YQP8/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/YWxlcnRtZWRpYS5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MjMvMDYvQmxvZy1G/bG9vZC1FbWVyZ2Vu/Y3ktUmVzcG9uc2Ut/UGxhbi0xMDI0eDUz/Ni5qcGc',
+  'https://imgs.search.brave.com/gjxfcGVgb1D0jdokhR9OR9DpUpnwu7uIYAUuAZ8JBLQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90cmFw/YmFnLmNvbS93cC1j/b250ZW50L3VwbG9h/ZHMvMjAyNC8wNy9G/YXJnby1GbG9vZC0z/LmpwZw',
+  'https://imgs.search.brave.com/f7UOe-wRJyctpe-DHT0duhPBuetprquJ7-4hexDdoDk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTcw/NDEwODYzNC9waG90/by9pbi10aGlzLXBp/Y3R1cmUtdGFrZW4t/b24tb2N0b2Jlci0y/LXRoYWktbWlsaXRh/cnktcGVyc29ubmVs/cy1jYXJyeS1iZWxv/bmdpbmdzLW9mLWxv/Y2FsLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz03bWF6R2V0/dURUeG1CbTFLMjNn/UDZieENfWHQ2Rm1U/U0tpTFNacDRiaEtN/PQ',
+  'https://imgs.search.brave.com/Zj027pu_F_HtCSjHlZn6EnJJbSLYAag553zxcqm78vo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9kMnY0/c2djMmswMmQ1dC5j/bG91ZGZyb250Lm5l/dC9oeWRyby1jbGVh/bnNpbmcuY29tL21l/ZGlhL3BhZ2VzL2Zs/b29kLXJlc3BvbnNl/L2J1bGstdGFua2Vy/LXJlbW92ZS1mbG9v/ZC1yZXNpZGVudGlh/bC1hcmVhLndlYnA',  
+  ],
+},
+{
+  id: '12',
+  topic: 'flood',
+  title: 'Evacuation Steps During Flood',
+  subtitle: 'Move Smart, Stay Together',
+  image: 'https://imgs.search.brave.com/gb0c6ooQm-MR5AlNT08ltIB8vzMTbpesrue15qGCvVw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTIz/NDIwOTM1Mi9waG90/by9jaGlsZHJlbi13/YWRlLXRocm91Z2gt/Zmxvb2R3YXRlci1u/ZWFyLXRoZS1zaG9y/ZS1vZi10aGUtcG9s/bHV0ZWQtbWFuaWxh/LWJheS1pbi10b25k/by1kaXN0cmljdC5q/cGc_cz02MTJ4NjEy/Jnc9MCZrPTIwJmM9/VDQ0d1hweVliNFF4/Z2hDVUROOXlPU01D/RDZyTHhmcDM0LV9E/bk5XRkRQQT0',
+  isViewed: false,
+  description:
+    'Steps to safely evacuate when floodwaters rise and evacuation is necessary.',
+  keyPoints: [
+    'Follow official evacuation orders immediately.',
+    'Do not wait until it’s too late to move.',
+    'Assist children, elderly, and disabled during evacuation.',
+    'Carry essential documents in waterproof bags.',
+    'Gather at a designated safe shelter point.',
+  ],
+  infographicsImages: [
+  'https://imgs.search.brave.com/yo9OlszRMIsqA-8GDRF937ZmyADYLIZ77st07hR1vHM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9saXZl/LXByb2R1Y3Rpb24u/d2Ntcy5hYmMtY2Ru/Lm5ldC5hdS82M2I2/YWRhMWNlODk5YTYw/NjQ1NTU1YzQ2OWQz/ZDNiYz9pbXBvbGlj/eT13Y21zX2Nyb3Bf/cmVzaXplJmNyb3BI/PTIyNjgmY3JvcFc9/NDAzMiZ4UG9zPTAm/eVBvcz0zNzgmd2lk/dGg9ODYyJmhlaWdo/dD00ODU',
+   'https://imgs.search.brave.com/gDbnkfSE2lhU7UvCkJMhSw-iykHRaQOyM2GiF0dTB50/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/d2VhdGhlci5nb3Yv/aW1hZ2VzL3NhZmV0/eS9rcy1IYWxsb3dl/ZW5mbG9vZC5qcGc',
+   'https://imgs.search.brave.com/8NTkQ4-sTM6xwjGOSys4ItFo1gwxckZp5ubnnMdiWYo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/Z2V0cmVhZHkucWxk/Lmdvdi5hdS9zaXRl/cy9kZWZhdWx0L2Zp/bGVzL3N0eWxlcy90/aWxlc180XzNfL3B1/YmxpYy8yMDIzLTA5/L0Fjb29tbW9kYXRp/b24lMjBzdXBwb3J0/JTIwLSUyMFNFUyUy/MGZsb29kJTIwYm9h/dCUyME1hcnlib3Jv/dWdoLmpwZz9pdG9r/PWFqUUNQN3RC',
+   'https://imgs.search.brave.com/pw1-ODf2-2FadB85i4asZYYnC-L7x5nG80pCwQyZsck/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTI0/MTk3MTgzNy9waG90/by9xaW5nY2hlbmct/Y2hpbmEtanVseS0x/Ni0yMDIyLXJlc2N1/ZXJzLWV2YWN1YXRl/LXZpbGxhZ2Vycy1v/bi1yb3Blcy1hY3Jv/c3MtYS1mbG9vZGVk/LXJpdmVyLWluLmpw/Zz9zPTYxMng2MTIm/dz0wJms9MjAmYz12/V1dIcWxVLUhTY2V1/UWJkQlkwX2ptWmh3/VV9TZzRYa1dKWEhT/b2NEY0Y4PQ', 
+  ],
+},
+{
+  id: '13',
+  topic: 'flood',
+  title: 'If You’re Trapped in Floodwaters',
+  subtitle: 'Survival First',
+  image: 'https://imgs.search.brave.com/i-EY9so0AIOqwEQDsuEs7kUCT8Hh_XFEKDLC5XkGKc4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/bnNzbC5ub2FhLmdv/di9lZHVjYXRpb24v/c3Zyd3gxMDEvZmxv/b2RzL2ltZy9mZW1h/LWZsYXNoZmxvb2Ry/ZXNjdWUtMjAwNy1h/YXJvbmxhdGhhbS02/NDU0NS5qcGc',
+  isViewed: false,
+  description:
+    'Actions to take when trapped in floodwaters and unable to evacuate immediately.',
+  keyPoints: [
+    'Climb to the highest point in your building or area.',
+    'Signal for help using bright cloths or lights.',
+    'Avoid fast-moving water at all costs.',
+    'Use sturdy objects to stay afloat if necessary.',
+    'Stay calm and conserve your energy.',
+  ],
+  infographicsImages: [
+  'https://imgs.search.brave.com/1KKBUQcQ3pjlno7IFe_9abDwiblrd_XGsnS__nk-RbI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzE0LzA5LzE0Lzkx/LzM2MF9GXzE0MDkx/NDkxODFfQ2JmVjNx/bTRDdEZFUmlmUjY5/U043d3V5TnpXcVRj/U1IuanBn',
+  'https://imgs.search.brave.com/i-EY9so0AIOqwEQDsuEs7kUCT8Hh_XFEKDLC5XkGKc4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/bnNzbC5ub2FhLmdv/di9lZHVjYXRpb24v/c3Zyd3gxMDEvZmxv/b2RzL2ltZy9mZW1h/LWZsYXNoZmxvb2Ry/ZXNjdWUtMjAwNy1h/YXJvbmxhdGhhbS02/NDU0NS5qcGc',
+  'https://imgs.search.brave.com/RlTgy9OJMxGyt8TMX6Fb8LgLwxZ1CjVALUcKB-c_Gek/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jbXMu/YWNjdXdlYXRoZXIu/Y29tL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDI1LzA3L0dldHR5/SW1hZ2VzLTU1MzIw/MjQyLmpwZz93PTYz/Mg',
+  'https://imgs.search.brave.com/uuU0p-WaqDZkyEwCk957Q9VGrU1r1LtHD0SD5QLVyk4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jbXMu/YWNjdXdlYXRoZXIu/Y29tL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDI1LzA3L0dldHR5/SW1hZ2VzLTg0MDYy/NTcwMi5qcGc_dz02/MzI',
+    
+  ],
+},
+{
+  id: '14',
+  topic: 'flood',
+  title: 'Flood Safety Equipment',
+  subtitle: 'Be Ready, Stay Equipped',
+  image: 'https://imgs.search.brave.com/lcwKrKa_-fiPkwF5h3fU7FziaQrKSHq0o4_ASTqm4Qk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ucHIu/YnJpZ2h0c3BvdGNk/bi5jb20vZGltczMv/ZGVmYXVsdC9zdHJp/cC9mYWxzZS9jcm9w/LzU1MDN4MzY2OSsw/KzAvcmVzaXplLzEx/MDAvcXVhbGl0eS81/MC9mb3JtYXQvanBl/Zy8_dXJsPWh0dHA6/Ly9ucHItYnJpZ2h0/c3BvdC5zMy5hbWF6/b25hd3MuY29tLzc3/LzU1LzhhMzg1N2I3/NGJlMmI5YjQ5Mjgy/YjgxZjgwMTIvYXAy/NTE4NTg1OTQ3NjY5/NC5qcGc',
+  isViewed: false,
+  description:
+    'Important flood safety tools and supplies to keep ready before a flood.',
+  keyPoints: [
+    'Keep a waterproof emergency kit with food and water.',
+    'Have a battery-powered radio for updates.',
+    'Store important medicines in waterproof containers.',
+    'Keep flashlights and extra batteries ready.',
+    'Stock life jackets and inflatable rafts if in high-risk areas.',
+  ],
+  infographicsImages: [
+  'https://imgs.search.brave.com/bhxhpbY-6vrtMKgItALAo7O8iSNs9FgzmO6WJDEt4xA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly8zLmlt/aW1nLmNvbS9kYXRh/My9YQS9TQy9NWS05/MTE2MjE2L2Zsb29k/LWRpc2FzdGVyLXJl/c2N1ZS1lcXVpcG1l/bnRzLTEwMDB4MTAw/MC5wbmc',
+  'https://imgs.search.brave.com/z0yHf7I4cVDnCRu5Mekzsvdna2Xhszk6hjQWm2V46-k/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/YXNwbGkuY29tL191/cGxvYWRzL2ltZy9w/cm9kdWN0cy9tZWRp/dW0vZmxvb2RzdG9w/LTA5bS0wMDExMDAu/anBn',
+  'https://imgs.search.brave.com/E97tKaXm44BrwbXA1T5KhcMh6UVMQXBnkru2dWE9kY0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvNDU4/NzA4NTQxL3Bob3Rv/L3JpdmVyLXJlc2N1/ZS1rYXlha2VyLXJl/c2N1ZWQtYW5kLWJy/b3VnaHQtYmFjay10/by1zaG9yZS5qcGc_/cz02MTJ4NjEyJnc9/MCZrPTIwJmM9cWNP/QmdodHFkVVlLcjFl/enp3Y2lmT1doYmtw/dXZYX0Y0djRBY3Ni/cVZjTT0',
+  'https://imgs.search.brave.com/VNa8TKAug22MjLuqv0-6EvY_q2cftjbDWyrtDR8xz6E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvODQw/OTk4MzE0L3Bob3Rv/L2Zsb29kLXByb3Rl/Y3Rpb24tc2FuZGJh/Z3Mtd2l0aC1mbG9v/ZGVkLWhvbWVzLWlu/LXRoZS1iYWNrZ3Jv/dW5kLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1fU0NZd3Ns/Q2RiTXp2YmYtS3VC/cHVsOW9sNFJqMUUz/M1pvSVhWZjZCeXVr/PQ',  
   
+  ],
+},
+{
+  id: '15',
+  topic: 'flood',
+  title: 'After the Flood',
+  subtitle: 'Recovery & Caution',
+  image: 'https://imgs.search.brave.com/0rHvKwa-EOsF89TsTqtU-xoLKb5y5ey4JrkqQGhPn20/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzA2Lzc3LzcyLzA2/LzM2MF9GXzY3Nzcy/MDY1NF9tMXBXSTlR/bnJuYzREdWRQdE4w/UzdLUXBQVGtJMXZL/ai5qcGc',
+  isViewed: false,
+  description:
+    'Crucial steps to take after a flood to ensure safety and start recovery.',
+  keyPoints: [
+    'Avoid entering buildings until declared safe.',
+    'Do not touch electrical equipment in wet areas.',
+    'Clean and disinfect everything touched by floodwater.',
+    'Be cautious of weakened roads and bridges.',
+    'Report damages and seek assistance from authorities.',
+  ],
+  infographicsImages: [
+  'https://imgs.search.brave.com/Fx2UM2Ej8b-otvN7JP4QaGnXsDF0OIDugrY5QNq3o-E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cmV1dGVycy5jb20v/cmVzaXplci92Mi9I/SUNEU1FKRUdOSkY1/QlNETkU0WE1SRFFH/VS5qcGc_YXV0aD05/YjgzZjZjZjlhNmI5/MGI2MjFiZTdhZDAx/N2QxYTdhMTI2YTYx/Njk0OTQ3Y2NmYmM5/MTk4NWQ0MzJmMGMx/NWIxJndpZHRoPTEw/ODAmcXVhbGl0eT04/MA',
+  'https://imgs.search.brave.com/DY2QZE9i5BVuZorq3ViDy4H1_14KmEvNzDD_SDtZ18A/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cmV1dGVycy5jb20v/cmVzaXplci92Mi9L/R1g2UjZLWjVKSkpQ/R1NSWUpGN0dHWEFF/NC5qcGc_YXV0aD0w/ZGE3ZjIzNjc2OGUx/NWI4NTNmNTRkNGI0/MWYwZDgyZGJmMGM0/YjU4NzI0ZTkzOTk2/MzRkOTNmNGNhOTgx/ZTM0JndpZHRoPTE5/MjAmcXVhbGl0eT04/MA',
+  'https://imgs.search.brave.com/NajqCt5BNIJVleZN-S_9N4Q4EHRqhgLpuL-9jFpmgxQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5uYmNkZncuY29t/LzIwMjUvMDcvQVAy/NTE4ODYzMjcxMTI5/MC1lMTc1MTkyMTI2/MzU5NC5qcGc_cXVh/bGl0eT04NSZzdHJp/cD1hbGwmZml0PTgy/NTYsNDY1MA',
+  'https://imgs.search.brave.com/38qFfJBCssV-zeiT7tJgm-Vxv02d2GACmRXHfvEMQv8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cmV1dGVycy5jb20v/cmVzaXplci92Mi9I/TlJRTklRV0VaSjRY/TFFMRlJaRVo3Tkc1/US5qcGc_YXV0aD04/ZmUxZDE1M2Y2ZTEw/MGZjZGZiZmMxYTA3/Y2RhZDQzZTJkNGQw/OGVjOTk1MjJkOTQ3/ZmI5NWFhMWM5NWQ3/YjUxJndpZHRoPTEw/ODAmcXVhbGl0eT04/MA'  
+  ],
+},
+{
+  id: '16',
+  topic: 'flood',
+  title: 'Community Support in Floods',
+  subtitle: 'Together We Survive',
+  image: 'https://imgs.search.brave.com/f1c6b7e2SA71w2toQZJaBcdZR8cQWAuYQmG4efG8EPY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzEzLzA3LzA1Lzcx/LzM2MF9GXzEzMDcw/NTcxODBfNmhXdW53/OUlnRzZ3Y2xVTXo5/NldSOXRIVTFGU085/TTQuanBn',
+  isViewed: false,
+  description:
+    'Ways communities can support one another during and after floods.',
+  keyPoints: [
+    'Organize rescue and relief teams.',
+    'Share food, water, and shelter with those in need.',
+    'Assist authorities with information about missing people.',
+    'Support emotional and psychological needs of survivors.',
+    'Promote rebuilding efforts with unity and cooperation.',
+  ],
+  infographicsImages: [
+  'https://imgs.search.brave.com/0eh-n1iB6vOC_2Loz2L-QOmfAOtNgy8BhLvH_wPUvbk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9oYW5k/cy1kaXN0cmlidXRp/bmctd2F0ZXItYm90/dGxlcy1mbG9vZC12/aWN0aW1zLXZvbHVu/dGVlcnMtcHJvdmlk/ZS1lc3NlbnRpYWwt/YWlkLXN1cHBvcnQt/bmF0dXJhbC1kaXNh/c3Rlci1jb21tdW5p/dHktZWZmb3J0LTM4/NzAzMzYyOS5qcGc',
+  'https://imgs.search.brave.com/lEtNvBBgGI2TLsn8-qDq9I01uRTuTulmYYzHk4YY1Dw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by9n/cm91cC1kaWZmZXJl/bnQtcGVvcGxlLXZv/bHVudGVlcmluZy1m/b29kYmFuay1wb29y/LXBlb3BsZV8yMy0y/MTQ5MDEyMjA4Lmpw/Zz9zZW10PWFpc19o/eWJyaWQmdz03NDAm/cT04MA',
+  'https://imgs.search.brave.com/15z_-u9yt0R_iBqkVHMzuC2BL_YmzJFUiZvcCKCl_sg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9mbG9v/ZC1yZWxpZWYtc3Vw/cGx5LTIxNzg2MzI1/LmpwZw',
+  'https://imgs.search.brave.com/69pZGCFRow-GtbRSgklTedTWhJUy31rYALNqA20h6CM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLmFi/Y25ld3NmZS5jb20v/YS85NWIwNTc5YS02/NWY3LTRlMzQtODQ0/OC1jMjFlMjQ3ZThh/MWQvdGV4YXMtZmxv/b2QtNy1ndHktZ21o/LTI1MDcwN18xNzUx/ODkxNjA4MzA1X2hw/TWFpbi5qcGc'  
+  
+  ],
+},
+
+ {
+  id: '17',
+  topic: 'cyclone',
+  title: 'Before the Cyclone',
+  subtitle: 'Preparation is Protection',
+  description:
+    'Steps to take before a cyclone strikes to keep yourself and your family safe.',
+  keyPoints: [
+    'Secure windows, doors, and rooftops.',
+    'Store enough drinking water and food supplies.',
+    'Keep emergency kit and important documents ready.',
+    'Identify nearest cyclone shelter.',
+    'Charge your phone and power banks fully.'
+  ],
+  image:
+    'https://imgs.search.brave.com/pE7tKULPMz4eRTfb4FqgACKdE0U6scBC3wJOPfHDFkA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy8w/LzAxL0ZvcnJlc3Rf/Tm92XzE1XzE5OTJf/MDg1MFoucG5n',
+  infographicsImages: [
+  
+'https://imgs.search.brave.com/CUSIeueMuV8pOJDiPpX2JxAW1ua-GWYhjyqtw2wrdr0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy80/LzRhL0VyaWNrXzIw/MjUtMDYtMTlfMjAy/NV8wNTQwWi5qcGc',
+'https://imgs.search.brave.com/I38O3LmsivelRw8g5Gy3ocPGQE1tr2Jz7Zgnfb9IYRo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTcw/NDU1NzUwL3Bob3Rv/L3N0b3JtLXNlYXNv/bi1jYXV0aW9uLXNp/Z24uanBnP3M9NjEy/eDYxMiZ3PTAmaz0y/MCZjPXc2ZVNrQ2xX/d2txcTZ5UWZJdGhz/N3ZMQlZ0aS1GYVd4/YkgtakhRVFYxRFk9',
+'https://imgs.search.brave.com/LfzjmQsJC8u5gSaPay_0Hvu2I1cUxsiilsKjK8Pb6Pg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTgy/NzY4NTQwL3Bob3Rv/L3BhbG0tdHJlZXMt/Ymxvd2luZy1pbi1h/LXRyb3BpY2FsLXN0/b3JtLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz0yS04xUDJQ/eE9ycmdPcGVvcGRV/V1hfVTRYR1BHY3Ey/NXJEYktNMGZHRDdJ/PQ',    
+  ],
+},
+
+{
+  id: '18',
+  topic: 'cyclone',
+  title: 'During the Cyclone',
+  subtitle: 'Stay Calm, Stay Inside',
+  description:
+    'Guidelines to follow when the cyclone is happening.',
+  keyPoints: [
+    'Stay indoors and away from windows.',
+    'Turn off electricity and gas if advised.',
+    'Do not step outside during strong winds.',
+    'Use battery-powered lights instead of candles.',
+    'Listen to official alerts for updates.'
+  ],
+  image:
+    'https://imgs.search.brave.com/D5lPu4OkCxRjXnWTm41ylT_MKphaI_MMiTupe8A6aY8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTIw/MDE5ODg2Ni9waG90/by93aW5keS1zdG9y/bS1kYXktYW5kLXdh/dmluZy1wYWxtLXRy/ZWVzLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1mbnVPbnNa/NnF3N3d3TlVDbTV5/a2loRExrRW5nRkJr/VVV3SGlJX1owRHJz/PQ',
+  infographicsImages: [
+  'https://imgs.search.brave.com/nuyTBscz-FihfAZXNVtWrXSsL64aoEdrhyXa7jh4b50/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvNDgw/Mzg2MjkwL3Bob3Rv/L3Ryb3BpY2FsLXN0/b3JtLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz0zeGlQMmlY/RWpOc21WSmpCWVls/R012LWpFUUdMeXVa/cU9LQ193anAxUHI4/PQ',
+  'https://imgs.search.brave.com/qipNkoa_-3QRaCrY7ebDmfCi3LxI7YMxONUgDE1cWqI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTE0/NjU1NTMxNi9waG90/by9jeWNsb25lLWZh/bmktaGVhZGluZy10/b3dhcmRzLWluZGlh/LWluLTIwMTktZWxl/bWVudHMtb2YtdGhp/cy1pbWFnZS1mdXJu/aXNoZWQtYnktbmFz/YS5qcGc_cz02MTJ4/NjEyJnc9MCZrPTIw/JmM9YUtjakpRX0ls/cV9xOTZzNWNDNmg1/T01UN0RPWDFYaUY1/V1dLcEZtdWxvND0',
+  'https://imgs.search.brave.com/xnMsVe65bl76rbdinl_zqlO_sl7WhFmIscI5bWBXUNo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTI2/Njc0MzcxNS9waG90/by9wYWJ1ay10eXBo/b29uLW9jZWFuLXNl/YS1zaG9yZS10aGFp/bGFuZC1uYXR1cmFs/LWRpc2FzdGVyLWV5/ZXdhbGwtaHVycmlj/YW5lLXN0cm9uZy1l/eHRyZW1lLmpwZz9z/PTYxMng2MTImdz0w/Jms9MjAmYz0tVEpI/X2pmTlNsZWFvNUtK/endfTnlKeGhITGhs/MTdUcndSZF84aGhR/X0k4PQ', 
+  
+  ],
+},
+
+{
+  id: '19',
+  topic: 'cyclone',
+  title: 'After the Cyclone',
+  subtitle: 'Recovery with Caution',
+  description:
+    'Safety measures to follow once the cyclone has passed.',
+  keyPoints: [
+    'Avoid fallen power lines and damaged poles.',
+    'Do not consume contaminated food or water.',
+    'Wear boots and gloves while cleaning debris.',
+    'Check for structural damage before entering buildings.',
+    'Help neighbors, especially children and elderly.'
+  ],
+  image:
+    'https://imgs.search.brave.com/wtoBH0EleU_vhNZ0QzVj_gFYsoScLToDYzHQiFyCsA0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTA2/MjU4NTgzMC9waG90/by93YXItem9uZS5q/cGc_cz02MTJ4NjEy/Jnc9MCZrPTIwJmM9/MjNmaGhCSDNzbGlw/Y1RfLWdpSjNQWmFI/WW13R0tBd3Y2dTF3/anc4WHJEWT0',
+  infographicsImages: [
+   
+  'https://imgs.search.brave.com/1rR2cY506ErO5dR-sWWicOmP-lHrEwjfICYRQbT4HZI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9saXZl/LXByb2R1Y3Rpb24u/d2Ntcy5hYmMtY2Ru/Lm5ldC5hdS9iNTg1/NDdkZjAyNmM1ZGRm/MDMyNWE3MDIxMWZm/YzMwMD9pbXBvbGlj/eT13Y21zX2Nyb3Bf/cmVzaXplJmNyb3BI/PTk5NCZjcm9wVz0x/NDk1JnhQb3M9MCZ5/UG9zPTAmd2lkdGg9/ODYyJmhlaWdodD01/NzU',
+  'https://imgs.search.brave.com/uh3cyNV0xoDOVEtx3xfZ5xNXj24QE4yYum4W7H_B6SM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTQz/MTQ0MjUxNC9waG90/by9odXJyaWNhbmUt/aWFuLWRlc3Ryb3ll/ZC1ob21lcy1pbi1m/bG9yaWRhLXJlc2lk/ZW50aWFsLWFyZWEt/bmF0dXJhbC1kaXNh/c3Rlci1hbmQtaXRz/LmpwZz9zPTYxMng2/MTImdz0wJms9MjAm/Yz1KcVlUdFZmUlFZ/VlAxdnRLdEZlUDM1/dnhHcFFDVVRUTFNO/LXJEZmxwS3pVPQ',
+  'https://imgs.search.brave.com/dFOOCyPNTm26fH8XQvqz3n-xJJIhGDCxHegi_wGvGCo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pY2hl/Zi5iYmNpLmNvLnVr/L2FjZS9zdGFuZGFy/ZC82NDAvY3BzcHJv/ZHBiL3Zpdm8vbGl2/ZS9pbWFnZXMvMjAy/NC8xMi8xNi8zZmMx/OTRlOS01NTVkLTQ3/ZmItYjJiNC0yZThi/ZmU4YmRkZTIuanBn/LndlYnA',
+  ],
+},
+
+{
+  id: '20',
+  topic: 'cyclone',
+  title: 'Cyclone Emergency Kit',
+  subtitle: 'Pack Smart, Stay Ready',
+  description:
+    'Essential items to keep in your cyclone emergency kit.',
+  keyPoints: [
+    'Store dry food and bottled water.',
+    'Include first aid and basic medicines.',
+    'Pack flashlights, batteries, and power banks.',
+    'Keep documents in waterproof pouches.',
+    'Carry ropes, whistles, and multipurpose tools.'
+  ],
+  image:
+    'https://imgs.search.brave.com/o2wA2YsRabaKdnDgguCQbLo1aMz4wRsVmJQzPQvv4fs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90My5m/dGNkbi5uZXQvanBn/LzEwLzc2LzA2LzU2/LzM2MF9GXzEwNzYw/NjU2MzFfR2hrenB5/eG9zRHFXd0p6ODdv/MTNpR0tDN1ZGTlJ4/VHAuanBn',
+  infographicsImages: [
+  'https://imgs.search.brave.com/8GkuxniXi7Fh8OqavYjLYUy3U_U3nWzKcUL2gUtzfXM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pNS53/YWxtYXJ0aW1hZ2Vz/LmNvbS9zZW8vUHJp/bWFjYXJlLUtCLTgw/MDVXTS1UZWFyLVJl/c2lzdGFudC1GaXJz/dC1BaWQtS2l0LTc1/LVBpZWNlXzcxYTRh/N2NhLTI3YmYtNGE1/OS04Y2VmLWU2ZGYw/MTAxYTc5OS5iNWUy/OTBiNTU0OTUzZDVm/ZjZjNGIxYjE4MWQ2/YzYyMi5qcGVnP29k/bkhlaWdodD01NzYm/b2RuV2lkdGg9NTc2/Jm9kbkJnPUZGRkZG/Rg',
+  'https://imgs.search.brave.com/z593DVUNKGVaxFzybxeAVqDEgrzymaQb-WrUk0EF390/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/bGlmZXNlY3VyZS5j/b20vd3AtY29udGVu/dC91cGxvYWRzLzIw/MTcvMDgvODE4MDAu/anBlZw',
+  'https://imgs.search.brave.com/XW9MnNOa_iB7HhMCb5U-_1YCQpKWninuwPkzrk0wy5k/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9kM2M3/b2R0dG5wN2EyZC5j/bG91ZGZyb250Lm5l/dC91cGxvYWRzL2Nv/bnRlbnRfaXRlbS9y/ZXVzYWJsZS9pbWFn/ZS81NzM4L0VtZXJn/ZW5jeS1ncmFiLWJh/Zy1wcm9tb19kZWZh/dWx0QDJ4LnBuZw', 
+  
+  ],
+},
+
+{
+  id: '21',
+  topic: 'cyclone',
+  title: 'Community Response',
+  subtitle: 'Helping Hands in the Storm',
+  description:
+    'How communities can support each other during and after a cyclone.',
+  keyPoints: [
+    'Assist children, elderly, and disabled during evacuation.',
+    'Share food, water, and supplies if needed.',
+    'Report hazards like gas leaks or broken wires.',
+    'Support rescue and relief workers.',
+    'Avoid spreading rumors and stay calm.'
+  ],
+  image:
+    'https://imgs.search.brave.com/GO1YjCp7IO6wDPjOspYG494zYrQVwvd-6K4IHCcVDYk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy8x/LzExL0h1cnJpY2Fu/ZV9GbG9yZW5jZV8t/XzE4MDkxNi1HLUNa/MDQzLTExNjNfKDQ0/MDYwNDE2MzY0KS5q/cGc',
+  infographicsImages: [
+  'https://imgs.search.brave.com/IzMqlquz2c8ZKkq7408UgIP-Gm4Ip8549pONkCzbF04/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzA5LzIxLzk1Lzkz/LzM2MF9GXzkyMTk1/OTM5NF9OeXdmYTl5/VnR4U3J5SnFMZXpi/Tzl2bmFIbzd6c0Jj/by5qcGc',
+  'https://imgs.search.brave.com/SPTcW857ap04Eu0f2pnusphMhm_f5yEXmVTcVOmcXyY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/Z2V0cmVhZHkucWxk/Lmdvdi5hdS9zaXRl/cy9kZWZhdWx0L2Zp/bGVzL3N0eWxlcy90/aWxlc180XzNfL3B1/YmxpYy8yMDE5LTA5/L1ZvbHVudGVlcmlu/Z18yLmpwZz9pdG9r/PTc0YXZ6MUFr',
+  'https://imgs.search.brave.com/GItm111cnyCMniReLBEUNuM3lj4WKRWL-wTJ86r_HO8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvNDg2/NDc2MTI5L3Bob3Rv/L3NlYXJjaC1hbmQt/cmVzY3VlLmpwZz9z/PTYxMng2MTImdz0w/Jms9MjAmYz1jWHc3/VC1VZ0pBUGlZQUNG/clUxVTQ0eTlpd0sw/cVhXR0V0N0dVVUM2/OXhvPQ'
+    
+  ],
+},
+ 
 ];
 
 const initialQuizzes = [
@@ -513,6 +1006,30 @@ const initialQuizzes = [
       'https://cdn.pixabay.com/photo/2017/01/31/13/14/cartoon-2026571_960_720.png',
     isViewed: true,
   },
+
+  {
+  id: '3',
+  topic: 'flood',
+  title: 'Flood Safety Quiz',
+  questions: '15 questions',
+  points: '400 points',
+  image:
+    'https://cdn.pixabay.com/photo/2016/09/15/15/20/flood-1671554_960_720.png',
+  isViewed: false,
+},
+
+{
+  id: '4',
+  topic: 'cyclone',
+  title: 'Cyclone Safety Quiz',
+  questions: '15 questions',
+  points: '400 points',
+  image:
+    'https://cdn.pixabay.com/photo/2013/07/12/15/37/tornado-150199_960_720.png',
+  isViewed: false,
+},
+
+
 ];
 
 export const useLearningStore = create((set, get) => ({
