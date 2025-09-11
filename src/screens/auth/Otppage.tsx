@@ -15,6 +15,7 @@ import { moderateScale } from '../../utils/scalingUtils';
 import { Arrowback } from '../../assets/icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { saveAuthData } from '../../store/authStorage';
+import { API_BASE_URL } from '../../config/apiConfig';
 
 const { width, height } = Dimensions.get('window');
 
@@ -60,35 +61,38 @@ export const Otppage = () => {
 
   const handleContinue = async () => {
     const enteredOtp = otp.join('');
-
     if (enteredOtp.length < 4) {
-      Alert.alert('Invalid OTP', 'Please enter the 4-digit OTP.');
-      return;
+      return Alert.alert('Invalid OTP', 'Enter the 4-digit OTP.');
     }
 
     try {
-      const response = await fetch('http://10.10.119.173:8000/api/auth/login', {
+      // Step 1: Verify OTP
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, otp: enteredOtp }),
       });
 
       const data = await response.json();
-      console.log('Login response:', data);
 
       if (response.ok && data.message === 'Login successful') {
-        // Save auth data to AsyncStorage
+        const { user_id, token, role } = data;
+
+        // Step 2: Fetch user info to get name
+        const userResponse = await fetch(`${API_BASE_URL}/users/${user_id}`);
+        const userData = await userResponse.json();
+
+        // Step 3: Save full auth data including name
         await saveAuthData({
-          token: data.token,
-          role: data.role,
-          user_id: data.user_id,
+          token,
+          role,
+          user_id,
           email,
+          name: userData.name,
         });
 
-        setTimeout(() => {
-          // Navigate to Loginpage with email and otpVerified
-          navigation.navigate('Loginpage', { email, otpVerified: true });
-        }, 1000);
+        // Navigate to Loginpage
+        navigation.navigate('Loginpage', { email, otpVerified: true });
       } else {
         Alert.alert('Error', data.message || 'Login failed');
       }

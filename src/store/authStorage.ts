@@ -7,6 +7,7 @@ export const saveAuthData = async (data: {
   role: string;
   user_id: number;
   email: string;
+  name?: string; // added optional name
 }) => {
   try {
     await AsyncStorage.setItem(AUTH_KEY, JSON.stringify(data));
