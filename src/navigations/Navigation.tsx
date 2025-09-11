@@ -3,7 +3,12 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { Dashboard, Getstarted, Loginpage, Otppage, Signup, Test } from '../screens';
-// Screens
+import { TeacherProfileScreen } from '../screens/profile/TeacherProfileScreen';
+import { ParentProfileScreen } from '../screens/profile/ParentProfileScreen';
+import { CommunityProfileScreen } from '../screens/profile/CommunityProfileScreen';
+import { StudentProfileScreen } from '../screens/profile/StudentProfileScreen';
+import { Profile } from '../screens/profile';
+
 
 
 const RootStack = createNativeStackNavigator();
@@ -11,14 +16,15 @@ const RootStack = createNativeStackNavigator();
 export const Navigation = () => {
   return (
     <NavigationContainer>
-      <RootStack.Navigator initialRouteName="Dashboard">
-        <RootStack.Screen name="Test" component={Test} options={{ headerShown: false }}/>
+      <RootStack.Navigator  initialRouteName="StudentProfileScreen">
+         <RootStack.Screen name="Test" component={Test} options={{ headerShown: false }}/>
          <RootStack.Screen name="Getstarted" component={Getstarted} options={{ headerShown: false }}/>
          <RootStack.Screen name="Loginpage" component={Loginpage} options={{ headerShown: false }}/>
          <RootStack.Screen name="Otppage" component={Otppage} options={{ headerShown: false }}/>
          <RootStack.Screen name="Signup" component={Signup} options={{ headerShown: false }}/>
-          <RootStack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }}/>
-      </RootStack.Navigator>
+          <RootStack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }}/> 
+          <RootStack.Screen name="profile" component={Profile} options={{ headerShown: false }}/>
+                </RootStack.Navigator>
     </NavigationContainer>
   );
 };
