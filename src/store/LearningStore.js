@@ -20,7 +20,7 @@ const initialVideos = [
     videoId: 'LBquzWQvp_M',
     image:
       'https://thumbs.dreamstime.com/b/incredibly-beautiful-sunset-sun-lake-sunrise-landscape-panorama-nature-sky-amazing-colorful-clouds-fantasy-design-115177001.jpg',
-    isViewed: false,
+    isViewed: true,
   },
   {
   id: '2',
@@ -40,7 +40,7 @@ const initialVideos = [
   duration: '45 min',
   videoId: 'sB3Pq6VqrKM',
   image: 'https://cdn.pixabay.com/photo/2017/01/20/00/30/emergency-1993906_1280.jpg',
-  isViewed: false,
+  isViewed: true,
 },
 {
   id: '3',
@@ -60,7 +60,7 @@ const initialVideos = [
   duration: '30 min',
   videoId: 'Kk6muw9R7O0',
   image: 'https://cdn.pixabay.com/photo/2016/03/09/15/22/city-1246231_1280.jpg',
-  isViewed: false,
+  isViewed: true,
 },
 {
   id: '4',
@@ -80,7 +80,7 @@ const initialVideos = [
   duration: '50 min',
   videoId: '0fKfDbY_p4A',
   image: 'https://cdn.pixabay.com/photo/2016/03/23/18/48/classroom-1276271_1280.jpg',
-  isViewed: false,
+  isViewed: true,
 },
 {
   id: '5',
@@ -100,7 +100,7 @@ const initialVideos = [
   duration: '40 min',
   videoId: 'Xx0gFhFhcy4',
   image: 'https://cdn.pixabay.com/photo/2018/03/04/18/04/demolition-3199136_1280.jpg',
-  isViewed: false,
+  isViewed: true,
 },
 {
   id: '6',
@@ -120,7 +120,7 @@ const initialVideos = [
   duration: '55 min',
   videoId: 'yXkk0gZ1S0Y',
   image: 'https://cdn.pixabay.com/photo/2016/03/27/20/54/refugees-1287351_1280.jpg',
-  isViewed: false,
+  isViewed: true,
 },
 
   {
@@ -202,6 +202,7 @@ const initialQuizzes = [
     points: '500 points',
     image:
       'https://png.pngtree.com/thumb_back/fh260/background/20250205/pngtree-soft-pastel-floral-design-light-blue-background-image_16896113.jpg',
+    isViewed: true,
   },
   {
     id: '2',
@@ -211,6 +212,7 @@ const initialQuizzes = [
     points: '400 points',
     image:
       'https://cdn.pixabay.com/photo/2017/01/31/13/14/cartoon-2026571_960_720.png',
+    isViewed: true,
   },
 ];
 

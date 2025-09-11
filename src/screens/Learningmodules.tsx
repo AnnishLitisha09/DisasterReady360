@@ -43,6 +43,12 @@ export const Learningmodules = () => {
     [quizzesStore, topic]
   );
 
+  // ✅ Dynamic progress calculation
+  const allItems = [...videos, ...infographics, ...quizzes];
+  const totalItems = allItems.length;
+  const completedItems = allItems.filter((item) => item.isViewed).length;
+  const progress = totalItems > 0 ? (completedItems / totalItems) * 100 : 0;
+
   // Video card
   const renderVideo = ({ item, index }) => (
     <TouchableOpacity
@@ -109,9 +115,11 @@ export const Learningmodules = () => {
 
         {/* Progress */}
         <View style={styles.progressSection}>
-          <Text style={styles.progressText}>Completed percentage: 50%</Text>
+          <Text style={styles.progressText}>
+            Completed percentage: {progress.toFixed(0)}%
+          </Text>
           <View style={styles.progressBar}>
-            <View style={styles.progressFill} />
+            <View style={[styles.progressFill, { width: `${progress}%` }]} />
           </View>
         </View>
 
@@ -179,7 +187,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#E0E0E0',
   },
   progressFill: {
-    width: '50%',
     height: '100%',
     backgroundColor: '#E85A2A',
     borderRadius: 10,
