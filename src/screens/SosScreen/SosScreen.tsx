@@ -12,6 +12,7 @@ import Geolocation from "@react-native-community/geolocation";
 import { SosButton } from "../../components";
 import { Arrowback } from "../../assets/icons";
 import { useNavigation } from "@react-navigation/native";
+import { moderateScale } from "../../utils/scalingUtils";
 
 export default function SosScreen() {
   const navigation = useNavigation();
@@ -197,65 +198,66 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    paddingTop: 50,
-    paddingHorizontal: 20,
+    paddingTop: moderateScale(70),
+    paddingHorizontal: moderateScale(20),
   },
   backButton: {
     position: "absolute",
-    top: 40,
-    left: 20,
+    top: moderateScale(70),
+    left: moderateScale(30),
     zIndex: 10,
   },
   locationLabel: {
-    fontSize: 12,
+    fontSize: moderateScale(15),
     color: "#999",
     textAlign: "center",
   },
   locationName: {
-    fontSize: 16,
+    fontSize: moderateScale(16),
     fontWeight: "600",
-    marginBottom: 30,
+    marginBottom: moderateScale(30),
     textAlign: "center",
   },
   title: {
-    fontSize: 24,
+    fontSize: moderateScale(24),
     fontWeight: "700",
     textAlign: "center",
-    marginBottom: 10,
+    marginBottom: moderateScale(10),
     color: "#000",
   },
   subtitle: {
-    fontSize: 14,
+    fontSize: moderateScale(14),
     textAlign: "center",
-    marginBottom: 40,
+    marginBottom: moderateScale(40),
     color: "#333",
   },
   outerCircle: {
-    width: 298,
-    height: 298,
-    borderRadius: 149,
+    width: moderateScale(298),
+    height: moderateScale(298),
+    borderRadius: moderateScale(149),
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 40,
+    marginBottom: moderateScale(40),
   },
   addressBox: {
-    marginTop: 10,
+    marginTop: moderateScale(10),
     width: "100%",
-    paddingVertical: 15,
-    paddingHorizontal: 20,
+    paddingVertical: moderateScale(15),
+    paddingHorizontal: moderateScale(20),
     backgroundColor: "#F6F6F6",
-    borderRadius: 12,
+    borderRadius: moderateScale(12),
     alignItems: "center",
   },
   addressTitle: {
-    fontSize: 12,
+    fontSize: moderateScale(12),
     color: "#888",
-    marginBottom: 4,
+    marginBottom: moderateScale(4),
   },
   addressText: {
-    fontSize: 16,
+    fontSize: moderateScale(16),
     fontWeight: "600",
     color: "#000",
     textAlign: "center",
   },
 });
+
