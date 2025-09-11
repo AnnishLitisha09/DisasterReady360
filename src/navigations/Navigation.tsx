@@ -2,7 +2,7 @@ import React from 'react';
 // Packages
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import { Dashboard, Getstarted, Loginpage, Otppage, Result, Signup, Test } from '../screens';
+import { Dashboard, Getstarted, Infographics, Learningmodules, Loginpage, Otppage, Result, Signup, Test, Veiwvideo } from '../screens';
 // Screens
 
 
@@ -18,7 +18,10 @@ export const Navigation = () => {
          <RootStack.Screen name="Otppage" component={Otppage} options={{ headerShown: false }}/>
          <RootStack.Screen name="Signup" component={Signup} options={{ headerShown: false }}/>
           <RootStack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }}/>
-           <RootStack.Screen name="Result" component={Result} options={{ headerShown: false }}/>
+          <RootStack.Screen name="Learningmodules" component={Learningmodules} options={{ headerShown: false }}/>
+           <RootStack.Screen name="Veiwvideo" component={Veiwvideo} options={{ headerShown: false }}/>
+            <RootStack.Screen name="Infographics" component={Infographics} options={{ headerShown: false }}/>
+            <RootStack.Screen name="Result" component={Result} options={{ headerShown: false }}/>
       </RootStack.Navigator>
     </NavigationContainer>
   );

@@ -3,3 +3,6 @@ export * from './Getstarted';
 export * from './auth';
 export * from './dashboard';
 export * from './quizz'
+export * from './Learningmodules';
+export * from './Veiwvideo'
+export * from './Infographics';
