@@ -12,112 +12,41 @@ import {
 import { moderateScale } from '../utils/scalingUtils';
 import { Arrowback } from '../assets/icons';
 import { useNavigation } from '@react-navigation/native';
+import { useLearningStore } from '../store/LearningStore';
 
 export const Learningmodules = () => {
   const navigation = useNavigation();
 
-  const videos = [
-    {
-      id: '1',
-      title: 'How to Protect Yourself During an Earthquake',
-      subtitle: 'Drop, Cover, Hold on',
-      duration: '60 min',
-      videoId: 'LBquzWQvp_M',
-      image:
-        'https://thumbs.dreamstime.com/b/incredibly-beautiful-sunset-sun-lake-sunrise-landscape-panorama-nature-sky-amazing-colorful-clouds-fantasy-design-115177001.jpg',
-      isViewed: true,
-    },
-    {
-      id: '2',
-      title: 'Evacuation Tips During Earthquake',
-      subtitle: 'Stay Calm and Move Safely',
-      duration: '45 min',
-      videoId: 'GwUh9P0oZpc',
-      image:
-        'https://thumbs.dreamstime.com/b/incredibly-beautiful-sunset-sun-lake-sunrise-landscape-panorama-nature-sky-amazing-colorful-clouds-fantasy-design-115177001.jpg',
-      isViewed: false,
-    },
-  ];
+  // Zustand store state
+  const videos = useLearningStore((state) => state.videos);
+  const infographics = useLearningStore((state) => state.infographics);
+  const quizzes = useLearningStore((state) => state.quizzes);
 
-  const infographics = [
-    {
-      id: '1',
-      title: 'Drop, Cover, Hold on',
-      subtitle: 'Cover the topic properly',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiqHqWHfSLTfTsNRi8xqEjVRoegUZLy5BRUQ&s',
-      isViewed: true,
-      description: 'This infographic teaches the correct procedure during an earthquake to minimize injuries and stay safe.',
-      keyPoints: [
-        'Drop to your hands and knees.',
-        'Cover your head and neck.',
-        'Hold on to something sturdy.',
-        'Stay indoors until the shaking stops.',
-        'Avoid windows and heavy objects.'
-      ],
-      infographicsImages: [
-        "https://images.pexels.com/photos/1563356/pexels-photo-1563356.jpeg",
-        "https://png.pngtree.com/thumb_back/fh260/background/20250205/pngtree-soft-pastel-floral-design-light-blue-background-image_16896113.jpg"
-      ]
-    },
-    {
-      id: '2',
-      title: 'Evacuation Steps',
-      subtitle: 'Stay safe outside',
-      image: 'https://cdn-icons-png.flaticon.com/512/1828/1828961.png',
-      isViewed: false,
-      description: 'Guidelines for safely evacuating a building or area during emergencies like fire or natural disasters.',
-      keyPoints: [
-        'Know your nearest exits.',
-        'Follow evacuation signs.',
-        'Do not use elevators.',
-        'Assist children, elderly, and disabled.',
-        'Assemble at the designated safe zone.'
-      ],
-      infographicsImages: [
-        "https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg",
-        "https://cdn-icons-png.flaticon.com/512/1828/1828961.png"
-      ]
-    },
-  ];
+  const markVideoViewed = useLearningStore((state) => state.markVideoViewed);
+  const markInfographicViewed = useLearningStore((state) => state.markInfographicViewed);
 
-  const quizzes = [
-    {
-      id: '1',
-      title: 'Earthquake Safety Quiz',
-      questions: '20 questions',
-      points: '500 points',
-      image:
-        'https://png.pngtree.com/thumb_back/fh260/background/20250205/pngtree-soft-pastel-floral-design-light-blue-background-image_16896113.jpg',
-    },
-    {
-      id: '2',
-      title: 'Emergency Kit Quiz',
-      questions: '15 questions',
-      points: '400 points',
-      image:
-        'https://cdn.pixabay.com/photo/2017/01/31/13/14/cartoon-2026571_960_720.png',
-    },
-  ];
-
+  // Video card
   const renderVideo = ({ item, index }) => (
     <TouchableOpacity
       style={styles.card}
-      onPress={() =>
-        navigation.navigate('Veiwvideo', { videos, currentIndex: index })
-      }>
+      onPress={() => {
+        markVideoViewed(item.id);
+        navigation.navigate('Veiwvideo', { videos, currentIndex: index });
+      }}
+    >
       <Image source={{ uri: item.image }} style={styles.cardImage} />
       <Text style={styles.cardTitle}>{item.title}</Text>
       <Text style={styles.cardSubtitle}>{item.subtitle}</Text>
       <Text style={styles.cardDuration}>{item.duration}</Text>
-      <TouchableOpacity
-        style={[styles.viewBtn, item.isViewed && styles.completedBtn]}>
+      <View style={[styles.viewBtn, item.isViewed && styles.completedBtn]}>
         <Text style={[styles.viewText, item.isViewed && styles.completedText]}>
           {item.isViewed ? 'Completed' : 'View'}
         </Text>
-      </TouchableOpacity>
+      </View>
     </TouchableOpacity>
   );
 
+  // Infographic card
   const renderInfographic = ({ item }) => (
     <View style={styles.infoCard}>
       <Image source={{ uri: item.image }} style={styles.infoImage} />
@@ -126,7 +55,11 @@ export const Learningmodules = () => {
         <Text style={styles.cardSubtitle}>{item.subtitle}</Text>
         <TouchableOpacity
           style={[styles.viewBtn, item.isViewed && styles.completedBtn]}
-          onPress={() => navigation.navigate('Infographics', { infographic: item })}>
+          onPress={() => {
+            markInfographicViewed(item.id);
+            navigation.navigate('Infographics', { infographic: item });
+          }}
+        >
           <Text style={[styles.viewText, item.isViewed && styles.completedText]}>
             {item.isViewed ? 'Completed' : 'View'}
           </Text>
@@ -135,6 +68,7 @@ export const Learningmodules = () => {
     </View>
   );
 
+  // Quiz card
   const renderQuiz = ({ item }) => (
     <View style={styles.quizCard}>
       <Image source={{ uri: item.image }} style={styles.quizImage} />

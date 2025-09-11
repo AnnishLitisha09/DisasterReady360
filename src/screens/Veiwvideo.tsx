@@ -48,9 +48,9 @@ export const Veiwvideo = () => {
         <Text style={styles.title}>{currentVideo.title}</Text>
         <Text style={styles.time}>{currentVideo.duration}</Text>
         <Text style={styles.sectionTitle}>Description</Text>
-        <Text style={styles.description}>{currentVideo.Description}</Text>
+        <Text style={styles.description}>{currentVideo.description}</Text>
         <Text style={styles.sectionTitle}>Key Points</Text>
-        <Text style={styles.description}>{currentVideo.KeyPoints}</Text>
+        <Text style={styles.description}>{currentVideo.keyPoints}</Text>
       </View>
 
       {/* Button */}
