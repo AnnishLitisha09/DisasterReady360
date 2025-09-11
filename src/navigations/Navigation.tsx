@@ -6,6 +6,8 @@ import { ActivityIndicator, View } from 'react-native';
 // Screens
 import { Dashboard, Getstarted, Infographics, Learningmodules, Loginpage, Otppage, Result, Signup, Test, Veiwvideo } from '../screens';
 import { getAuthData } from '../store/authStorage';
+import { SosButton } from '../components';
+import SosScreen from '../screens/SosScreen/SosScreen';
 
 const RootStack = createNativeStackNavigator();
 
@@ -46,6 +48,7 @@ export const Navigation = () => {
         <RootStack.Screen name="Veiwvideo" component={Veiwvideo} options={{ headerShown: false }}/>
         <RootStack.Screen name="Infographics" component={Infographics} options={{ headerShown: false }}/>
         <RootStack.Screen name="Result" component={Result} options={{ headerShown: false }}/>
+        <RootStack.Screen name="SosScreen" component={SosScreen} options={{ headerShown: false }}/>
       </RootStack.Navigator>
     </NavigationContainer>
   );

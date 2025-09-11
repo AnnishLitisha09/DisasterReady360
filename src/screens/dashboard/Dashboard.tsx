@@ -2,8 +2,11 @@ import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView, Alert, Touchab
 import React, { useEffect, useState } from 'react'
 import { moderateScale } from '../../utils/scalingUtils'
 import { LearningModuleCard, PracticeModuleCard } from '../../components'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native';
+import SosScreen from '../SosScreen/SosScreen';
 import { getAuthData } from '../../store/authStorage'
+
+
 
 export const Dashboard = () => {
   const navigation = useNavigation()
@@ -126,7 +129,7 @@ export const Dashboard = () => {
       {/* Floating SOS Button */}
       <TouchableOpacity
         style={styles.sosButton}
-        onPress={() => Alert.alert('SOS Alert Triggered!')}
+       onPress={() => navigation.navigate('SosScreen')}
       >
         <Text style={styles.sosText}>SOS</Text>
       </TouchableOpacity>
