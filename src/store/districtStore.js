@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { API_BASE_URL } from "../config/apiConfig"; // make sure the path is correct
+import { API_BASE_URL } from "../config/apiConfig";
 
 export const useDistrictStore = create((set) => ({
   districts: [],
@@ -10,10 +10,11 @@ export const useDistrictStore = create((set) => ({
       const response = await fetch(`${API_BASE_URL}/districts`);
       const data = await response.json();
 
+      // Normalize API data -> { label, value, key }
       const formatted = data.map((item) => ({
-        label: item.district || "Unknown", // correct field
-        value: item.id,                     // correct field
-        key: item.id.toString(),            // unique key
+        label: item.district || "Unknown", // ✅ correct field
+        value: item.id,                    // ✅ correct field
+        key: String(item.id),              // ✅ safe toString
       }));
 
       set({ districts: formatted });

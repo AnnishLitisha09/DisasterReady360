@@ -14,6 +14,7 @@ import {
 import { moderateScale } from '../../utils/scalingUtils';
 import { Arrowback } from '../../assets/icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { API_BASE_URL } from '../../config/apiConfig';
 
 export const Loginpage = () => {
   const navigation = useNavigation();
@@ -32,18 +33,41 @@ export const Loginpage = () => {
     if (otpVerifiedFromRoute) setOtpVerified(true);
   }, [emailFromRoute, otpVerifiedFromRoute]);
 
-  const handleVerify = () => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const handleVerify = async () => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (email.trim() === '') {
-      Alert.alert('Error', 'Please enter your email');
-    } else if (!emailRegex.test(email)) {
-      Alert.alert('Error', 'Please enter a valid email address');
-    } else {
-      // Navigate to OTP page with current email
+  if (email.trim() === '') {
+    Alert.alert('Error', 'Please enter your email');
+    return;
+  } else if (!emailRegex.test(email)) {
+    Alert.alert('Error', 'Please enter a valid email address');
+    return;
+  }
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/auth/send-otp`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+
+    const data = await response.json();
+    console.log('OTP response:', data);
+
+    if (response.ok) {
+      Alert.alert('Success', 'OTP sent to your email');
+      setOtpVerified(true); // mark as verified if you want to auto-enable login
+      // Navigate to OTP page
       navigation.navigate('Otppage', { email });
+    } else {
+      Alert.alert('Error', data.message || 'Failed to send OTP');
     }
-  };
+  } catch (error) {
+    console.error('OTP error:', error);
+    Alert.alert('Error', 'Something went wrong while sending OTP');
+  }
+};
+
 
   const handleLogin = () => {
     if (!otpVerified) {

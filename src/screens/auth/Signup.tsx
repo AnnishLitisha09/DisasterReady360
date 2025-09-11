@@ -8,6 +8,7 @@ import {
   ScrollView,
   SafeAreaView,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 import { moderateScale } from "../../utils/scalingUtils";
@@ -23,6 +24,7 @@ export const Signup = () => {
   const [role, setRole] = useState(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const { districts, selectedDistrict, fetchDistricts, setDistrict } =
     useDistrictStore();
@@ -48,7 +50,6 @@ export const Signup = () => {
         return;
       }
       payload.institute_id = selectedInstitute;
-      console.log("Selected Institute ID:", selectedInstitute);
     }
 
     if (role === "community") {
@@ -57,12 +58,13 @@ export const Signup = () => {
         return;
       }
       payload.city_id = selectedDistrict;
-      console.log("Selected District ID:", selectedDistrict);
     }
 
     console.log("Payload sent to backend:", payload);
 
     try {
+      setLoading(true);
+
       const response = await fetch(`${API_BASE_URL}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -81,6 +83,8 @@ export const Signup = () => {
     } catch (error) {
       console.error("Signup error:", error);
       Alert.alert("Error", "Failed to register user");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -102,14 +106,15 @@ export const Signup = () => {
           Welcome to Disaster Ready 360, enter your details below to continue.
         </Text>
 
+        {/* Role Picker */}
         <Text style={styles.label}>Select your role</Text>
         <RNPickerSelect
           onValueChange={(value) => setRole(value)}
           items={[
-            { label: "Student", value: "student", key: "student" },
-            { label: "Teacher", value: "teacher", key: "teacher" },
-            { label: "Parent", value: "parent", key: "parent" },
-            { label: "Community", value: "community", key: "community" },
+            { label: "Student", value: "student" },
+            { label: "Teacher", value: "teacher" },
+            { label: "Parent", value: "parent" },
+            { label: "Community", value: "community" },
           ]}
           placeholder={{ label: "Select your role", value: null }}
           style={pickerStyle}
@@ -139,11 +144,7 @@ export const Signup = () => {
                 <Text style={styles.label}>Select Institution</Text>
                 <RNPickerSelect
                   onValueChange={(value) => setSelectedInstitute(value)}
-                  items={institutes.map((i) => ({
-                    label: i.name,
-                    value: i.id,
-                    key: i.id.toString(),
-                  }))}
+                  items={institutes} // ✅ already normalized in store
                   value={selectedInstitute}
                   placeholder={{ label: "Select Institution", value: null }}
                   style={pickerStyle}
@@ -156,7 +157,7 @@ export const Signup = () => {
                 <Text style={styles.label}>Select District</Text>
                 <RNPickerSelect
                   onValueChange={(value) => setDistrict(value)}
-                  items={districts}
+                  items={districts} // ✅ already formatted in store
                   value={selectedDistrict}
                   placeholder={{ label: "Select District", value: null }}
                   style={pickerStyle}
@@ -166,8 +167,16 @@ export const Signup = () => {
           </>
         )}
 
-        <TouchableOpacity style={styles.button} onPress={handleSignup}>
-          <Text style={styles.buttonText}>Create your account</Text>
+        <TouchableOpacity
+          style={[styles.button, loading && { opacity: 0.7 }]}
+          onPress={handleSignup}
+          disabled={loading}
+        >
+          {loading ? (
+            <ActivityIndicator color="#fff" />
+          ) : (
+            <Text style={styles.buttonText}>Create your account</Text>
+          )}
         </TouchableOpacity>
 
         <View style={styles.loginContainer}>
