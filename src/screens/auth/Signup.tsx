@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
   SafeAreaView,
+  Alert,
 } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 import { moderateScale } from "../../utils/scalingUtils";
@@ -14,6 +15,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Arrowback } from "../../assets/icons";
 import { useDistrictStore } from "../../store/districtStore";
 import { useInstituteStore } from "../../store/instituteStore";
+import { API_BASE_URL } from "../../config/apiConfig";
 
 export const Signup = () => {
   const navigation = useNavigation();
@@ -22,27 +24,65 @@ export const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
-  const { districts, fetchDistricts, setDistrict } = useDistrictStore();
-  const {
-    institutes,
-    fetchInstitutes,
-    selectedInstitute,
-    setSelectedInstitute,
-  } = useInstituteStore();
+  const { districts, selectedDistrict, fetchDistricts, setDistrict } =
+    useDistrictStore();
+  const { institutes, selectedInstitute, fetchInstitutes, setSelectedInstitute } =
+    useInstituteStore();
 
-  // Fetch districts when role is community
   useEffect(() => {
-    if (role === "community") {
-      fetchDistricts();
-    }
+    if (role === "community") fetchDistricts();
+    if (role === "student" || role === "teacher") fetchInstitutes();
   }, [role]);
 
-  // Fetch institutes when role is student or teacher
-  useEffect(() => {
+  const handleSignup = async () => {
+    if (!role || !name || !email) {
+      Alert.alert("Error", "Please fill all required fields");
+      return;
+    }
+
+    let payload = { name, email, role };
+
     if (role === "student" || role === "teacher") {
-      fetchInstitutes();
+      if (!selectedInstitute) {
+        Alert.alert("Error", "Please select an institution");
+        return;
+      }
+      payload.institute_id = selectedInstitute;
+      console.log("Selected Institute ID:", selectedInstitute);
     }
-  }, [role]);
+
+    if (role === "community") {
+      if (!selectedDistrict) {
+        Alert.alert("Error", "Please select a district");
+        return;
+      }
+      payload.city_id = selectedDistrict;
+      console.log("Selected District ID:", selectedDistrict);
+    }
+
+    console.log("Payload sent to backend:", payload);
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+      console.log("Signup response:", data);
+
+      if (response.ok) {
+        Alert.alert("Success", "Account created successfully!");
+        navigation.navigate("Loginpage");
+      } else {
+        Alert.alert("Error", data.message || "Something went wrong!");
+      }
+    } catch (error) {
+      console.error("Signup error:", error);
+      Alert.alert("Error", "Failed to register user");
+    }
+  };
 
   return (
     <SafeAreaView style={styles.safeContainer}>
@@ -66,10 +106,10 @@ export const Signup = () => {
         <RNPickerSelect
           onValueChange={(value) => setRole(value)}
           items={[
-            { label: "Student", value: "student" },
-            { label: "Teacher", value: "teacher" },
-            { label: "Parent", value: "parent" },
-            { label: "Community", value: "community" },
+            { label: "Student", value: "student", key: "student" },
+            { label: "Teacher", value: "teacher", key: "teacher" },
+            { label: "Parent", value: "parent", key: "parent" },
+            { label: "Community", value: "community", key: "community" },
           ]}
           placeholder={{ label: "Select your role", value: null }}
           style={pickerStyle}
@@ -98,11 +138,12 @@ export const Signup = () => {
               <>
                 <Text style={styles.label}>Select Institution</Text>
                 <RNPickerSelect
-                  onValueChange={(value) => {
-                    setSelectedInstitute(value);
-                    console.log("Selected Institute ID:", value);
-                  }}
-                  items={institutes}
+                  onValueChange={(value) => setSelectedInstitute(value)}
+                  items={institutes.map((i) => ({
+                    label: i.name,
+                    value: i.id,
+                    key: i.id.toString(),
+                  }))}
                   value={selectedInstitute}
                   placeholder={{ label: "Select Institution", value: null }}
                   style={pickerStyle}
@@ -114,11 +155,9 @@ export const Signup = () => {
               <>
                 <Text style={styles.label}>Select District</Text>
                 <RNPickerSelect
-                  onValueChange={(value) => {
-                    setDistrict(value);
-                    console.log("Selected District:", value);
-                  }}
+                  onValueChange={(value) => setDistrict(value)}
                   items={districts}
+                  value={selectedDistrict}
                   placeholder={{ label: "Select District", value: null }}
                   style={pickerStyle}
                 />
@@ -127,7 +166,7 @@ export const Signup = () => {
           </>
         )}
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={handleSignup}>
           <Text style={styles.buttonText}>Create your account</Text>
         </TouchableOpacity>
 
