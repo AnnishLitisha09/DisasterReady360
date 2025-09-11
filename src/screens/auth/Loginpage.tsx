@@ -10,72 +10,83 @@ import {
   Switch,
   Alert,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import { moderateScale } from '../../utils/scalingUtils';
 import { Arrowback } from '../../assets/icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { API_BASE_URL } from '../../config/apiConfig';
+import { getAuthData } from '../../store/authStorage';
 
 export const Loginpage = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
-  // Get email and OTP status from route params
   const emailFromRoute = route.params?.email || '';
   const otpVerifiedFromRoute = route.params?.otpVerified || false;
 
   const [remember, setRemember] = useState(false);
   const [email, setEmail] = useState(emailFromRoute);
   const [otpVerified, setOtpVerified] = useState(otpVerifiedFromRoute);
+  const [loadingVerify, setLoadingVerify] = useState(false); // ✅ new state
 
   useEffect(() => {
     if (emailFromRoute) setEmail(emailFromRoute);
     if (otpVerifiedFromRoute) setOtpVerified(true);
   }, [emailFromRoute, otpVerifiedFromRoute]);
 
-const handleVerify = async () => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const handleVerify = async () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  if (email.trim() === '') {
-    Alert.alert('Error', 'Please enter your email');
-    return;
-  } else if (!emailRegex.test(email)) {
-    Alert.alert('Error', 'Please enter a valid email address');
-    return;
-  }
-
-  try {
-    const response = await fetch(`${API_BASE_URL}/auth/send-otp`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email }),
-    });
-
-    const data = await response.json();
-    console.log('OTP response:', data);
-
-    if (response.ok) {
-      Alert.alert('Success', 'OTP sent to your email');
-      setOtpVerified(true); // mark as verified if you want to auto-enable login
-      // Navigate to OTP page
-      navigation.navigate('Otppage', { email });
-    } else {
-      Alert.alert('Error', data.message || 'Failed to send OTP');
-    }
-  } catch (error) {
-    console.error('OTP error:', error);
-    Alert.alert('Error', 'Something went wrong while sending OTP');
-  }
-};
-
-
-  const handleLogin = () => {
-    if (!otpVerified) {
-      Alert.alert('Error', 'Please verify your email first.');
+    if (email.trim() === '') {
+      Alert.alert('Error', 'Please enter your email');
+      return;
+    } else if (!emailRegex.test(email)) {
+      Alert.alert('Error', 'Please enter a valid email address');
       return;
     }
-    navigation.navigate('Home');
+
+    try {
+      setLoadingVerify(true); // start loading
+      const response = await fetch(`${API_BASE_URL}/auth/send-otp`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+      console.log('OTP response:', data);
+
+      if (response.ok) {
+        // Alert.alert('Success', 'OTP sent to your email');
+        setOtpVerified(true);
+        navigation.navigate('Otppage', { email });
+      } else {
+        Alert.alert('Error', data.message || 'Failed to send OTP');
+      }
+    } catch (error) {
+      console.error('OTP error:', error);
+      Alert.alert('Error', 'Something went wrong while sending OTP');
+    } finally {
+      setLoadingVerify(false); // stop loading
+    }
   };
+
+const handleLogin = async () => {
+  try {
+    const auth = await getAuthData();
+
+    if (auth?.token && auth?.user_id) {
+      // Token exists → navigate to Home
+      navigation.navigate('Dashboard');
+    } else {
+      Alert.alert('Error', 'OTP not verified or invalid login.');
+    }
+  } catch (error) {
+    console.error('Login check error:', error);
+    Alert.alert('Error', 'Something went wrong while checking login.');
+  }
+};
 
   return (
     <SafeAreaView style={styles.container}>
@@ -108,21 +119,26 @@ const handleVerify = async () => {
             placeholder="Enter your email"
             style={styles.input}
             placeholderTextColor="#A4A8AE"
-            value={email} // Show email from route
+            value={email}
             onChangeText={setEmail}
           />
+
           <TouchableOpacity
             onPress={handleVerify}
-            disabled={otpVerified} // Disable if already verified
+            disabled={otpVerified || loadingVerify}
           >
-            <Text
-              style={[
-                styles.verifyText,
-                otpVerified && { color: 'green' },
-              ]}
-            >
-              {otpVerified ? 'Verified' : 'Verify'}
-            </Text>
+            {loadingVerify ? (
+              <ActivityIndicator size="small" color="#E35B33" />
+            ) : (
+              <Text
+                style={[
+                  styles.verifyText,
+                  otpVerified && { color: 'green' },
+                ]}
+              >
+                {otpVerified ? 'Verified' : 'Verify'}
+              </Text>
+            )}
           </TouchableOpacity>
         </View>
 
@@ -148,25 +164,21 @@ const handleVerify = async () => {
         </TouchableOpacity>
 
         <Text style={styles.footerText}>
-  Don’t have an account?{' '}
-  <Text
-    style={styles.signUp}
-    onPress={() => navigation.navigate('Signup')}
-  >
-    SIGN UP
-  </Text>
-</Text>
-
+          Don’t have an account?{' '}
+          <Text
+            style={styles.signUp}
+            onPress={() => navigation.navigate('Signup')}
+          >
+            SIGN UP
+          </Text>
+        </Text>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F9F9F9',
-  },
+  container: { flex: 1, backgroundColor: '#F9F9F9' },
   scrollContainer: {
     paddingHorizontal: moderateScale(20),
     paddingTop: moderateScale(30),
