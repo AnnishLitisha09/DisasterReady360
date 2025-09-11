@@ -11,7 +11,7 @@ const RootStack = createNativeStackNavigator();
 export const Navigation = () => {
   return (
     <NavigationContainer>
-      <RootStack.Navigator initialRouteName="Result">
+      <RootStack.Navigator initialRouteName="Dashboard">
         <RootStack.Screen name="Test" component={Test} options={{ headerShown: false }}/>
          <RootStack.Screen name="Getstarted" component={Getstarted} options={{ headerShown: false }}/>
          <RootStack.Screen name="Loginpage" component={Loginpage} options={{ headerShown: false }}/>
