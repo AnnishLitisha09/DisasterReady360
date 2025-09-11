@@ -3,7 +3,7 @@ import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { Dashboard, Getstarted, Loginpage, Otppage, Signup, Test } from '../screens';
-// Screens
+import SosScreen from '../screens/SosScreen/SosScreen';
 
 
 const RootStack = createNativeStackNavigator();
@@ -18,6 +18,12 @@ export const Navigation = () => {
          <RootStack.Screen name="Otppage" component={Otppage} options={{ headerShown: false }}/>
          <RootStack.Screen name="Signup" component={Signup} options={{ headerShown: false }}/>
           <RootStack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }}/>
+          <RootStack.Screen
+  name="SosScreen"
+  component={SosScreen}
+  options={{ headerShown: false }}
+/>
+
       </RootStack.Navigator>
     </NavigationContainer>
   );
