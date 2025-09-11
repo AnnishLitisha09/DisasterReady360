@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { moderateScale } from '../../utils/scalingUtils'
 
-export const LearningModuleCard = ({ title, imageUrl, progress }) => {
+export const LearningModuleCard = ({ title, imageUrl, progress, onPress }) => {
   return (
-    <View style={styles.card}>
+    <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.8}>
       {/* Title */}
       <Text style={styles.title}>{title}</Text>
 
@@ -22,7 +22,7 @@ export const LearningModuleCard = ({ title, imageUrl, progress }) => {
       <View style={styles.progressWrapper}>
         <View style={[styles.progressBar, { width: `${progress}%` }]} />
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 
@@ -38,10 +38,9 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
-    elevation:4,
+    elevation: 4,
     padding: moderateScale(10),
-    marginRight: moderateScale(20)
-
+    marginRight: moderateScale(20),
   },
   title: {
     fontSize: moderateScale(14),

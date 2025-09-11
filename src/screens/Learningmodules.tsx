@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   StyleSheet,
   Text,
@@ -11,19 +11,37 @@ import {
 } from 'react-native';
 import { moderateScale } from '../utils/scalingUtils';
 import { Arrowback } from '../assets/icons';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import { useLearningStore } from '../store/LearningStore';
 
 export const Learningmodules = () => {
   const navigation = useNavigation();
+  const route = useRoute();
+  const { topic } = route.params;
 
-  // Zustand store state
-  const videos = useLearningStore((state) => state.videos);
-  const infographics = useLearningStore((state) => state.infographics);
-  const quizzes = useLearningStore((state) => state.quizzes);
+  // ✅ Access store state only once
+  const videosStore = useLearningStore((state) => state.videos);
+  const infographicsStore = useLearningStore((state) => state.infographics);
+  const quizzesStore = useLearningStore((state) => state.quizzes);
 
   const markVideoViewed = useLearningStore((state) => state.markVideoViewed);
   const markInfographicViewed = useLearningStore((state) => state.markInfographicViewed);
+
+  // ✅ Memoize filtered data to prevent infinite loops
+  const videos = useMemo(
+    () => videosStore.filter((v) => v.topic === topic),
+    [videosStore, topic]
+  );
+
+  const infographics = useMemo(
+    () => infographicsStore.filter((i) => i.topic === topic),
+    [infographicsStore, topic]
+  );
+
+  const quizzes = useMemo(
+    () => quizzesStore.filter((q) => q.topic === topic),
+    [quizzesStore, topic]
+  );
 
   // Video card
   const renderVideo = ({ item, index }) => (
@@ -86,7 +104,7 @@ export const Learningmodules = () => {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Arrowback width={24} height={24} fill="#fff" />
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>Earthquake Module</Text>
+          <Text style={styles.headerTitle}>{topic.toUpperCase()} Module</Text>
         </View>
 
         {/* Progress */}

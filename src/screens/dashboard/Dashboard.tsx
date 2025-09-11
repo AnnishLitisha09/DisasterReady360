@@ -2,8 +2,11 @@ import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView, Alert, Touchab
 import React from 'react'
 import { moderateScale } from '../../utils/scalingUtils'
 import { LearningModuleCard, PracticeModuleCard } from '../../components'
+import { useNavigation } from '@react-navigation/native'
 
 export const Dashboard = () => {
+  const navigation = useNavigation()
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -54,24 +57,28 @@ export const Dashboard = () => {
           <View style={styles.modulesContainer}>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <LearningModuleCard
-                title="React"
-                imageUrl="https://reactnative.dev/img/tiny_logo.png"
+                title="Earthquake"
+                imageUrl="https://cdn-icons-png.flaticon.com/512/854/854929.png"
                 progress={65}
+                onPress={() => navigation.navigate('Learningmodules', { topic: 'earthquake' })}
               />
               <LearningModuleCard
-                title="Node.js"
-                imageUrl="https://nodejs.org/static/images/logo.svg"
+                title="Fire"
+                imageUrl="https://t3.ftcdn.net/jpg/02/35/26/30/360_F_235263034_miJw2igmixo7ymCqhHZ7c8wp9kaujzfM.jpg"
                 progress={40}
+                onPress={() => navigation.navigate('Learningmodules', { topic: 'fire' })}
               />
               <LearningModuleCard
-                title="Python"
-                imageUrl="https://www.python.org/static/community_logos/python-logo.png"
+                title="Flood"
+                imageUrl="https://cdn-icons-png.flaticon.com/512/3439/3439089.png"
                 progress={80}
+                onPress={() => navigation.navigate('Learningmodules', { topic: 'flood' })}
               />
               <LearningModuleCard
-                title="Java"
-                imageUrl="https://cdn-icons-png.flaticon.com/512/226/226777.png"
+                title="Cyclone"
+                imageUrl="https://www.shutterstock.com/image-vector/icon-tornadoes-linear-flat-style-600nw-552867940.jpg"
                 progress={55}
+                onPress={() => navigation.navigate('Learningmodules', { topic: 'cyclone' })}
               />
             </ScrollView>
           </View>
@@ -118,10 +125,7 @@ export const Dashboard = () => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F9F9F9',
-  },
+  container: { flex: 1, backgroundColor: '#F9F9F9' },
   header: {
     width: '100%',
     height: 274,
@@ -134,16 +138,8 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: moderateScale(70),
     position: 'relative',
   },
-  greeting: {
-    color: '#fff',
-    fontSize: moderateScale(30),
-    fontWeight: 'bold',
-  },
-  logo: {
-    width: moderateScale(70),
-    height: moderateScale(70),
-    borderRadius: moderateScale(50),
-  },
+  greeting: { color: '#fff', fontSize: moderateScale(30), fontWeight: 'bold' },
+  logo: { width: moderateScale(70), height: moderateScale(70), borderRadius: moderateScale(50) },
   achievementsBox: {
     position: 'absolute',
     bottom: moderateScale(-85),
@@ -159,38 +155,18 @@ const styles = StyleSheet.create({
     elevation: 6,
     padding: moderateScale(15),
   },
-  modulesContainer: {
-    height: moderateScale(180),
-  },
+  modulesContainer: { height: moderateScale(180) },
   achievementsTitle: {
     fontSize: moderateScale(18),
     fontWeight: '700',
     color: '#000',
     marginBottom: moderateScale(15),
   },
-  achievementsRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
-  item: {
-    alignItems: 'center',
-  },
-  icon: {
-    width: moderateScale(50),
-    height: moderateScale(50),
-    marginBottom: moderateScale(5),
-  },
-  infoText: {
-    fontSize: moderateScale(14),
-    fontWeight: '500',
-    color: '#333',
-    textAlign: 'center',
-  },
-  learningWrapper: {
-    marginTop: moderateScale(100),
-    paddingHorizontal: moderateScale(20),
-  },
+  achievementsRow: { flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' },
+  item: { alignItems: 'center' },
+  icon: { width: moderateScale(50), height: moderateScale(50), marginBottom: moderateScale(5) },
+  infoText: { fontSize: moderateScale(14), fontWeight: '500', color: '#333', textAlign: 'center' },
+  learningWrapper: { marginTop: moderateScale(100), paddingHorizontal: moderateScale(20) },
   learningHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -198,16 +174,8 @@ const styles = StyleSheet.create({
     marginBottom: moderateScale(15),
     marginTop: moderateScale(10),
   },
-  learningText: {
-    fontSize: moderateScale(20),
-    fontWeight: '700',
-    color: '#000',
-  },
-  viewAll: {
-    fontSize: moderateScale(14),
-    fontWeight: '600',
-    color: '#E35B33',
-  },
+  learningText: { fontSize: moderateScale(20), fontWeight: '700', color: '#000' },
+  viewAll: { fontSize: moderateScale(14), fontWeight: '600', color: '#E35B33' },
   sosButton: {
     position: 'absolute',
     bottom: moderateScale(30),
@@ -224,9 +192,5 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 4,
   },
-  sosText: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: moderateScale(18),
-  },
+  sosText: { color: '#fff', fontWeight: 'bold', fontSize: moderateScale(18) },
 })
