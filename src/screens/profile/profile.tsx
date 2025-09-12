@@ -1,24 +1,38 @@
 // screens/Profile.tsx
 import React, { useState, useEffect } from "react";
 import {
-  View, Text, StyleSheet, ScrollView, TouchableOpacity,
-  Image, Alert, SafeAreaView, StatusBar, FlatList,
-  PermissionsAndroid, Platform,
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+  Alert,
+  SafeAreaView,
+  StatusBar,
+  FlatList,
+  PermissionsAndroid,
+  Platform,
 } from "react-native";
 import { FieldBox } from "../../components/FieldBox";
 import { launchImageLibrary } from "react-native-image-picker";
 import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import { Camera } from "../../assets/icons/camera";
+import { Arrowback } from "../../assets/icons"; // ✅ import Arrowback
 import { moderateScale } from "../../utils/scalingUtils";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getAuthData } from "../../store/authStorage";
+import { useNavigation } from "@react-navigation/native"; // ✅ navigation
 
-const avatarImg = require("../../assets/images/badge.png");
+const avatarImg = {
+  uri: "https://static.vecteezy.com/system/resources/thumbnails/029/271/062/small_2x/avatar-profile-icon-in-flat-style-male-user-profile-illustration-on-isolated-background-man-profile-sign-business-concept-vector.jpg",
+};
+
 type Role = "student" | "teacher" | "parent" | "community" | "schoolAdmin";
 
-// ✅ Removed all Id fields
 const roleFields: { [K in Role]: string[] } = {
-  student: ["Name", "Email", "Date of Birth", "City"],
-  teacher: ["Name", "Email"],
+  student: ["Name", "Email", "Institution Name", "Date of Birth"],
+  teacher: ["Name", "Email", "Institution Name"],
   parent: ["Name", "Email"],
   community: ["Name", "Email", "City"],
   schoolAdmin: ["Name", "Email"],
@@ -28,23 +42,38 @@ const cityOptions = ["Sathy", "Chennai", "Coimbatore", "Salem", "Madurai", "Bang
 const STORAGE_KEY = "@profile_data";
 
 export default function Profile(): JSX.Element {
-  const [role] = useState<Role>("community");
+  const navigation = useNavigation();
+  const [role, setRole] = useState<Role>("teacher");
   const [formData, setFormData] = useState<Record<string, string>>({
-    Name: "Melissa Peters",
-    Email: "melpeters@gmail.com",
-    Password: "password123",
+    Name: "",
+    Email: "",
+    Password: "",
     "Date of Birth": "",
-    City: "Sathy",
+    City: "",
+    "Institution Name": "",
   });
   const [avatarUri, setAvatarUri] = useState<any>(avatarImg);
   const [showCitySuggestions, setShowCitySuggestions] = useState(false);
 
-  // 🔹 Load data on mount
+  // 🔹 Load role + profile data
   useEffect(() => {
     const loadProfile = async () => {
       try {
+        const authData = await getAuthData();
+        if (authData) {
+          console.log("🔑 Role from AsyncStorage:", authData.role);
+          setFormData((prev) => ({
+            ...prev,
+            Name: authData.name || prev.Name,
+            Email: authData.email || prev.Email,
+          }));
+          if (authData.role) setRole(authData.role as Role);
+        }
+
         const storedData = await AsyncStorage.getItem(STORAGE_KEY);
-        if (storedData) setFormData(JSON.parse(storedData));
+        if (storedData) {
+          setFormData((prev) => ({ ...prev, ...JSON.parse(storedData) }));
+        }
       } catch (e) {
         console.warn("Failed to load profile", e);
       }
@@ -119,7 +148,15 @@ export default function Profile(): JSX.Element {
         contentContainerStyle={styles.container}
         keyboardShouldPersistTaps="handled"
       >
-        <Text style={styles.screenTitle}>Edit Profile</Text>
+        {/* Header row with back + title */}
+        <View style={styles.headerRow}>
+          <TouchableOpacity onPress={() => navigation.goBack()} activeOpacity={0.7}>
+            <Arrowback />
+          </TouchableOpacity>
+          <Text style={styles.screenTitle}>Edit Profile</Text>
+        </View>
+
+        {/* Avatar */}
         <View style={styles.avatarWrap}>
           <TouchableOpacity
             onPress={onPressAvatar}
@@ -127,11 +164,7 @@ export default function Profile(): JSX.Element {
             style={styles.avatarTouchable}
           >
             <View style={styles.avatarBorder}>
-              <Image
-                source={avatarUri}
-                style={styles.avatarImage}
-                resizeMode="cover"
-              />
+              <Image source={avatarUri} style={styles.avatarImage} resizeMode="cover" />
             </View>
             <View style={styles.cameraButton}>
               <Text style={styles.cameraEmoji}>
@@ -140,6 +173,8 @@ export default function Profile(): JSX.Element {
             </View>
           </TouchableOpacity>
         </View>
+
+        {/* Form Fields */}
         <View style={styles.form}>
           {roleFields[role].map((field) => {
             if (field === "Date of Birth")
@@ -165,9 +200,7 @@ export default function Profile(): JSX.Element {
                   {showCitySuggestions && (
                     <FlatList
                       data={cityOptions.filter((c) =>
-                        c
-                          .toLowerCase()
-                          .includes((formData["City"] || "").toLowerCase())
+                        c.toLowerCase().includes((formData["City"] || "").toLowerCase())
                       )}
                       keyExtractor={(i) => i}
                       renderItem={({ item }) => (
@@ -186,17 +219,6 @@ export default function Profile(): JSX.Element {
                   )}
                 </View>
               );
-            if (field.toLowerCase().includes("password"))
-              return (
-                <FieldBox
-                  key={field}
-                  label={field}
-                  value={formData[field] ?? ""}
-                  onChangeText={(v) => handleChange(field, v)}
-                  secureTextEntry
-                  placeholder="********"
-                />
-              );
             return (
               <FieldBox
                 key={field}
@@ -208,11 +230,9 @@ export default function Profile(): JSX.Element {
             );
           })}
         </View>
-        <TouchableOpacity
-          style={styles.saveButton}
-          onPress={onSave}
-          activeOpacity={0.9}
-        >
+
+        {/* Save Button */}
+        <TouchableOpacity style={styles.saveButton} onPress={onSave} activeOpacity={0.9}>
           <Text style={styles.saveButtonText}>Save Changes</Text>
         </TouchableOpacity>
       </ScrollView>
@@ -227,14 +247,19 @@ const styles = StyleSheet.create({
     paddingBottom: moderateScale(50),
     paddingTop: moderateScale(18),
     alignItems: "center",
-    marginTop: moderateScale(50),
+    marginTop: moderateScale(30),
+  },
+  headerRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+    marginBottom: moderateScale(30),
   },
   screenTitle: {
     fontSize: moderateScale(18),
     fontWeight: "700",
-    marginTop: moderateScale(8),
-    marginBottom: moderateScale(40),
     color: "#111111",
+    marginLeft: moderateScale(12), // space between back and title
   },
   avatarWrap: {
     marginBottom: moderateScale(18),
