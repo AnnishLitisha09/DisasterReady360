@@ -13,12 +13,12 @@ export const Navigation = () => {
   return (
     <NavigationContainer>
       <RootStack.Navigator initialRouteName="profile">
-        {/* <RootStack.Screen name="Test" component={Test} options={{ headerShown: false }}/>
+        <RootStack.Screen name="Test" component={Test} options={{ headerShown: false }}/>
          <RootStack.Screen name="Getstarted" component={Getstarted} options={{ headerShown: false }}/>
          <RootStack.Screen name="Loginpage" component={Loginpage} options={{ headerShown: false }}/>
          <RootStack.Screen name="Otppage" component={Otppage} options={{ headerShown: false }}/>
          <RootStack.Screen name="Signup" component={Signup} options={{ headerShown: false }}/>
-          <RootStack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }}/> */}
+          <RootStack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }}/>
            <RootStack.Screen name="profile" component={profile} options={{ headerShown: false }}/>
       </RootStack.Navigator>
     </NavigationContainer>
