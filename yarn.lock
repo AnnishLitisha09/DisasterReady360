@@ -1952,12 +1952,12 @@ __metadata:
   linkType: hard
 
 "@jridgewell/trace-mapping@npm:^0.3.12, @jridgewell/trace-mapping@npm:^0.3.18, @jridgewell/trace-mapping@npm:^0.3.24, @jridgewell/trace-mapping@npm:^0.3.25, @jridgewell/trace-mapping@npm:^0.3.28":
-  version: 0.3.30
-  resolution: "@jridgewell/trace-mapping@npm:0.3.30"
+  version: 0.3.31
+  resolution: "@jridgewell/trace-mapping@npm:0.3.31"
   dependencies:
     "@jridgewell/resolve-uri": ^3.1.0
     "@jridgewell/sourcemap-codec": ^1.4.14
-  checksum: 26edb94faf6f02df346e3657deff9df3f2f083195cbda62a6cf60204d548a0a6134454cbc3af8437392206a89dfb3e72782eaf78f49cbd8924400e55a6575e72
+  checksum: af8fda2431348ad507fbddf8e25f5d08c79ecc94594061ce402cf41bc5aba1a7b3e59bf0fd70a619b35f33983a3f488ceeba8faf56bff784f98bb5394a8b7d47
   languageName: node
   linkType: hard
 
@@ -2023,6 +2023,17 @@ __metadata:
   version: 0.11.0
   resolution: "@pkgjs/parseargs@npm:0.11.0"
   checksum: 6ad6a00fc4f2f2cfc6bff76fb1d88b8ee20bc0601e18ebb01b6d4be583733a860239a521a7fbca73b612e66705078809483549d2b18f370eb346c5155c8e4a0f
+  languageName: node
+  linkType: hard
+
+"@react-native-async-storage/async-storage@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "@react-native-async-storage/async-storage@npm:2.2.0"
+  dependencies:
+    merge-options: ^3.0.4
+  peerDependencies:
+    react-native: ^0.0.0-0 || >=0.65 <1.0
+  checksum: efbb9c801fb7eecfad1568d6a5e9d247db420b8ba8f1789d5b783e679432567a53cf54c7e7b5e6f315276f33d1df297253549e0cefef2e683539df346d2a1f2d
   languageName: node
   linkType: hard
 
@@ -2189,6 +2200,35 @@ __metadata:
   bin:
     rnc-cli: build/bin.js
   checksum: 57c412cd3da1ef2312e9e314352cde0e783a5efcac7821798d5d69a390168837240b87b486538aab31a4d7e7e6d41bd31c487878a5485503289e89e15f468bbf
+  languageName: node
+  linkType: hard
+
+"@react-native-community/datetimepicker@npm:^8.4.4":
+  version: 8.4.4
+  resolution: "@react-native-community/datetimepicker@npm:8.4.4"
+  dependencies:
+    invariant: ^2.2.4
+  peerDependencies:
+    expo: ">=52.0.0"
+    react: "*"
+    react-native: "*"
+    react-native-windows: "*"
+  peerDependenciesMeta:
+    expo:
+      optional: true
+    react-native-windows:
+      optional: true
+  checksum: 659a19ec6ea6ec7538519411c60ff8eeae330b40248e28a38b540e5d8f758859f6a0fa8e9e39efbafbc6d44b57e3f68cb972b5fd4abb9a173651ca09a1ff28e5
+  languageName: node
+  linkType: hard
+
+"@react-native-community/geolocation@npm:^3.4.0":
+  version: 3.4.0
+  resolution: "@react-native-community/geolocation@npm:3.4.0"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 4a1a334de5b8345ee5ca9af987718a4cdd0b401b6d024268330c98736eccd0bebf45fd1d4cb396558f429a4670e5b29da0b5b7ebd4e51ca12972d4b08b55d4bc
   languageName: node
   linkType: hard
 
@@ -2924,6 +2964,9 @@ __metadata:
     "@babel/core": ^7.20.0
     "@babel/preset-env": ^7.20.0
     "@babel/runtime": ^7.20.0
+    "@react-native-async-storage/async-storage": ^2.2.0
+    "@react-native-community/datetimepicker": ^8.4.4
+    "@react-native-community/geolocation": ^3.4.0
     "@react-native-picker/picker": ^2.11.2
     "@react-native/babel-preset": 0.75.5
     "@react-native/eslint-config": 0.75.5
@@ -2940,12 +2983,17 @@ __metadata:
     prettier: 2.8.8
     react: 18.3.1
     react-native: 0.75.5
+    react-native-geolocation-service: ^5.3.1
+    react-native-image-picker: ^8.2.1
     react-native-picker-select: ^9.3.1
     react-native-safe-area-context: ^5.6.1
     react-native-screens: ^4.16.0
     react-native-svg: ^15.13.0
+    react-native-webview: ^13.16.0
+    react-native-youtube-iframe: ^2.4.1
     react-test-renderer: 18.3.1
     typescript: 5.0.4
+    zustand: ^5.0.8
   languageName: unknown
   linkType: soft
 
@@ -4263,9 +4311,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.5.211":
-  version: 1.5.215
-  resolution: "electron-to-chromium@npm:1.5.215"
-  checksum: bb9cc85f51334fa9ae7ba3c2c77739616004c924e9282e955f39d90025ec40994fba9fd8d0128004e23fdfecdbe89cf9e04a1199c11c65c0213b1e090aa8c290
+  version: 1.5.218
+  resolution: "electron-to-chromium@npm:1.5.218"
+  checksum: 869953636f9d7ff865c827a65e3a8e5f2b4162f1ba58389d93e19f2c945001a2e5925d2c29b49af57c2ddbbf75c6205d01d472bf0d54085c42d606b97fd76eab
   languageName: node
   linkType: hard
 
@@ -4809,6 +4857,13 @@ __metadata:
   version: 5.0.1
   resolution: "event-target-shim@npm:5.0.1"
   checksum: 1ffe3bb22a6d51bdeb6bf6f7cf97d2ff4a74b017ad12284cc9e6a279e727dc30a5de6bb613e5596ff4dc3e517841339ad09a7eec44266eccb1aa201a30448166
+  languageName: node
+  linkType: hard
+
+"events@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "events@npm:3.3.0"
+  checksum: f6f487ad2198aa41d878fa31452f1a3c00958f46e9019286ff4787c84aac329332ab45c9cdc8c445928fc6d7ded294b9e005a7fce9426488518017831b272780
   languageName: node
   linkType: hard
 
@@ -5556,7 +5611,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"invariant@npm:^2.2.4":
+"invariant@npm:2.2.4, invariant@npm:^2.2.4":
   version: 2.2.4
   resolution: "invariant@npm:2.2.4"
   dependencies:
@@ -5782,6 +5837,13 @@ __metadata:
   version: 3.0.3
   resolution: "is-path-inside@npm:3.0.3"
   checksum: abd50f06186a052b349c15e55b182326f1936c89a78bf6c8f2b707412517c097ce04bc49a0ca221787bc44e1049f51f09a2ffb63d22899051988d3a618ba13e9
+  languageName: node
+  linkType: hard
+
+"is-plain-obj@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "is-plain-obj@npm:2.1.0"
+  checksum: cec9100678b0a9fe0248a81743041ed990c2d4c99f893d935545cfbc42876cbe86d207f3b895700c690ad2fa520e568c44afc1605044b535a7820c1d40e38daa
   languageName: node
   linkType: hard
 
@@ -6914,6 +6976,15 @@ __metadata:
   version: 5.2.1
   resolution: "memoize-one@npm:5.2.1"
   checksum: a3cba7b824ebcf24cdfcd234aa7f86f3ad6394b8d9be4c96ff756dafb8b51c7f71320785fbc2304f1af48a0467cbbd2a409efc9333025700ed523f254cb52e3d
+  languageName: node
+  linkType: hard
+
+"merge-options@npm:^3.0.4":
+  version: 3.0.4
+  resolution: "merge-options@npm:3.0.4"
+  dependencies:
+    is-plain-obj: ^2.1.0
+  checksum: d86ddb3dd6e85d558dbf25dc944f3527b6bacb944db3fdda6e84a3f59c4e4b85231095f58b835758b9a57708342dee0f8de0dffa352974a48221487fe9f4584f
   languageName: node
   linkType: hard
 
@@ -8126,6 +8197,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-geolocation-service@npm:^5.3.1":
+  version: 5.3.1
+  resolution: "react-native-geolocation-service@npm:5.3.1"
+  checksum: 9a625c9f87811933491055fd8cbd1ef46f97fbbe0262714ad1d9aa969a8900dcb4abc47e58fe162400a81bcdee79324dfcc8e631862df9a22d59ac84af9acfde
+  languageName: node
+  linkType: hard
+
+"react-native-image-picker@npm:^8.2.1":
+  version: 8.2.1
+  resolution: "react-native-image-picker@npm:8.2.1"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: fc85bc278c0ba5ccef8cbacfce3001e994b34b0895be34e0c884021d2215802c2e553c5e97ff7f21a30e502be60000f90cf9555e9c2a19c71fdc76120d30e158
+  languageName: node
+  linkType: hard
+
 "react-native-is-edge-to-edge@npm:^1.2.1":
   version: 1.2.1
   resolution: "react-native-is-edge-to-edge@npm:1.2.1"
@@ -8183,6 +8271,38 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: c20a95029630a1ff6d79caa9d01e9e3ad988afaa6787f306b1057369b8ce4ac1f2f0b3cf3367bac7e529e5f2ed03ce85236542ecfcf29f5827ab77dfd0921bb2
+  languageName: node
+  linkType: hard
+
+"react-native-webview@npm:^13.16.0":
+  version: 13.16.0
+  resolution: "react-native-webview@npm:13.16.0"
+  dependencies:
+    escape-string-regexp: ^4.0.0
+    invariant: 2.2.4
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: a6fefc1bc977c1d121057c91696edb08ca170421a6d6ad5a9bcda279a20eca84aaaf553eca3a8e51b621e22fd473afa8bc994888807fb7db154eb9d7acb87928
+  languageName: node
+  linkType: hard
+
+"react-native-youtube-iframe@npm:^2.4.1":
+  version: 2.4.1
+  resolution: "react-native-youtube-iframe@npm:2.4.1"
+  dependencies:
+    events: ^3.3.0
+  peerDependencies:
+    react: ">=16.8.6"
+    react-native: ">=0.60"
+    react-native-web-webview: ">=1.0.2"
+    react-native-webview: ">=7.0.0"
+  peerDependenciesMeta:
+    react-native-web-webview:
+      optional: true
+    react-native-webview:
+      optional: true
+  checksum: 2080baee54492cd0afa056e8d868164a8a6fe16615fff1a351eee351313a318dbf8a6b582afb311cfef3c33e61612dfa750ce6a743078be18d213d73230f62e2
   languageName: node
   linkType: hard
 
@@ -8381,8 +8501,8 @@ __metadata:
   linkType: hard
 
 "regexpu-core@npm:^6.2.0":
-  version: 6.3.0
-  resolution: "regexpu-core@npm:6.3.0"
+  version: 6.3.1
+  resolution: "regexpu-core@npm:6.3.1"
   dependencies:
     regenerate: ^1.4.2
     regenerate-unicode-properties: ^10.2.2
@@ -8390,7 +8510,7 @@ __metadata:
     regjsparser: ^0.12.0
     unicode-match-property-ecmascript: ^2.0.0
     unicode-match-property-value-ecmascript: ^2.2.1
-  checksum: d9845490f1a4db36b8bf560d291bfaf1d1906e8f9d48dcf85b12603f6c48bdc92cd8e11e8c95e77c23e04c14a39c4f2300477b82bc53b8471c79d900f96477b3
+  checksum: 601a8298bca4d074c239e3b989b3b5f7532e4c8bde4e6d45690d4ba01d4f331869df3899a260a0fd88ecdb8902082725845447b0e2a3e1b0a1364131970489cb
   languageName: node
   linkType: hard
 
@@ -10008,5 +10128,26 @@ __metadata:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: f77b3d8d00310def622123df93d4ee654fc6a0096182af8bd60679ddcdfb3474c56c6c7190817c84a2785648cdee9d721c0154eb45698c62176c322fb46fc700
+  languageName: node
+  linkType: hard
+
+"zustand@npm:^5.0.8":
+  version: 5.0.8
+  resolution: "zustand@npm:5.0.8"
+  peerDependencies:
+    "@types/react": ">=18.0.0"
+    immer: ">=9.0.6"
+    react: ">=18.0.0"
+    use-sync-external-store: ">=1.2.0"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    immer:
+      optional: true
+    react:
+      optional: true
+    use-sync-external-store:
+      optional: true
+  checksum: 1a0f896f335e21841509a605fb61db34342497c5073f8c4b69889a669f829c9cf39d0282d68ac8fec1c8814cdaa89ee6711d59989feb80dc0364f19ac72e75e0
   languageName: node
   linkType: hard
