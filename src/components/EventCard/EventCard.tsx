@@ -1,10 +1,11 @@
 // components/EventCard.tsx
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import DeleteIcon from "../../assets/icons/deleteicon";
+import {Deleteicon } from "../../assets/icons";
 import { Editicon } from "../../assets/icons";
 import HomeSafeIcon from "../../assets/icons/homesafeicon";
 import { Clockicon } from "../../assets/icons/Clockicon";
+import { moderateScale } from "../../utils/scalingUtils";  // 🔹 added
 
 type ButtonOption = "editDelete" | "result" | "joinnow" | "none";
 
@@ -38,17 +39,16 @@ const EventCard: React.FC<EventCardProps> = ({
       case "editDelete":
         return (
           <View style={styles.buttonRow}>
-      <TouchableOpacity style={styles.iconBtn} onPress={onEdit}>
-        <Editicon width={18} height={18} color="white" />
-      </TouchableOpacity>
+            <TouchableOpacity style={styles.iconBtn} onPress={onEdit}>
+              <Editicon width={moderateScale(18)} height={moderateScale(18)} color="white" />
+            </TouchableOpacity>
 
-      {/* Divider line */}
-      <View style={styles.iconDivider} />
+            <View style={styles.iconDivider} />
 
-      <TouchableOpacity style={styles.iconBtn} onPress={onDelete}>
-        <DeleteIcon width={18} height={18} color="white" />
-      </TouchableOpacity>
-    </View>
+            <TouchableOpacity style={styles.iconBtn} onPress={onDelete}>
+              <Deleteicon width={moderateScale(18)} height={moderateScale(18)} color="white" />
+            </TouchableOpacity>
+          </View>
         );
       case "result":
         return (
@@ -69,35 +69,32 @@ const EventCard: React.FC<EventCardProps> = ({
 
   return (
     <View style={styles.card}>
-      {/* Header */}
       <View style={styles.headerRow}>
         <View style={styles.leftHeader}>
           <View style={styles.iconBox}>
-            <HomeSafeIcon width={18} height={18} fill="white" />
+            <HomeSafeIcon width={moderateScale(18)} height={moderateScale(18)} fill="white" />
           </View>
           <Text style={styles.title}>{title}</Text>
         </View>
         <View style={styles.rightHeader}>
-          { <Clockicon width={14} height={14} fill="#555" /> }
+          <Clockicon width={moderateScale(14)} height={moderateScale(14)} fill="#555" />
           <Text style={styles.timeText}>{time}</Text>
         </View>
       </View>
 
-      {/* Details */}
-    <View style={styles.detailRow}>
-  <Text style={styles.detailLabel}>
-    Total number of joined     :  {totalJoined.toString().padStart(2, "0")}
-  </Text>
-</View>
+      <View style={styles.detailRow}>
+        <Text style={styles.detailLabel}>
+          Total number of joined : {totalJoined.toString().padStart(2, "0")}
+        </Text>
+      </View>
 
-<View style={styles.detailRow}>
-  <Text style={styles.detailLabel}>Venue    :   {venue}</Text>
-</View>
+      <View style={styles.detailRow}>
+        <Text style={styles.detailLabel}>Venue : {venue}</Text>
+      </View>
 
-      {/* Type row + floating button on right */}
       <View style={styles.detailRow}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Text style={styles.detailLabel}>Type       :  </Text>
+          <Text style={styles.detailLabel}>Type :</Text>
           <Text style={styles.detailValue}>{type}</Text>
         </View>
         {renderButton()}
@@ -109,9 +106,9 @@ const EventCard: React.FC<EventCardProps> = ({
 const styles = StyleSheet.create({
   card: {
     backgroundColor: "white",
-    borderRadius: 12,
-    padding: 14,
-    marginVertical: 8,
+    borderRadius: moderateScale(12),
+    padding: moderateScale(14),
+    marginVertical: moderateScale(8),
     elevation: 3,
     shadowColor: "#000",
     shadowOpacity: 0.1,
@@ -122,66 +119,67 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 12,
+    marginBottom: moderateScale(12),
   },
   leftHeader: {
     flexDirection: "row",
     alignItems: "center",
   },
   iconBox: {
-    width: 28,
-    height: 28,
-    borderRadius: 6,
-    backgroundColor: "#E64A19",
-    alignItems: "center",
-    justifyContent: "center",
-    marginRight: 8,
-  },
-  title: { fontSize: 16, fontWeight: "bold", color: "#333" },
+  width: moderateScale(35),       // ↑ increased from 30 → 40
+  height: moderateScale(35),      // ↑ increased from 30 → 40
+  borderRadius: moderateScale(10), // ↑ increased for smoother corners
+  backgroundColor: "#E64A19",
+  alignItems: "center",
+  justifyContent: "center",
+  marginRight: moderateScale(12),  // ↑ little more spacing
+},
+
+  title: { fontSize: moderateScale(16), fontWeight: "bold", color: "#333" },
   rightHeader: { flexDirection: "row", alignItems: "center" },
-  timeText: { marginLeft: 6, fontSize: 12, color: "#555" },
+  timeText: { marginLeft: moderateScale(6), fontSize: moderateScale(12), color: "#555" },
 
   detailRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 8,
+    marginBottom: moderateScale(8),
     fontWeight: "400",
   },
   detailLabel: {
-    fontSize: 14,
+    fontSize: moderateScale(14),
     color: "#434242ff",
-    marginRight: 2,
+    marginRight: moderateScale(2),
   },
   detailValue: {
-    fontSize: 14,
+    fontSize: moderateScale(14),
     color: "#333",
     fontWeight: "400",
-    marginRight: 2,
+    marginRight: moderateScale(2),
   },
 
   buttonRow: {
     flexDirection: "row",
     backgroundColor: "#E64A19",
-    borderRadius: 20,
+    borderRadius: moderateScale(20),
     overflow: "hidden",
   },
   iconBtn: {
-    padding: 8,
+    padding: moderateScale(8),
   },
   textBtn: {
     backgroundColor: "#E64A19",
-    paddingHorizontal: 16,
-    paddingVertical: 6,
-    borderRadius: 20,
+    paddingHorizontal: moderateScale(16),
+    paddingVertical: moderateScale(6),
+    borderRadius: moderateScale(20),
   },
-  btnText: { color: "white", fontWeight: "500" },
+  btnText: { color: "white", fontWeight: "500", fontSize: moderateScale(14) },
   iconDivider: {
-  width: 2,
-  backgroundColor: "white", 
-  opacity: 0.6,             
-},
-
+    width: moderateScale(2),
+    backgroundColor: "white",
+    opacity: 0.6,
+  },
 });
 
 export default EventCard;
+
