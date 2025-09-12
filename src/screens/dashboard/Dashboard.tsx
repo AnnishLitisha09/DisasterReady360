@@ -1,24 +1,23 @@
-import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView, Alert, TouchableOpacity } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { moderateScale } from '../../utils/scalingUtils'
-import { LearningModuleCard, PracticeModuleCard } from '../../components'
+import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView, Alert, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { moderateScale } from '../../utils/scalingUtils';
+import { LearningModuleCard, PracticeModuleCard } from '../../components';
 import { useNavigation } from '@react-navigation/native';
-import SosScreen from '../SosScreen/SosScreen';
-import { getAuthData } from '../../store/authStorage'
-
-
+import { getAuthData } from '../../store/authStorage';
 
 export const Dashboard = () => {
-  const navigation = useNavigation()
-  const [name, setName] = useState<string>('User') // default fallback
+  const navigation = useNavigation();
+  const [name, setName] = useState<string>('User'); // default fallback
+  const [avatar, setAvatar] = useState<string | null>(null); // store avatar URI
 
   useEffect(() => {
-    const fetchName = async () => {
-      const authData = await getAuthData()
-      if (authData?.name) setName(authData.name)
-    }
-    fetchName()
-  }, [])
+    const fetchData = async () => {
+      const authData = await getAuthData();
+      if (authData?.name) setName(authData.name);
+      if (authData?.avatar) setAvatar(authData.avatar); // get avatar from AsyncStorage
+    };
+    fetchData();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -27,33 +26,31 @@ export const Dashboard = () => {
         <View style={styles.header}>
           {/* Greeting and Profile */}
           <Text style={styles.greeting}>Hey {name}!</Text>
-         <TouchableOpacity onPress={() => navigation.navigate("profile")}>
-  <Image
-    source={{
-      uri: "https://lh3.googleusercontent.com/a/ACg8ocJUDVcUKiE7vKDEZiBiHdfVkEa8dPU1vioE9hyLdZMQevYJ-eoK=s192-c",
-    }}
-    style={styles.logo}
-    resizeMode="contain"
-  />
-</TouchableOpacity>
 
+          <TouchableOpacity onPress={() => navigation.navigate("profile")}>
+            <Image
+              source={{
+                uri: avatar
+                  ? avatar
+                  : "https://static.vecteezy.com/system/resources/thumbnails/029/271/062/small_2x/avatar-profile-icon-in-flat-style-male-user-profile-illustration-on-isolated-background-man-profile-sign-business-concept-vector.jpg", // default avatar
+              }}
+              style={styles.logo}
+              resizeMode="cover"
+            />
+          </TouchableOpacity>
 
           {/* White Container with Achievements */}
           <View style={styles.achievementsBox}>
             <Text style={styles.achievementsTitle}>ACHIEVEMENTS</Text>
-
-            {/* Achievements Row */}
             <View style={styles.achievementsRow}>
               <View style={styles.item}>
                 <Image source={require('../../assets/images/badge.png')} style={styles.icon} />
                 <Text style={styles.infoText}>3 Badges</Text>
               </View>
-
               <View style={styles.item}>
                 <Image source={require('../../assets/images/rank.png')} style={styles.icon} />
                 <Text style={styles.infoText}>300 Points</Text>
               </View>
-
               <View style={styles.item}>
                 <Image source={require('../../assets/images/star.png')} style={styles.icon} />
                 <Text style={styles.infoText}>1st Rank</Text>
@@ -132,14 +129,15 @@ export const Dashboard = () => {
       {/* Floating SOS Button */}
       <TouchableOpacity
         style={styles.sosButton}
-       onPress={() => navigation.navigate('SosScreen')}
+        onPress={() => navigation.navigate('SosScreen')}
       >
         <Text style={styles.sosText}>SOS</Text>
       </TouchableOpacity>
     </SafeAreaView>
-  )
-}
+  );
+};
 
+// Keep your styles unchanged
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#F9F9F9' },
   header: {
@@ -209,4 +207,4 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
   },
   sosText: { color: '#fff', fontWeight: 'bold', fontSize: moderateScale(18) },
-})
+});

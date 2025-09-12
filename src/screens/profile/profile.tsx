@@ -1,50 +1,72 @@
 // screens/Profile.tsx
 import React, { useState, useEffect } from "react";
 import {
-  View, Text, StyleSheet, ScrollView, TouchableOpacity,
-  Image, Alert, SafeAreaView, StatusBar, FlatList,
-  PermissionsAndroid, Platform,
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+  Alert,
+  SafeAreaView,
+  StatusBar,
+  FlatList,
+  PermissionsAndroid,
+  Platform,
 } from "react-native";
 import { FieldBox } from "../../components/FieldBox";
 import { launchImageLibrary } from "react-native-image-picker";
 import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import { Camera } from "../../assets/icons/camera";
+import { Arrowback } from "../../assets/icons";
 import { moderateScale } from "../../utils/scalingUtils";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getAuthData, saveAuthData } from "../../store/authStorage";
+import { useNavigation } from "@react-navigation/native";
 
-const avatarImg = require("../../assets/images/badge.png");
+const defaultAvatar = {
+  uri: "https://static.vecteezy.com/system/resources/thumbnails/029/271/062/small_2x/avatar-profile-icon-in-flat-style-male-user-profile-illustration-on-isolated-background-man-profile-sign-business-concept-vector.jpg",
+};
+
 type Role = "student" | "teacher" | "parent" | "community" | "schoolAdmin";
 
-// ✅ Removed all Id fields
 const roleFields: { [K in Role]: string[] } = {
-  student: ["Name", "Email", "Date of Birth", "City"],
-  teacher: ["Name", "Email"],
+  student: ["Name", "Email", "Institution Name", "Date of Birth"],
+  teacher: ["Name", "Email", "Institution Name"],
   parent: ["Name", "Email"],
   community: ["Name", "Email", "City"],
   schoolAdmin: ["Name", "Email"],
 };
 
 const cityOptions = ["Sathy", "Chennai", "Coimbatore", "Salem", "Madurai", "Bangalore"];
-const STORAGE_KEY = "@profile_data";
 
 export default function Profile(): JSX.Element {
-  const [role] = useState<Role>("community");
+  const navigation = useNavigation();
+  const [role, setRole] = useState<Role>("teacher");
   const [formData, setFormData] = useState<Record<string, string>>({
-    Name: "Melissa Peters",
-    Email: "melpeters@gmail.com",
-    Password: "password123",
+    Name: "",
+    Email: "",
+    Password: "",
     "Date of Birth": "",
-    City: "Sathy",
+    City: "",
+    "Institution Name": "",
   });
-  const [avatarUri, setAvatarUri] = useState<any>(avatarImg);
+  const [avatarUri, setAvatarUri] = useState<any>(defaultAvatar);
   const [showCitySuggestions, setShowCitySuggestions] = useState(false);
 
-  // 🔹 Load data on mount
+  // Load auth data including avatar
   useEffect(() => {
     const loadProfile = async () => {
       try {
-        const storedData = await AsyncStorage.getItem(STORAGE_KEY);
-        if (storedData) setFormData(JSON.parse(storedData));
+        const authData = await getAuthData();
+        if (authData) {
+          setFormData((prev) => ({
+            ...prev,
+            Name: authData.name || prev.Name,
+            Email: authData.email || prev.Email,
+          }));
+          if (authData.avatar) setAvatarUri({ uri: authData.avatar });
+          if (authData.role) setRole(authData.role as Role);
+        }
       } catch (e) {
         console.warn("Failed to load profile", e);
       }
@@ -59,9 +81,11 @@ export default function Profile(): JSX.Element {
 
   const onSave = async () => {
     try {
-      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+      const authData = await getAuthData();
+      if (authData) {
+        await saveAuthData({ ...authData, ...formData, avatar: avatarUri.uri });
+      }
       Alert.alert("Saved", "Profile changes saved successfully.", [{ text: "OK" }]);
-      console.log("Profile data:", formData);
     } catch (e) {
       console.warn("Failed to save profile", e);
     }
@@ -74,10 +98,7 @@ export default function Profile(): JSX.Element {
           Platform.Version >= 33
             ? PermissionsAndroid.PERMISSIONS.READ_MEDIA_IMAGES
             : PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE;
-        return (
-          (await PermissionsAndroid.request(perm)) ===
-          PermissionsAndroid.RESULTS.GRANTED
-        );
+        return (await PermissionsAndroid.request(perm)) === PermissionsAndroid.RESULTS.GRANTED;
       } catch (err) {
         console.warn(err);
         return false;
@@ -92,7 +113,14 @@ export default function Profile(): JSX.Element {
       return;
     }
     const result = await launchImageLibrary({ mediaType: "photo", quality: 0.7 });
-    if (result.assets?.length) setAvatarUri({ uri: result.assets[0].uri });
+    if (result.assets?.length) {
+      const uri = result.assets[0].uri;
+      setAvatarUri({ uri });
+
+      // Update AsyncStorage immediately
+      const authData = await getAuthData();
+      if (authData) await saveAuthData({ ...authData, avatar: uri });
+    }
   };
 
   const onSelectDate = () => {
@@ -115,31 +143,25 @@ export default function Profile(): JSX.Element {
   return (
     <SafeAreaView style={styles.safe}>
       <StatusBar barStyle="dark-content" backgroundColor="#F5F5F6" />
-      <ScrollView
-        contentContainerStyle={styles.container}
-        keyboardShouldPersistTaps="handled"
-      >
-        <Text style={styles.screenTitle}>Edit Profile</Text>
+      <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
+        <View style={styles.headerRow}>
+          <TouchableOpacity onPress={() => navigation.goBack()} activeOpacity={0.7}>
+            <Arrowback />
+          </TouchableOpacity>
+          <Text style={styles.screenTitle}>Edit Profile</Text>
+        </View>
+
         <View style={styles.avatarWrap}>
-          <TouchableOpacity
-            onPress={onPressAvatar}
-            activeOpacity={0.8}
-            style={styles.avatarTouchable}
-          >
+          <TouchableOpacity onPress={onPressAvatar} activeOpacity={0.8} style={styles.avatarTouchable}>
             <View style={styles.avatarBorder}>
-              <Image
-                source={avatarUri}
-                style={styles.avatarImage}
-                resizeMode="cover"
-              />
+              <Image source={avatarUri} style={styles.avatarImage} resizeMode="cover" />
             </View>
             <View style={styles.cameraButton}>
-              <Text style={styles.cameraEmoji}>
-                <Camera />
-              </Text>
+              <Camera />
             </View>
           </TouchableOpacity>
         </View>
+
         <View style={styles.form}>
           {roleFields[role].map((field) => {
             if (field === "Date of Birth")
@@ -165,9 +187,7 @@ export default function Profile(): JSX.Element {
                   {showCitySuggestions && (
                     <FlatList
                       data={cityOptions.filter((c) =>
-                        c
-                          .toLowerCase()
-                          .includes((formData["City"] || "").toLowerCase())
+                        c.toLowerCase().includes((formData["City"] || "").toLowerCase())
                       )}
                       keyExtractor={(i) => i}
                       renderItem={({ item }) => (
@@ -186,17 +206,6 @@ export default function Profile(): JSX.Element {
                   )}
                 </View>
               );
-            if (field.toLowerCase().includes("password"))
-              return (
-                <FieldBox
-                  key={field}
-                  label={field}
-                  value={formData[field] ?? ""}
-                  onChangeText={(v) => handleChange(field, v)}
-                  secureTextEntry
-                  placeholder="********"
-                />
-              );
             return (
               <FieldBox
                 key={field}
@@ -208,11 +217,8 @@ export default function Profile(): JSX.Element {
             );
           })}
         </View>
-        <TouchableOpacity
-          style={styles.saveButton}
-          onPress={onSave}
-          activeOpacity={0.9}
-        >
+
+        <TouchableOpacity style={styles.saveButton} onPress={onSave} activeOpacity={0.9}>
           <Text style={styles.saveButtonText}>Save Changes</Text>
         </TouchableOpacity>
       </ScrollView>
@@ -222,25 +228,10 @@ export default function Profile(): JSX.Element {
 
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: "#F5F5F6" },
-  container: {
-    paddingHorizontal: moderateScale(20),
-    paddingBottom: moderateScale(50),
-    paddingTop: moderateScale(18),
-    alignItems: "center",
-    marginTop: moderateScale(50),
-  },
-  screenTitle: {
-    fontSize: moderateScale(18),
-    fontWeight: "700",
-    marginTop: moderateScale(8),
-    marginBottom: moderateScale(40),
-    color: "#111111",
-  },
-  avatarWrap: {
-    marginBottom: moderateScale(18),
-    alignItems: "center",
-    width: "100%",
-  },
+  container: { paddingHorizontal: moderateScale(20), paddingBottom: moderateScale(50), paddingTop: moderateScale(18), alignItems: "center", marginTop: moderateScale(30) },
+  headerRow: { flexDirection: "row", alignItems: "center", width: "100%", marginBottom: moderateScale(30) },
+  screenTitle: { fontSize: moderateScale(18), fontWeight: "700", color: "#111111", marginLeft: moderateScale(12) },
+  avatarWrap: { marginBottom: moderateScale(18), alignItems: "center", width: "100%" },
   avatarTouchable: { position: "relative" },
   avatarBorder: {
     width: moderateScale(120),
@@ -275,40 +266,9 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: moderateScale(2) },
     elevation: 4,
   },
-  cameraEmoji: { fontSize: moderateScale(18), color: "#FFFFFF" },
   form: { width: "100%", marginTop: moderateScale(6) },
-  saveButton: {
-    marginTop: moderateScale(22),
-    width: "100%",
-    backgroundColor: "#FF6B3A",
-    paddingVertical: moderateScale(14),
-    borderRadius: moderateScale(12),
-    alignItems: "center",
-    justifyContent: "center",
-    shadowColor: "#000",
-    shadowOpacity: 0.12,
-    shadowRadius: moderateScale(8),
-    shadowOffset: { width: 0, height: moderateScale(6) },
-    elevation: 4,
-  },
-  saveButtonText: {
-    color: "#FFFFFF",
-    fontSize: moderateScale(16),
-    fontWeight: "700",
-  },
-  cityItem: {
-    padding: moderateScale(10),
-    backgroundColor: "#fff",
-    borderBottomWidth: 1,
-    borderColor: "#eee",
-  },
-  cityList: {
-    maxHeight: moderateScale(120),
-    borderWidth: 1,
-    borderColor: "#ccc",
-    marginTop: -moderateScale(8),
-    marginBottom: moderateScale(10),
-    borderRadius: moderateScale(6),
-    backgroundColor: "#fff",
-  },
+  saveButton: { marginTop: moderateScale(22), width: "100%", backgroundColor: "#FF6B3A", paddingVertical: moderateScale(14), borderRadius: moderateScale(12), alignItems: "center", justifyContent: "center", shadowColor: "#000", shadowOpacity: 0.12, shadowRadius: moderateScale(8), shadowOffset: { width: 0, height: moderateScale(6) }, elevation: 4 },
+  saveButtonText: { color: "#FFFFFF", fontSize: moderateScale(16), fontWeight: "700" },
+  cityItem: { padding: moderateScale(10), backgroundColor: "#fff", borderBottomWidth: 1, borderColor: "#eee" },
+  cityList: { maxHeight: moderateScale(120), borderWidth: 1, borderColor: "#ccc", marginTop: -moderateScale(8), marginBottom: moderateScale(10), borderRadius: moderateScale(6), backgroundColor: "#fff" },
 });

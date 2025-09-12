@@ -9,6 +9,7 @@ import { Dashboard, Getstarted, Infographics, Learningmodules, Loginpage, Otppag
 import { getAuthData } from '../store/authStorage';
 
 import SosScreen from '../screens/SosScreen/SosScreen';
+import { Flashscreen } from '../screens/auth/Flashscreen';
 
 const RootStack = createNativeStackNavigator();
 
@@ -39,7 +40,8 @@ export const Navigation = () => {
   return (
     <NavigationContainer>
     
-      <RootStack.Navigator initialRouteName="Verification">
+      <RootStack.Navigator initialRouteName="Flashscreen">
+        
         <RootStack.Screen name="Test" component={Test} options={{ headerShown: false }}/>
         <RootStack.Screen name="Getstarted" component={Getstarted} options={{ headerShown: false }}/>
         <RootStack.Screen name="Loginpage" component={Loginpage} options={{ headerShown: false }}/>
@@ -53,6 +55,7 @@ export const Navigation = () => {
         <RootStack.Screen name="SosScreen" component={SosScreen} options={{ headerShown: false }}/>
         <RootStack.Screen name="profile" component={profile} options={{ headerShown: false }}/>
         <RootStack.Screen name="Verification" component={Verification} options={{ headerShown: false }}/>
+         <RootStack.Screen name="Flashscreen" component={Flashscreen} options={{ headerShown: false }}/>
       </RootStack.Navigator>
     </NavigationContainer>
   );
