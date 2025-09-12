@@ -1,11 +1,24 @@
 import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView, Alert, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { moderateScale } from '../../utils/scalingUtils'
 import { LearningModuleCard, PracticeModuleCard } from '../../components'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native';
+import SosScreen from '../SosScreen/SosScreen';
+import { getAuthData } from '../../store/authStorage'
+
+
 
 export const Dashboard = () => {
   const navigation = useNavigation()
+  const [name, setName] = useState<string>('User') // default fallback
+
+  useEffect(() => {
+    const fetchName = async () => {
+      const authData = await getAuthData()
+      if (authData?.name) setName(authData.name)
+    }
+    fetchName()
+  }, [])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -13,14 +26,17 @@ export const Dashboard = () => {
         {/* Orange Header */}
         <View style={styles.header}>
           {/* Greeting and Profile */}
-          <Text style={styles.greeting}>Hey Aswath!</Text>
-          <Image
-            source={{
-              uri: 'https://lh3.googleusercontent.com/a/ACg8ocJUDVcUKiE7vKDEZiBiHdfVkEa8dPU1vioE9hyLdZMQevYJ-eoK=s192-c',
-            }}
-            style={styles.logo}
-            resizeMode="contain"
-          />
+          <Text style={styles.greeting}>Hey {name}!</Text>
+         <TouchableOpacity onPress={() => navigation.navigate("profile")}>
+  <Image
+    source={{
+      uri: "https://lh3.googleusercontent.com/a/ACg8ocJUDVcUKiE7vKDEZiBiHdfVkEa8dPU1vioE9hyLdZMQevYJ-eoK=s192-c",
+    }}
+    style={styles.logo}
+    resizeMode="contain"
+  />
+</TouchableOpacity>
+
 
           {/* White Container with Achievements */}
           <View style={styles.achievementsBox}>
@@ -116,7 +132,7 @@ export const Dashboard = () => {
       {/* Floating SOS Button */}
       <TouchableOpacity
         style={styles.sosButton}
-        onPress={() => Alert.alert('SOS Alert Triggered!')}
+       onPress={() => navigation.navigate('SosScreen')}
       >
         <Text style={styles.sosText}>SOS</Text>
       </TouchableOpacity>

@@ -624,7 +624,7 @@ const initialInfographics = [
       'https://imgs.search.brave.com/OmaU3RDTezssKb9bGgAn4exIS0UfmFa6oFPMouhJStk/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hZHZh/bmNlZGN0LmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMjAxOC8w/OC9zaHV0dGVyc3Rv/Y2tfMTQ2NDQ1OTk4/LmpwZw',
       'https://imgs.search.brave.com/sPSF4hqbyoX9RBgMHcwub6oBt3v4PdJOv9WN7b1fKwo/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hbGVy/dGZvcmNlLmNvbS5h/dS93cC1jb250ZW50/L3VwbG9hZHMvMjAy/NC8xMS9maXJlLXdh/cmRlbi1hdC13b3Jr/LmpwZw',
       'https://imgs.search.brave.com/-b-77heUtZrpD6HGYRtn5-17Teyqy5NODFjW1nERCsU/rs:fit:0:180:1:0/g:ce/aHR0cHM6Ly93d3cu/c2V0b24uY28udWsv/bWVkaWEvd3lzaXd5/Zy9TVFVLL0NNUy9m/aXJlLWV2YWN1YXRp/b24tcGxhbi9maXJl/LmpwZw',
-      
+  
     ],
   },
 
