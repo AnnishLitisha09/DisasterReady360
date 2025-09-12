@@ -14,6 +14,8 @@ import LottieView from 'lottie-react-native';
 import { moderateScale } from '../../utils/scalingUtils';
 import { Arrowback } from '../../assets/icons';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { saveAuthData } from '../../store/authStorage';
+import { API_BASE_URL } from '../../config/apiConfig';
 
 const { width, height } = Dimensions.get('window');
 
@@ -25,7 +27,7 @@ export const Otppage = () => {
   const [otp, setOtp] = useState(['', '', '', '']);
   const [showLottie, setShowLottie] = useState(false);
   const inputs = useRef<TextInput[]>([]);
-  const [timer, setTimer] = useState(10);
+  const [timer, setTimer] = useState(30);
   const [canResend, setCanResend] = useState(false);
 
   useEffect(() => {
@@ -52,26 +54,51 @@ export const Otppage = () => {
 
   const handleResend = () => {
     setOtp(['', '', '', '']);
-    setTimer(10);
+    setTimer(30);
     setCanResend(false);
     console.log('OTP resent!');
   };
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     const enteredOtp = otp.join('');
     if (enteredOtp.length < 4) {
-      Alert.alert('Invalid OTP', 'Please enter the 4-digit OTP.');
-      return;
+      return Alert.alert('Invalid OTP', 'Enter the 4-digit OTP.');
     }
 
-    if (enteredOtp === '1234') {
-      setShowLottie(true); // Show full screen Lottie
-      setTimeout(() => {
-        setShowLottie(false);
+    try {
+      // Step 1: Verify OTP
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, otp: enteredOtp }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.message === 'Login successful') {
+        const { user_id, token, role } = data;
+
+        // Step 2: Fetch user info to get name
+        const userResponse = await fetch(`${API_BASE_URL}/users/${user_id}`);
+        const userData = await userResponse.json();
+
+        // Step 3: Save full auth data including name
+        await saveAuthData({
+          token,
+          role,
+          user_id,
+          email,
+          name: userData.name,
+        });
+
+        // Navigate to Loginpage
         navigation.navigate('Loginpage', { email, otpVerified: true });
-      }, 2000); // 2 seconds animation
-    } else {
-      Alert.alert('Error', 'Incorrect OTP');
+      } else {
+        Alert.alert('Error', data.message || 'Login failed');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      Alert.alert('Error', 'Something went wrong while verifying OTP');
     }
   };
 
