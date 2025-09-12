@@ -27,13 +27,16 @@ export const Dashboard = () => {
         <View style={styles.header}>
           {/* Greeting and Profile */}
           <Text style={styles.greeting}>Hey {name}!</Text>
-          <Image
-            source={{
-              uri: 'https://lh3.googleusercontent.com/a/ACg8ocJUDVcUKiE7vKDEZiBiHdfVkEa8dPU1vioE9hyLdZMQevYJ-eoK=s192-c',
-            }}
-            style={styles.logo}
-            resizeMode="contain"
-          />
+         <TouchableOpacity onPress={() => navigation.navigate("profile")}>
+  <Image
+    source={{
+      uri: "https://lh3.googleusercontent.com/a/ACg8ocJUDVcUKiE7vKDEZiBiHdfVkEa8dPU1vioE9hyLdZMQevYJ-eoK=s192-c",
+    }}
+    style={styles.logo}
+    resizeMode="contain"
+  />
+</TouchableOpacity>
+
 
           {/* White Container with Achievements */}
           <View style={styles.achievementsBox}>

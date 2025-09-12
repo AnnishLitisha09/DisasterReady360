@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 // Packages
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import profile from '../screens/profile/profile';
 import { ActivityIndicator, View } from 'react-native';
 // Screens
 import { Dashboard, Getstarted, Infographics, Learningmodules, Loginpage, Otppage, Result, Signup, Test, Veiwvideo } from '../screens';
@@ -49,6 +50,7 @@ export const Navigation = () => {
         <RootStack.Screen name="Infographics" component={Infographics} options={{ headerShown: false }}/>
         <RootStack.Screen name="Result" component={Result} options={{ headerShown: false }}/>
         <RootStack.Screen name="SosScreen" component={SosScreen} options={{ headerShown: false }}/>
+        <RootStack.Screen name="profile" component={profile} options={{ headerShown: false }}/>
       </RootStack.Navigator>
     </NavigationContainer>
   );
