@@ -1,11 +1,12 @@
 import type React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Check } from 'lucide-react-native';
+import { moderateScale } from '../../utils/scalingUtils';
 
 interface CheckboxListItemProps {
-  name: string
-  isSelected: boolean
-  onToggle: () => void
+  name: string;
+  isSelected: boolean;
+  onToggle: () => void;
 }
 
 export const CheckboxListItem: React.FC<CheckboxListItemProps> = ({ name, isSelected, onToggle }) => {
@@ -15,28 +16,28 @@ export const CheckboxListItem: React.FC<CheckboxListItemProps> = ({ name, isSele
       style={{
         flexDirection: 'row',
         alignItems: 'center',
-        paddingVertical: 12,
-        paddingHorizontal: 5,
+        paddingVertical: moderateScale(12),
+        paddingHorizontal: moderateScale(5),
       }}
     >
       <View
         style={{
-          width: 20,
-          height: 20,
-          borderRadius: 4,
+          width: moderateScale(20),
+          height: moderateScale(20),
+          borderRadius: moderateScale(4),
           backgroundColor: isSelected ? '#FF6B35' : 'transparent',
-          borderWidth: 2,
+          borderWidth: moderateScale(2),
           borderColor: isSelected ? '#FF6B35' : '#DDD',
-          marginRight: 15,
+          marginRight: moderateScale(15),
           alignItems: 'center',
           justifyContent: 'center',
         }}
       >
-        {isSelected && <Check size={12} color="white" />}
+        {isSelected && <Check size={moderateScale(12)} color="white" />}
       </View>
       <Text
         style={{
-          fontSize: 16,
+          fontSize: moderateScale(16),
           color: '#333',
           flex: 1,
         }}

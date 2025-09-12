@@ -2,6 +2,7 @@
 
 import { SafeAreaView, View, Text, Image, FlatList, StyleSheet, Dimensions } from 'react-native';
 import { CurvedHeader } from '../../components';
+import { moderateScale } from '../../utils/scalingUtils';
 
 const { width, height } = Dimensions.get('window');
 
@@ -22,7 +23,7 @@ export const LeaderboardPage = () => {
     return (
       <View style={styles.listItem}>
         <View style={styles.avatar}>
-          <Text style={{ fontSize: 18 }}>👤</Text>
+          <Text style={{ fontSize: moderateScale(18) }}>👤</Text>
         </View>
         <View style={{ flex: 1 }}>
           <Text style={styles.userName}>{item.name}</Text>
@@ -46,7 +47,7 @@ export const LeaderboardPage = () => {
         </View>
 
         {/* 1st place */}
-        <View style={[styles.podiumPerson, { left: width / 2 - 20, top: height * 0.03 }]}>
+        <View style={[styles.podiumPerson, { left: width / 2 - moderateScale(20), top: height * 0.03 }]}>
           <Text style={styles.crown}>👑</Text>
           <Image source={require('../../assets/images/person.png')} style={styles.podiumAvatar} />
           <Text style={styles.podiumName}>{leaderboardData[0].name}</Text>
@@ -68,7 +69,7 @@ export const LeaderboardPage = () => {
           data={leaderboardData}
           renderItem={renderItem}
           keyExtractor={(item) => item.rank.toString()}
-          contentContainerStyle={{ padding: 15, paddingBottom: 40 }}
+          contentContainerStyle={{ padding: moderateScale(15), paddingBottom: moderateScale(40) }}
         />
       </View>
     </SafeAreaView>
@@ -86,20 +87,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   podiumAvatar: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: moderateScale(50),
+    height: moderateScale(50),
+    borderRadius: moderateScale(25),
   },
   crown: {
-    fontSize: 24,
+    fontSize: moderateScale(24),
     position: 'absolute',
-    top: -20,
+    top: moderateScale(-20),
   },
   podiumName: {
     fontWeight: 'bold',
-    marginTop: 5,
+    marginTop: moderateScale(5),
     color: '#333',
-    fontSize: 12,
+    fontSize: moderateScale(12),
   },
   podiumImage: {
     position: 'absolute',
@@ -109,44 +110,44 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   listContainer: {
-    flex: 1, // <- makes it take all remaining space
+    flex: 1,
     backgroundColor: '#ffe5e0',
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
+    borderTopLeftRadius: moderateScale(30),
+    borderTopRightRadius: moderateScale(30),
     overflow: 'hidden',
   },
   listItem: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#fff',
-    borderRadius: 20,
-    padding: 15,
-    marginVertical: 6,
+    borderRadius: moderateScale(20),
+    padding: moderateScale(15),
+    marginVertical: moderateScale(6),
     shadowColor: '#000',
     shadowOpacity: 0.05,
-    shadowRadius: 3,
+    shadowRadius: moderateScale(3),
     elevation: 2,
   },
   avatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: moderateScale(40),
+    height: moderateScale(40),
+    borderRadius: moderateScale(20),
     backgroundColor: '#f2f2f2',
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 10,
+    marginRight: moderateScale(10),
   },
   userName: {
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: moderateScale(16),
   },
   points: {
     color: 'gray',
-    fontSize: 14,
+    fontSize: moderateScale(14),
   },
   rank: {
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: moderateScale(16),
     color: '#888',
   },
 });

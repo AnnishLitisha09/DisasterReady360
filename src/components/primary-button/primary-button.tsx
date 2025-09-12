@@ -1,10 +1,11 @@
 import type React from 'react';
 import { TouchableOpacity, Text } from 'react-native';
+import { moderateScale } from '../../utils/scalingUtils';
 
 interface PrimaryButtonProps {
-  title: string
-  onPress: () => void
-  disabled?: boolean
+  title: string;
+  onPress: () => void;
+  disabled?: boolean;
 }
 
 export const PrimaryButton: React.FC<PrimaryButtonProps> = ({ title, onPress, disabled = false }) => {
@@ -14,17 +15,17 @@ export const PrimaryButton: React.FC<PrimaryButtonProps> = ({ title, onPress, di
       disabled={disabled}
       style={{
         backgroundColor: disabled ? '#CCC' : '#FF6B35',
-        paddingVertical: 16,
-        borderRadius: 12,
+        paddingVertical: moderateScale(16),
+        borderRadius: moderateScale(12),
         alignItems: 'center',
-        marginHorizontal: 20,
-        marginBottom: 20,
+        marginHorizontal: moderateScale(20),
+        marginBottom: moderateScale(20),
       }}
     >
       <Text
         style={{
           color: 'white',
-          fontSize: 16,
+          fontSize: moderateScale(16),
           fontWeight: '600',
         }}
       >
