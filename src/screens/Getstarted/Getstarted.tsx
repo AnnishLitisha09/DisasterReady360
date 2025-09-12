@@ -8,7 +8,7 @@ export const Getstarted = () => {
   const navigation = useNavigation(); // ✅ Access navigation
 
   const handleGetStarted = () => {
-    navigation.navigate('AssignDrillScreen'); // ✅ Navigate to the Login page
+    navigation.navigate('Loginpage'); // ✅ Navigate to the Login page
   };
 
   return (
