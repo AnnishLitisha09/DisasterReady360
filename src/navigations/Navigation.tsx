@@ -5,7 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import profile from '../screens/profile/profile';
 import { ActivityIndicator, View } from 'react-native';
 // Screens
-import { Dashboard, Getstarted, Infographics, Learningmodules, Loginpage, Otppage, Result, Signup, Test, Veiwvideo } from '../screens';
+import { AssignDrillScreen, Dashboard, Getstarted, Infographics, LeaderboardPage, Learningmodules, Loginpage, Otppage, Result, Signup, Test, Veiwvideo } from '../screens';
 import { getAuthData } from '../store/authStorage';
 
 import SosScreen from '../screens/SosScreen/SosScreen';
@@ -38,7 +38,6 @@ export const Navigation = () => {
 
   return (
     <NavigationContainer>
-    
       <RootStack.Navigator initialRouteName={initialRoute}>
         <RootStack.Screen name="Test" component={Test} options={{ headerShown: false }}/>
         <RootStack.Screen name="Getstarted" component={Getstarted} options={{ headerShown: false }}/>
@@ -52,6 +51,8 @@ export const Navigation = () => {
         <RootStack.Screen name="Result" component={Result} options={{ headerShown: false }}/>
         <RootStack.Screen name="SosScreen" component={SosScreen} options={{ headerShown: false }}/>
         <RootStack.Screen name="profile" component={profile} options={{ headerShown: false }}/>
+        <RootStack.Screen name="AssignDrillScreen" component={AssignDrillScreen} options={{ headerShown: false }}/>
+        <RootStack.Screen name="LeaderboardPage" component={LeaderboardPage} options={{ headerShown: false }}/>
       </RootStack.Navigator>
     </NavigationContainer>
   );
