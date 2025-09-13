@@ -8,3 +8,4 @@ export * from './Learningmodules';
 export * from './Veiwvideo';
 export * from './Infographics';
 export * from './AssignDrillScreen';
+export * from './LeaderboardPage';

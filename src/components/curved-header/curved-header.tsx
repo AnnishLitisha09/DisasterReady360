@@ -1,10 +1,11 @@
 import type React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { ChevronLeft } from 'lucide-react-native';
+import { moderateScale } from '../../utils/scalingUtils';
 
 interface CurvedHeaderProps {
-  title: string
-  onBackPress: () => void
+  title: string;
+  onBackPress: () => void;
 }
 
 export const CurvedHeader: React.FC<CurvedHeaderProps> = ({ title, onBackPress }) => {
@@ -12,11 +13,11 @@ export const CurvedHeader: React.FC<CurvedHeaderProps> = ({ title, onBackPress }
     <View
       style={{
         backgroundColor: '#FF6B35',
-        paddingTop: 70,
-        paddingBottom: 40,
-        paddingHorizontal: 20,
-        borderBottomLeftRadius: 60,
-        borderBottomRightRadius: 60,
+        paddingTop: moderateScale(70),
+        paddingBottom: moderateScale(40),
+        paddingHorizontal: moderateScale(20),
+        borderBottomLeftRadius: moderateScale(60),
+        borderBottomRightRadius: moderateScale(60),
       }}
     >
       <View
@@ -25,13 +26,13 @@ export const CurvedHeader: React.FC<CurvedHeaderProps> = ({ title, onBackPress }
           alignItems: 'center',
         }}
       >
-        <TouchableOpacity onPress={onBackPress} style={{ marginRight: 15 }}>
-          <ChevronLeft size={30} color="white" />
+        <TouchableOpacity onPress={onBackPress} style={{ marginRight: moderateScale(15) }}>
+          <ChevronLeft size={moderateScale(30)} color="white" />
         </TouchableOpacity>
         <Text
           style={{
             color: 'white',
-            fontSize: 20,
+            fontSize: moderateScale(20),
             fontWeight: '600',
           }}
         >

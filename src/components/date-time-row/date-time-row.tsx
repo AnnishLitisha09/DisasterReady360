@@ -1,14 +1,15 @@
 import type React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
+import { moderateScale } from '../../utils/scalingUtils';
 
 interface DateTimeField {
-  label: string
-  value: string
-  onPress: () => void
+  label: string;
+  value: string;
+  onPress: () => void;
 }
 
 interface DateTimeRowProps {
-  fields: DateTimeField[]
+  fields: DateTimeField[];
 }
 
 export const DateTimeRow: React.FC<DateTimeRowProps> = ({ fields }) => {
@@ -17,17 +18,17 @@ export const DateTimeRow: React.FC<DateTimeRowProps> = ({ fields }) => {
       style={{
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom: 20,
+        marginBottom: moderateScale(20),
       }}
     >
       {fields.map((field, index) => (
-        <View key={index} style={{ flex: 1, marginRight: index < fields.length - 1 ? 10 : 0 }}>
+        <View key={index} style={{ flex: 1, marginRight: index < fields.length - 1 ? moderateScale(10) : 0 }}>
           <Text
             style={{
-              fontSize: 14,
+              fontSize: moderateScale(14),
               fontWeight: '600',
               color: '#333',
-              marginBottom: 8,
+              marginBottom: moderateScale(8),
             }}
           >
             {field.label}
@@ -36,17 +37,17 @@ export const DateTimeRow: React.FC<DateTimeRowProps> = ({ fields }) => {
             onPress={field.onPress}
             style={{
               borderColor: '#cbcbcbff',
-              borderWidth: 1,
-              padding: 12,
-              borderRadius: 8,
-              minHeight: 45,
+              borderWidth: moderateScale(1),
+              padding: moderateScale(12),
+              borderRadius: moderateScale(8),
+              minHeight: moderateScale(45),
               justifyContent: 'center',
             }}
           >
             <Text
               style={{
                 color: field.value ? '#333' : '#999',
-                fontSize: 12,
+                fontSize: moderateScale(12),
               }}
             >
               {field.value || field.label}

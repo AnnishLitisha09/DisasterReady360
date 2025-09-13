@@ -2,6 +2,7 @@ import { SafeAreaView, ScrollView, View, TouchableOpacity, Text, TextInput } fro
 import { useState } from 'react';
 import DatePicker from 'react-native-date-picker';
 import { CheckboxListItem, CurvedHeader, CustomDropdown, DateTimeRow, PrimaryButton } from '../../components';
+import { moderateScale } from '../../utils/scalingUtils';
 
 const CustomMultiSelectDropdown = ({
   label,
@@ -28,18 +29,18 @@ const CustomMultiSelectDropdown = ({
   const filteredOptions = options.filter((o) => o.toLowerCase().includes(searchText.toLowerCase()));
 
   return (
-    <View style={{ marginVertical: 10 }}>
+    <View style={{ marginVertical: moderateScale(10) }}>
       <TouchableOpacity
         onPress={() => setIsOpen(!isOpen)}
         style={{
-          borderWidth: 1,
+          borderWidth: moderateScale(1),
           borderColor: '#ccc',
-          borderRadius: 10,
-          padding: 12,
+          borderRadius: moderateScale(10),
+          padding: moderateScale(12),
         }}
       >
-        <Text style={{ fontWeight: '600' }}>{label}</Text>
-        <Text style={{ color: '#555', marginTop: 5 }}>
+        <Text style={{ fontWeight: '600', fontSize: moderateScale(14) }}>{label}</Text>
+        <Text style={{ color: '#555', marginTop: moderateScale(5), fontSize: moderateScale(13) }}>
           {selectedOptions.length > 0 ? selectedOptions.join(', ') : `Select ${label.toLowerCase()}`}
         </Text>
       </TouchableOpacity>
@@ -47,26 +48,26 @@ const CustomMultiSelectDropdown = ({
       {isOpen && (
         <View
           style={{
-            marginTop: 5,
-            borderWidth: 1,
+            marginTop: moderateScale(5),
+            borderWidth: moderateScale(1),
             borderColor: '#ccc',
-            borderRadius: 10,
+            borderRadius: moderateScale(10),
             backgroundColor: 'white',
-            maxHeight: 250,
+            maxHeight: moderateScale(250),
             elevation: 4,
             zIndex: 1000,
           }}
         >
-          <View style={{ borderBottomWidth: 1, borderColor: '#eee', padding: 8 , borderRadius: 20}}>
+          <View style={{ borderBottomWidth: moderateScale(1), borderColor: '#eee', padding: moderateScale(8), borderRadius: moderateScale(20) }}>
             <TextInput
               placeholder="Search..."
               value={searchText}
               onChangeText={setSearchText}
-              style={{ paddingVertical: 6 }}
+              style={{ paddingVertical: moderateScale(6), fontSize: moderateScale(13) }}
             />
           </View>
           
-          <ScrollView style={{ maxHeight: 200 }}>
+          <ScrollView style={{ maxHeight: moderateScale(200) }}>
             {filteredOptions.map((item) => (
               <CheckboxListItem
                 key={item}
@@ -79,15 +80,15 @@ const CustomMultiSelectDropdown = ({
 
           <TouchableOpacity
             style={{
-              padding: 12,
+              padding: moderateScale(12),
               alignItems: 'center',
-              borderTopWidth: 1,
+              borderTopWidth: moderateScale(1),
               borderColor: '#eee',
               backgroundColor: '#f5f5f5',
             }}
             onPress={() => setIsOpen(false)}
           >
-            <Text style={{ fontWeight: '600', color: '#E35B33' }}>Done</Text>
+            <Text style={{ fontWeight: '600', color: '#E35B33', fontSize: moderateScale(14) }}>Done</Text>
           </TouchableOpacity>
         </View>
       )}
@@ -130,7 +131,7 @@ export const AssignDrillScreen = () => {
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <CurvedHeader title="Assign New Drill" onBackPress={() => console.log('Back pressed')} />
 
-      <ScrollView style={{ flex: 1, padding: 20 }}>
+      <ScrollView style={{ flex: 1, padding: moderateScale(20) }}>
         <CustomDropdown
           label="Drill Type"
           value={drillType}
