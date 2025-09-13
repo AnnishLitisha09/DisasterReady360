@@ -14,3 +14,5 @@ export * from './security';
 export * from './logouticon';
 export * from './helpicon';
 export * from './shareicon';
+export * from './copyicon';
+export * from  './Deleteicon'
