@@ -3,8 +3,8 @@
 import type React from 'react';
 import { useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { ChevronDown } from 'lucide-react-native';
 import { moderateScale } from '../../utils/scalingUtils';
+import { Down } from '../../assets/icons';
 
 interface DropdownProps {
   label: string;
@@ -48,7 +48,7 @@ export const CustomDropdown: React.FC<DropdownProps> = ({ label, value, options,
         >
           {value}
         </Text>
-        <ChevronDown size={moderateScale(20)} color="#666" />
+        <Down size={moderateScale(20)} color="#666" />
       </TouchableOpacity>
 
       {isOpen && (

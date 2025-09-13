@@ -9,3 +9,5 @@ export * from './Veiwvideo';
 export * from './Infographics';
 export * from './AssignDrillScreen';
 export * from './LeaderboardPage';
+export * from './StudentTeacherDrill';
+
