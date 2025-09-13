@@ -14,6 +14,7 @@ interface EventCardProps {
   totalJoined: number;
   venue: string;
   type: string;
+  date: string;
   time: string;
   buttonOption: ButtonOption;
   onEdit?: () => void;
@@ -28,6 +29,7 @@ const EventCard: React.FC<EventCardProps> = ({
   venue,
   type,
   time,
+  date,
   buttonOption,
   onEdit,
   onDelete,
@@ -78,7 +80,7 @@ const EventCard: React.FC<EventCardProps> = ({
         </View>
         <View style={styles.rightHeader}>
           <Clockicon width={moderateScale(14)} height={moderateScale(14)} fill="#555" />
-          <Text style={styles.timeText}>{time}</Text>
+          <Text style={styles.timeText}>{date} / {time}</Text>
         </View>
       </View>
 
