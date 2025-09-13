@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 // Packages
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { ViewStudentsAccount } from '../screens/ViewStudentsAccount';
 import profile from '../screens/profile/profile';
 import { ActivityIndicator, View } from 'react-native';
 // Screens
@@ -53,6 +54,7 @@ export const Navigation = () => {
         <RootStack.Screen name="profile" component={profile} options={{ headerShown: false }}/>
         <RootStack.Screen name="AssignDrillScreen" component={AssignDrillScreen} options={{ headerShown: false }}/>
         <RootStack.Screen name="LeaderboardPage" component={LeaderboardPage} options={{ headerShown: false }}/>
+        <RootStack.Screen name="ViewStudentsAccount" component={ViewStudentsAccount} options={{ headerShown: false }}/>
       </RootStack.Navigator>
     </NavigationContainer>
   );

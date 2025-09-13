@@ -40,7 +40,7 @@ const initialVideos = [
   duration: '8:40 min',
   videoId: 'hWSu4l1RxLg',
   image: 'https://imgs.search.brave.com/Z7nRcfYYRNCgkmokNf77HuQVUqfyilACG4H0mEwBqBA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZndkLmNvbS5waC9p/bWFnZXMvdjMvYXNz/ZXRzL2JsdDlkMjQ1/MDU1OTcyZmRlNGUv/Ymx0MzI2YWRkMzhh/MGUxYmYxOC82ODA5/ZTRiMWU0MWIxZjI4/MmFiYmFkYTQvRWFy/dGhxdWFrZV9TYWZl/dHkucG5n',
-  isViewed: false,
+  isViewed: true,
 },
 {
   id: '3',
@@ -60,7 +60,7 @@ const initialVideos = [
   duration: '17:27 min',
   videoId: 'S6BFw4ZURZQ',
   image: 'https://imgs.search.brave.com/i5eUhRVnCf7_l2a_lGPzU-KSgtjmQQyXMavq9_YGvpY/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/c2h1dHRlcnN0b2Nr/LmNvbS9pbWFnZS12/ZWN0b3IvZWFydGhx/dWFrZS1zYWZldHkt/cnVsZXMtaW5zdHJ1/Y3Rpb24tY2FzZS0y/NjBudy0yMTUyMjYx/OTA3LmpwZw',
-  isViewed: false,
+  isViewed: true,
 },
 {
   id: '4',
@@ -80,7 +80,7 @@ const initialVideos = [
   duration: '5:54 min',
   videoId: 'MllUVQM3KVk',
   image: 'https://imgs.search.brave.com/S-Qxt9hRo3pyowJD9FI4OrvL__dVuVZLnde7GTZENTA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/Zm9vdHByaW50c2Vk/dWNhdGlvbi5pbi9i/bG9nL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDI0LzA4L0VhcnRo/cXVha2Utc2FmZXR5/LWZvci1jaGlsZHJl/bi0xMjAweDY3OC5q/cGc',
-  isViewed: false,
+  isViewed: true,
 },
 {
   id: '5',
@@ -100,7 +100,7 @@ const initialVideos = [
   duration: '6:23 min',
   videoId: 'd3K_5ZSyEBA',
   image: 'https://imgs.search.brave.com/HIKDu-ibFfmoDfXcPJaUBnQ5nOr53FLQ34hueOk82wI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/c2xpZGVzaGFyZWNk/bi5jb20vc3NfdGh1/bWJuYWlscy9lYXJ0/aHF1YWtlc2FmZXR5/ZmluYWwtMjUwNDI4/MDQyMjEwLWI3NjMw/NTc0LXRodW1ibmFp/bC5qcGc_d2lkdGg9/NTYwJmZpdD1ib3Vu/ZHM',
-  isViewed: false,
+  isViewed: true,
 },
 {
   id: '6',
@@ -120,7 +120,7 @@ const initialVideos = [
   duration: '4:32 min',
   videoId: 'xqbQ-CFgrbQ',
   image: 'https://imgs.search.brave.com/Hd32HdDtVTA4KK8_plO945tKzXu8EeQXzZwytadf5X4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hbGxo/YW5kc2FuZGhlYXJ0/cy5vcmcvd3AtY29u/dGVudC91cGxvYWRz/LzIwMjUvMDcvTWV4/aWNvX0VhcnRocXVh/a2VfUmVsaWVmX0dh/bGxlcnlfMy1zY2Fs/ZWQud2VicA',
-  isViewed: false,
+  isViewed: true,
 },
   {
     id: '1',
@@ -562,7 +562,7 @@ const initialInfographics = [
     subtitle: 'Cover the topic properly',
     image:
       'https://imgs.search.brave.com/8DbFviGMS_fiwRbBxd49_E7DWwkhStm6MKScB8cPZrc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pLm5h/dGdlb2ZlLmNvbS9u/LzEyN2NiZjhiLTNl/NDQtNDY1OC05MTYy/LWIwYjEyNWM0MDE3/Mi8yMTY5NS5qcGc',
-    isViewed: false,
+    isViewed: true,
     description:
       'This infographic teaches the correct procedure during an earthquake to minimize injuries and stay safe.',
     keyPoints: [
@@ -994,7 +994,17 @@ const initialQuizzes = [
     points: '500 points',
     image:
       'https://png.pngtree.com/thumb_back/fh260/background/20250205/pngtree-soft-pastel-floral-design-light-blue-background-image_16896113.jpg',
-    isViewed: true,
+    isViewed: false,
+  },
+    {
+    id: '10',
+    topic: 'earthquake',
+    title: 'Earthquake Safety Quiz',
+    questions: '20 questions',
+    points: '500 points',
+    image:
+      'https://png.pngtree.com/thumb_back/fh260/background/20250205/pngtree-soft-pastel-floral-design-light-blue-background-image_16896113.jpg',
+    isViewed: false,
   },
   {
     id: '2',

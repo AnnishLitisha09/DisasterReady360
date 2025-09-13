@@ -8,3 +8,4 @@ export * from './curved-header';
 export * from './custom-dropdown';
 export * from './date-time-row';
 export * from './primary-button';
+export * from './FieldBox';
