@@ -1,8 +1,8 @@
 import type React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { ChevronLeft } from 'lucide-react-native';
 import { moderateScale } from '../../utils/scalingUtils';
 import { useNavigation } from '@react-navigation/native';
+import { Arrowback } from '../../assets/icons';
 
 interface CurvedHeaderProps {
   title: string;
@@ -32,7 +32,7 @@ export const CurvedHeader: React.FC<CurvedHeaderProps> = ({ title }) => {
           onPress={() => navigation.goBack()}
           style={{ marginRight: moderateScale(15) }}
         >
-          <ChevronLeft size={moderateScale(30)} color="white" />
+          <Arrowback height={moderateScale(30)} width={moderateScale(30)} color="white" />
         </TouchableOpacity>
         <Text
           style={{

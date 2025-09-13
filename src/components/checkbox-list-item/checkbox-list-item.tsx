@@ -1,7 +1,7 @@
 import type React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { Check } from 'lucide-react-native';
 import { moderateScale } from '../../utils/scalingUtils';
+import { Check } from '../../assets/icons';
 
 interface CheckboxListItemProps {
   name: string;
@@ -33,7 +33,7 @@ export const CheckboxListItem: React.FC<CheckboxListItemProps> = ({ name, isSele
           justifyContent: 'center',
         }}
       >
-        {isSelected && <Check size={moderateScale(12)} color="white" />}
+        {isSelected && <Check size={moderateScale(18)} color="white" />}
       </View>
       <Text
         style={{

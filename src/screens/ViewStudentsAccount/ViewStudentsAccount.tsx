@@ -3,31 +3,43 @@ import { StyleSheet, Text, View, SafeAreaView, FlatList } from 'react-native';
 import { StudentCard } from '../../components/StudentCard';
 import { SearchBar } from '../../components/SearchBar';
 import { moderateScale } from '../../utils/scalingUtils';
+import { useNavigation } from '@react-navigation/native'; // 🔹 added
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { CurvedHeader } from '../../components';
+
+// 🔹 Define your navigation types
+type RootStackParamList = {
+  ViewStudentsAccount: undefined;
+  StudentTeacherDrill: { userName: string };
+};
+
+type NavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'ViewStudentsAccount'
+>;
 
 const students = [
   { name: 'Annish Litisha', email: 'jonnishlitisha@gmail.com', level: 'Level - 1' },
   { name: 'Annish Litisha', email: 'jonnishlitisha@gmail.com', level: 'Level - 1' },
   { name: 'Annish Litisha', email: 'jonnishlitisha@gmail.com', level: 'Level - 1' },
   { name: 'Annish Litisha', email: 'jonnishlitisha@gmail.com', level: 'Level - 1' },
-  { name: 'Annish Litisha', email: 'jonnishlitisha@gmail.com', level: 'Level - 1' },
+  { name: 'John Doe', email: 'johndoe@gmail.com', level: 'Level - 2' },
+  { name: 'Jane Smith', email: 'janesmith@gmail.com', level: 'Level - 3' },
 ];
 
 export const ViewStudentsAccount = () => {
   const [search, setSearch] = useState('');
+  const navigation = useNavigation<NavigationProp>();
 
-  const filteredStudents = students.filter((student) =>
-    student.name.toLowerCase().includes(search.toLowerCase()) ||
-    student.email.toLowerCase().includes(search.toLowerCase())
+  const filteredStudents = students.filter(
+    (student) =>
+      student.name.toLowerCase().includes(search.toLowerCase()) ||
+      student.email.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.headerText}>View Student's Account</Text>
-      </View>
-
-      {/* Search Bar */}
+      <CurvedHeader title="View Student's Account"  />
       <SearchBar value={search} onChangeText={setSearch} />
 
       {/* Student List */}
@@ -40,7 +52,11 @@ export const ViewStudentsAccount = () => {
               name={item.name}
               email={item.email}
               level={item.level}
-              onPress={() => console.log('View pressed for', item.name)}
+              onPress={() =>
+                navigation.navigate('StudentTeacherDrill', {
+                  userName: item.name, // 🔹 pass student name to StudentTeacherDrill
+                })
+              }
             />
           )}
         />

@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView, Alert, TouchableOpacity } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { moderateScale } from '../../utils/scalingUtils';
-import { EventCard, FieldBox, LearningModuleCard, PracticeModuleCard } from '../../components';
+import { EventCard, LearningModuleCard, PracticeModuleCard } from '../../components';
 import { useNavigation } from '@react-navigation/native';
 import { getAuthData } from '../../store/authStorage';
-import { Addicon, Arrowback, PersonIcon } from '../../assets/icons';
+import { Addicon, PersonIcon } from '../../assets/icons';
 
 
 export const Dashboard = () => {
@@ -26,7 +26,6 @@ export const Dashboard = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* Orange Header */}
         <View style={styles.header}>
           <Text style={styles.greeting}>Hey {name}!</Text>
 
@@ -73,7 +72,6 @@ export const Dashboard = () => {
                   School Average: 85%
                 </Text>
 
-                {/* Linear Progress Bar */}
                 <View
                   style={{
                     height: moderateScale(12),
@@ -191,7 +189,7 @@ export const Dashboard = () => {
 </TouchableOpacity>
 
 
-              <TouchableOpacity style={styles.teacherButton} onPress={() => Alert.alert("View Student's Account")}>
+              <TouchableOpacity style={styles.teacherButton} onPress={() => navigation.navigate("ViewStudentsAccount")}>
                  <PersonIcon/>
                 <Text style={styles.teacherButtonText}>View Student’s Account</Text>
               </TouchableOpacity>
@@ -205,13 +203,12 @@ export const Dashboard = () => {
               </View>
             </View>
             <View>
-              <EventCard title={'Earthquake'} totalJoined={0} venue={' bit auditorium'} type={'Level 1 '} time={'12:00'} buttonOption={'editDelete'} />
-               <EventCard title={'Earthquake'} totalJoined={0} venue={' bit auditorium'} type={'Level 1 '} time={'12:00'} buttonOption={'editDelete'} />
-                <EventCard title={'Earthquake'} totalJoined={0} venue={' bit auditorium'} type={'Level 1 '} time={'12:00'} buttonOption={'editDelete'} />
-                 <EventCard title={'Earthquake'} totalJoined={0} venue={' bit auditorium'} type={'Level 1 '} time={'12:00'} buttonOption={'editDelete'} />
-                  <EventCard title={'Earthquake'} totalJoined={0} venue={' bit auditorium'} type={'Level 1 '} time={'12:00'} buttonOption={'editDelete'} />
-                   <EventCard title={'Earthquake'} totalJoined={0} venue={' bit auditorium'} type={'Level 1 '} time={'12:00'} buttonOption={'editDelete'} />
-                   
+              <EventCard title={'Earthquake'} totalJoined={0} venue={' bit auditorium'} type={'Level 1 '} time={'12:00'} buttonOption={'editDelete'} date={'16-09-2025'} />
+               <EventCard title={'Earthquake'} totalJoined={0} venue={' bit auditorium'} type={'Level 1 '} time={'12:00'} buttonOption={'editDelete'} date={'16-09-2025'} />
+                <EventCard title={'Earthquake'} totalJoined={0} venue={' bit auditorium'} type={'Level 1 '} time={'12:00'} buttonOption={'editDelete'} date={'16-09-2025'} />
+                 <EventCard title={'Earthquake'} totalJoined={0} venue={' bit auditorium'} type={'Level 1 '} time={'12:00'} buttonOption={'editDelete'} date={'16-09-2025'} />
+                  <EventCard title={'Earthquake'} totalJoined={0} venue={' bit auditorium'} type={'Level 1 '} time={'12:00'} buttonOption={'editDelete'} date={'16-09-2025'} />
+                   <EventCard title={'Earthquake'} totalJoined={0} venue={' bit auditorium'} type={'Level 1 '} time={'12:00'} buttonOption={'editDelete'} date={'16-09-2025'} />
             </View>
           </View>
           
@@ -219,7 +216,6 @@ export const Dashboard = () => {
 
       </ScrollView>
 
-      {/* Floating SOS Button */}
       {role === 'student' && (
         <TouchableOpacity
           style={styles.sosButton}

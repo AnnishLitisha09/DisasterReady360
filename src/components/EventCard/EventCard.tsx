@@ -5,7 +5,7 @@ import {Deleteicon } from "../../assets/icons";
 import { Editicon } from "../../assets/icons";
 import HomeSafeIcon from "../../assets/icons/homesafeicon";
 import { Clockicon } from "../../assets/icons/Clockicon";
-import { moderateScale } from "../../utils/scalingUtils";  // 🔹 added
+import { moderateScale } from "../../utils/scalingUtils";
 
 type ButtonOption = "editDelete" | "result" | "joinnow" | "none";
 
@@ -80,7 +80,7 @@ export const EventCard: React.FC<EventCardProps> = ({
         </View>
         <View style={styles.rightHeader}>
           <Clockicon width={moderateScale(14)} height={moderateScale(14)} fill="#555" />
-          <Text style={styles.timeText}>{date} / {time}</Text>
+          <Text style={styles.timeText}>{date}    {time}</Text>
         </View>
       </View>
 

@@ -6,7 +6,7 @@ import { ViewStudentsAccount } from '../screens/ViewStudentsAccount';
 import profile from '../screens/profile/profile';
 import { ActivityIndicator, View } from 'react-native';
 // Screens
-import { AssignDrillScreen, Dashboard, Getstarted, Infographics, LeaderboardPage, Learningmodules, Loginpage, Otppage, Result, Signup, Test, Veiwvideo } from '../screens';
+import { AssignDrillScreen, Dashboard, Getstarted, Infographics, LeaderboardPage, Learningmodules, Loginpage, Otppage, Result, Signup, StudentTeacherDrill, Test, Veiwvideo } from '../screens';
 import { getAuthData } from '../store/authStorage';
 
 import SosScreen from '../screens/SosScreen/SosScreen';
@@ -55,6 +55,7 @@ export const Navigation = () => {
         <RootStack.Screen name="AssignDrillScreen" component={AssignDrillScreen} options={{ headerShown: false }}/>
         <RootStack.Screen name="LeaderboardPage" component={LeaderboardPage} options={{ headerShown: false }}/>
         <RootStack.Screen name="ViewStudentsAccount" component={ViewStudentsAccount} options={{ headerShown: false }}/>
+        <RootStack.Screen name="StudentTeacherDrill" component={StudentTeacherDrill} options={{ headerShown: false }}/>
       </RootStack.Navigator>
     </NavigationContainer>
   );
