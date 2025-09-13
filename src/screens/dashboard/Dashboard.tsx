@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView, Alert, TouchableOpacity } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { moderateScale } from '../../utils/scalingUtils';
-import { LearningModuleCard, PracticeModuleCard } from '../../components';
+import { EventCard, FieldBox, LearningModuleCard, PracticeModuleCard } from '../../components';
 import { useNavigation } from '@react-navigation/native';
 import { getAuthData } from '../../store/authStorage';
 import { Addicon, Arrowback, PersonIcon } from '../../assets/icons';
+
 
 export const Dashboard = () => {
   const navigation = useNavigation();
@@ -169,7 +170,7 @@ export const Dashboard = () => {
 
               <TouchableOpacity
                 style={styles.teacherQuickActionCard}
-                onPress={() => navigation.navigate('Leaderboard')}
+                onPress={() => navigation.navigate('LeaderboardPage')}
               >
                 <Image
                   source={require('../../assets/images/rank.png')}
@@ -181,10 +182,14 @@ export const Dashboard = () => {
 
             {/* Two Buttons in a row */}
             <View style={styles.teacherButtonsRow}>
-              <TouchableOpacity style={styles.teacherButton} onPress={() => Alert.alert('Assign New Drill')}>
-                <Addicon width={25} height={24}/>
-                <Text style={styles.teacherButtonText}>Assign New Drill</Text>
-              </TouchableOpacity>
+             <TouchableOpacity 
+  style={styles.teacherButton} 
+  onPress={() => navigation.navigate("AssignDrillScreen")}
+>
+  <Addicon width={25} height={24} />
+  <Text style={styles.teacherButtonText}>Assign New Drill</Text>
+</TouchableOpacity>
+
 
               <TouchableOpacity style={styles.teacherButton} onPress={() => Alert.alert("View Student's Account")}>
                  <PersonIcon/>
@@ -198,6 +203,15 @@ export const Dashboard = () => {
               <View>
                 <Text style={styles.viewAll}>View all</Text>
               </View>
+            </View>
+            <View>
+              <EventCard title={'Earthquake'} totalJoined={0} venue={' bit auditorium'} type={'Level 1 '} time={'12:00'} buttonOption={'editDelete'} />
+               <EventCard title={'Earthquake'} totalJoined={0} venue={' bit auditorium'} type={'Level 1 '} time={'12:00'} buttonOption={'editDelete'} />
+                <EventCard title={'Earthquake'} totalJoined={0} venue={' bit auditorium'} type={'Level 1 '} time={'12:00'} buttonOption={'editDelete'} />
+                 <EventCard title={'Earthquake'} totalJoined={0} venue={' bit auditorium'} type={'Level 1 '} time={'12:00'} buttonOption={'editDelete'} />
+                  <EventCard title={'Earthquake'} totalJoined={0} venue={' bit auditorium'} type={'Level 1 '} time={'12:00'} buttonOption={'editDelete'} />
+                   <EventCard title={'Earthquake'} totalJoined={0} venue={' bit auditorium'} type={'Level 1 '} time={'12:00'} buttonOption={'editDelete'} />
+                   
             </View>
           </View>
           

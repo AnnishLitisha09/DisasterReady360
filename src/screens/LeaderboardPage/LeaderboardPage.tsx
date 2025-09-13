@@ -14,6 +14,13 @@ const leaderboardData = [
   { name: 'Zain Vaccaro', points: 448, rank: 5 },
   { name: 'Skylar Geidt', points: 448, rank: 6 },
   { name: 'Justin Bator', points: 400, rank: 7 },
+    { name: 'Litisha', points: 2569, rank: 8 },
+  { name: 'Alena Donin', points: 1469, rank: 9 },
+  { name: 'Craig Gouse', points: 1053, rank: 10 },
+  { name: 'Madelyn Dias', points: 590, rank: 11 },
+  { name: 'Zain Vaccaro', points: 448, rank: 12 },
+  { name: 'Skylar Geidt', points: 448, rank: 13 },
+  { name: 'Justin Bator', points: 400, rank: 14 },
 ];
 
 export const LeaderboardPage = () => {

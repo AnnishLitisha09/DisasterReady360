@@ -2,17 +2,19 @@ import type React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { ChevronLeft } from 'lucide-react-native';
 import { moderateScale } from '../../utils/scalingUtils';
+import { useNavigation } from '@react-navigation/native';
 
 interface CurvedHeaderProps {
   title: string;
-  onBackPress: () => void;
 }
 
-export const CurvedHeader: React.FC<CurvedHeaderProps> = ({ title, onBackPress }) => {
+export const CurvedHeader: React.FC<CurvedHeaderProps> = ({ title }) => {
+  const navigation = useNavigation();
+
   return (
     <View
       style={{
-        backgroundColor: '#FF6B35',
+        backgroundColor: '#E35B33',
         paddingTop: moderateScale(70),
         paddingBottom: moderateScale(40),
         paddingHorizontal: moderateScale(20),
@@ -26,7 +28,10 @@ export const CurvedHeader: React.FC<CurvedHeaderProps> = ({ title, onBackPress }
           alignItems: 'center',
         }}
       >
-        <TouchableOpacity onPress={onBackPress} style={{ marginRight: moderateScale(15) }}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={{ marginRight: moderateScale(15) }}
+        >
           <ChevronLeft size={moderateScale(30)} color="white" />
         </TouchableOpacity>
         <Text

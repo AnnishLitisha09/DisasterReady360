@@ -22,7 +22,7 @@ interface EventCardProps {
   onJoin?: () => void;
 }
 
-const EventCard: React.FC<EventCardProps> = ({
+export const EventCard: React.FC<EventCardProps> = ({
   title,
   totalJoined,
   venue,
@@ -181,5 +181,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EventCard;
+
 
