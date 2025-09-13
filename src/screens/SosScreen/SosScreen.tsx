@@ -13,15 +13,53 @@ import { SosButton } from "../../components";
 import { Arrowback } from "../../assets/icons";
 import { useNavigation } from "@react-navigation/native";
 import { moderateScale } from "../../utils/scalingUtils";
+import Sound from "react-native-sound";
+// 🔊 Enable playback
+Sound.setCategory("Playback");
+
+let sosSound: Sound | null = null;
 
 export default function SosScreen() {
   const navigation = useNavigation();
-
-  const [sosPressed, setSosPressed] = useState(false); // toggle state
+  const [sosPressed, setSosPressed] = useState(false);
   const [location, setLocation] = useState<any>(null);
   const [address, setAddress] = useState<string>("Fetching location...");
 
-  // 🔹 fetch detailed address from OSM
+  // Load siren sound once
+useEffect(() => {
+  sosSound = new Sound(
+  "facility_siren_loopable_100687.mp3",
+  Sound.MAIN_BUNDLE,
+  (error) => {
+    if (error) {
+      console.log("❌ Failed to load siren from bundle:", error);
+      return;
+    }
+    console.log("✅ Siren loaded from bundle");
+  }
+);
+
+
+  return () => {
+    sosSound?.release();
+  };
+}, []);
+
+
+
+  const playSOS = () => {
+    if (sosSound) {
+      sosSound.setNumberOfLoops(-1); // 🔁 loop until stopped
+      sosSound.play((success) => {
+        if (!success) console.log("❌ Playback failed");
+      });
+    }
+  };
+
+  const stopSOS = () => {
+    sosSound?.stop();
+  };
+
   const fetchAddressOSM = async (lat: number, lng: number) => {
     try {
       const response = await fetch(
@@ -35,7 +73,6 @@ export default function SosScreen() {
       const data = await response.json();
       if (data && data.address) {
         const addr = data.address;
-
         const houseNumber = addr.house_number || "";
         const road = addr.road || addr.pedestrian || "";
         const suburb = addr.suburb || "";
@@ -52,12 +89,9 @@ export default function SosScreen() {
         if (country) fullAddress += `${country}`;
 
         setAddress(fullAddress.trim());
-
-        // ✅ Log address to console
-        console.log("Fetched address:", fullAddress.trim());
+        console.log("📍 Address updated:", fullAddress.trim());
       } else {
         setAddress("Address not found");
-        console.log("Address not found");
       }
     } catch (error) {
       console.error("OSM Address fetch error:", error);
@@ -82,6 +116,8 @@ export default function SosScreen() {
 
   useEffect(() => {
     let watchId: any;
+    let lastLat: number | null = null;
+    let lastLng: number | null = null;
 
     (async () => {
       const hasPermission = await requestLocationPermission();
@@ -90,57 +126,60 @@ export default function SosScreen() {
         return;
       }
 
-      // 🔹 Initial position
+      // Initial position
       Geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
           setLocation(position.coords);
           fetchAddressOSM(latitude, longitude);
-
-          // ✅ Log coordinates
-          console.log("Initial position:", latitude, longitude);
+          lastLat = latitude;
+          lastLng = longitude;
         },
         (error) => {
           console.error("Initial GPS error:", error);
           setAddress("Unable to get GPS location");
         },
-        {
-          enableHighAccuracy: true,
-          timeout: 15000,
-          maximumAge: 10000,
-        }
+        { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
       );
 
-      // 🔹 Watch position for updates
+      // Watch position
       watchId = Geolocation.watchPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          setLocation(position.coords);
-          fetchAddressOSM(latitude, longitude);
 
-          // ✅ Log updated coordinates
-          console.log("Updated position:", latitude, longitude);
+          // ✅ Only update if coordinates changed significantly (~11m)
+          if (
+            lastLat === null ||
+            lastLng === null ||
+            Math.abs(latitude - lastLat) > 0.0001 ||
+            Math.abs(longitude - lastLng) > 0.0001
+          ) {
+            setLocation(position.coords);
+            fetchAddressOSM(latitude, longitude);
+            console.log("📍 Location changed:", latitude, longitude);
+            lastLat = latitude;
+            lastLng = longitude;
+          }
         },
         (error) => console.error("GPS watch error:", error),
-        {
-          enableHighAccuracy: true,
-          distanceFilter: 0,
-          interval: 5000,
-          fastestInterval: 2000,
-        }
+        { enableHighAccuracy: true, distanceFilter: 0, interval: 5000, fastestInterval: 2000 }
       );
     })();
 
     return () => {
-      if (watchId != null) {
-        Geolocation.clearWatch(watchId);
-      }
+      if (watchId != null) Geolocation.clearWatch(watchId);
     };
   }, []);
 
-  // 🔹 toggle SOS button color
+  // Toggle SOS
   const handleSOSPress = () => {
-    setSosPressed((prev) => !prev);
+    setSosPressed((prev) => {
+      const newState = !prev;
+      if (newState) playSOS();
+      else stopSOS();
+      return newState;
+    });
+
     if (location) fetchAddressOSM(location.latitude, location.longitude);
   };
 
@@ -260,4 +299,3 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
-

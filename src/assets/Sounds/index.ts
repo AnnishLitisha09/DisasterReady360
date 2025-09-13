@@ -1,0 +1,1 @@
+export const getSirenSound = () => require('./facility-siren-loopable-100687.mp3');
