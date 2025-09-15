@@ -14,6 +14,9 @@ import { Arrowback } from "../../assets/icons";
 import { useNavigation } from "@react-navigation/native";
 import { moderateScale } from "../../utils/scalingUtils";
 import Sound from "react-native-sound";
+import { getAuthData } from "../../store/authStorage";
+import { API_BASE_URL } from "../../config/apiConfig";
+
 // 🔊 Enable playback
 Sound.setCategory("Playback");
 
@@ -26,26 +29,23 @@ export default function SosScreen() {
   const [address, setAddress] = useState<string>("Fetching location...");
 
   // Load siren sound once
-useEffect(() => {
-  sosSound = new Sound(
-  "facility_siren_loopable_100687.mp3",
-  Sound.MAIN_BUNDLE,
-  (error) => {
-    if (error) {
-      console.log("❌ Failed to load siren from bundle:", error);
-      return;
-    }
-    console.log("✅ Siren loaded from bundle");
-  }
-);
+  useEffect(() => {
+    sosSound = new Sound(
+      "facility_siren_loopable_100687.mp3",
+      Sound.MAIN_BUNDLE,
+      (error) => {
+        if (error) {
+          console.log("❌ Failed to load siren from bundle:", error);
+          return;
+        }
+        console.log("✅ Siren loaded from bundle");
+      }
+    );
 
-
-  return () => {
-    sosSound?.release();
-  };
-}, []);
-
-
+    return () => {
+      sosSound?.release();
+    };
+  }, []);
 
   const playSOS = () => {
     if (sosSound) {
@@ -60,6 +60,38 @@ useEffect(() => {
     sosSound?.stop();
   };
 
+  // 🔹 Send location to backend
+  const updateUserLocation = async (location: string) => {
+    try {
+      const authData = await getAuthData();
+      if (!authData || !authData.user_id) {
+        console.warn("⚠️ No user_id found in storage");
+        return;
+      }
+
+const response = await fetch(`${API_BASE_URL}/update-location`, {
+  method: "PUT",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    user_id: authData.user_id,
+    location,
+  }),
+});
+
+
+      if (!response.ok) {
+        console.error("❌ Failed to update location:", await response.text());
+      } else {
+        console.log("✅ Location updated on server");
+      }
+    } catch (error) {
+      console.error("API error while updating location:", error);
+    }
+  };
+
+  // 🔹 Fetch address from OpenStreetMap
   const fetchAddressOSM = async (lat: number, lng: number) => {
     try {
       const response = await fetch(
@@ -88,8 +120,16 @@ useEffect(() => {
         if (state) fullAddress += `${state}, `;
         if (country) fullAddress += `${country}`;
 
-        setAddress(fullAddress.trim());
-        console.log("📍 Address updated:", fullAddress.trim());
+        const formattedAddress = fullAddress.trim();
+        setAddress(formattedAddress);
+        console.log("📍 Address updated:", formattedAddress);
+
+        // 🔹 Extract first word before "-" (like "Sathy")
+        const frontWord = formattedAddress.split("-")[0].trim().split(" ")[0];
+        console.log("📍 Extracted location:", frontWord);
+
+        // 🔹 Send to API
+        updateUserLocation(frontWord);
       } else {
         setAddress("Address not found");
       }
@@ -140,7 +180,6 @@ useEffect(() => {
           setAddress("Unable to get GPS location");
         },
         { enableHighAccuracy: false, timeout: 30000, maximumAge: 10000 }
-
       );
 
       // Watch position

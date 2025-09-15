@@ -39,7 +39,7 @@ export const Navigation = () => {
 
   return (
     <NavigationContainer>
-      <RootStack.Navigator initialRouteName={"SosScreen"}>
+      <RootStack.Navigator initialRouteName={initialRoute}>
         <RootStack.Screen name="Test" component={Test} options={{ headerShown: false }}/>
         <RootStack.Screen name="Getstarted" component={Getstarted} options={{ headerShown: false }}/>
         <RootStack.Screen name="Loginpage" component={Loginpage} options={{ headerShown: false }}/>
