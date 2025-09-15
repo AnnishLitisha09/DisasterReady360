@@ -1,10 +1,21 @@
-import React, { useState, useRef } from "react";
-import { 
-  StyleSheet, Text, View, Image, ScrollView, Dimensions, TouchableOpacity 
+// screens/Infographics.tsx
+import React, { useState, useRef, useEffect } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ScrollView,
+  Dimensions,
+  TouchableOpacity,
+  Alert,
 } from "react-native";
 import { Arrowback } from "../assets/icons";
 import { moderateScale } from "../utils/scalingUtils";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import axios from "axios";
+import { getAuthData } from "../store/authStorage";
+import { useLearningStore } from "../store/LearningStore";
 
 const { width } = Dimensions.get("window");
 
@@ -13,34 +24,77 @@ export const Infographics = () => {
   const route = useRoute();
   const { infographic } = route.params;
 
-  // Use all images; fallback to main image if none
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [studentId, setStudentId] = useState<number | null>(null);
+  const scrollRef = useRef<ScrollView>(null);
+
   const images = infographic.infographicsImages.length
     ? infographic.infographicsImages
     : [infographic.image];
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const scrollRef = useRef(null);
+  const markInfographicViewed = useLearningStore(
+    (state) => state.markInfographicViewed
+  );
+
+  useEffect(() => {
+    const fetchStudentId = async () => {
+      const authData = await getAuthData();
+      if (authData && authData.user_id) setStudentId(authData.role_id);
+    };
+    fetchStudentId();
+  }, []);
 
   const onScroll = (event) => {
     const index = Math.round(event.nativeEvent.contentOffset.x / width);
     setCurrentIndex(index);
   };
 
-  const handleMarkCompleted = () => {
-    // You can handle logic for marking completed here
-    alert("Marked as Completed!");
+const handleMarkCompleted = async () => {
+  if (!studentId) {
+    Alert.alert("Error", "Student ID not found.");
+    return;
+  }
+
+  const payload = {
+    student_id: studentId,
+    infographic_id: infographic.id,
   };
 
-  const handleUpNext = () => {
-    // Logic to navigate to next infographic or module
-    alert("Up Next clicked!");
-  };
+  // Log CURL equivalent
+  const curlCommand = `
+curl -X POST http://10.10.189.191:8000/api/update-infographic-progress \\
+-H "Content-Type: application/json" \\
+-d '${JSON.stringify(payload)}'
+  `;
+  console.log("CURL Request:\n", curlCommand);
+
+  try {
+    await axios.post(
+      "http://10.10.189.191:8000/api/update-infographic-progress",
+      payload
+    );
+
+    // Update local Zustand store
+    markInfographicViewed(infographic.id);
+
+    Alert.alert("Success", "Marked as Completed!");
+  } catch (err) {
+    console.error("Error marking infographic completed:", err);
+    Alert.alert("Error", "Failed to mark as completed.");
+  }
+};
+
 
   return (
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <Arrowback width={24} height={24} fill="#fff" onPress={() => navigation.goBack()} />
+        <Arrowback
+          width={24}
+          height={24}
+          fill="#fff"
+          onPress={() => navigation.goBack()}
+        />
         <Text style={styles.headerTitle}>{infographic.title}</Text>
       </View>
 
@@ -66,10 +120,7 @@ export const Infographics = () => {
         {images.map((_, index) => (
           <View
             key={index}
-            style={[
-              styles.dot,
-              currentIndex === index && styles.activeDot
-            ]}
+            style={[styles.dot, currentIndex === index && styles.activeDot]}
           />
         ))}
       </View>
@@ -88,7 +139,10 @@ export const Infographics = () => {
 
         {/* Buttons */}
         <View style={styles.buttonsContainer}>
-          <TouchableOpacity style={styles.completedBtn} onPress={handleMarkCompleted}>
+          <TouchableOpacity
+            style={styles.completedBtn}
+            onPress={handleMarkCompleted}
+          >
             <Text style={styles.buttonText}>Mark as Completed</Text>
           </TouchableOpacity>
         </View>
@@ -175,14 +229,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: "center",
     marginRight: moderateScale(10),
-  },
-  upNextBtn: {
-    flex: 1,
-    backgroundColor: "#E85A2A",
-    padding: moderateScale(12),
-    borderRadius: 8,
-    alignItems: "center",
-    marginLeft: moderateScale(10),
   },
   buttonText: {
     color: "#fff",

@@ -15,7 +15,7 @@ import { moderateScale } from "../utils/scalingUtils";
 import { Arrowback } from "../assets/icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useLearningStore } from "../store/LearningStore";
-import { getAuthData } from "../store/authStorage"; // ✅ import auth storage
+import { getAuthData } from "../store/authStorage";
 import { API_BASE_URL } from "../config/apiConfig";
 
 export const Learningmodules = () => {
@@ -26,65 +26,54 @@ export const Learningmodules = () => {
   const [loading, setLoading] = useState(true);
   const [studentId, setStudentId] = useState<number | null>(null);
 
-  // ✅ Zustand store
   const videosStore = useLearningStore((state) => state.videos);
   const infographicsStore = useLearningStore((state) => state.infographics);
   const quizzesStore = useLearningStore((state) => state.quizzes);
 
   const setVideos = useLearningStore((state) => state.setVideos);
-  const markVideoViewed = useLearningStore((state) => state.markVideoViewed);
+  const setInfographics = useLearningStore((state) => state.setInfographics);
   const markInfographicViewed = useLearningStore(
     (state) => state.markInfographicViewed
   );
 
-  // ✅ Get student_id from AsyncStorage first
-  // ✅ Get student_id from AsyncStorage first
-useEffect(() => {
-  const fetchStudentId = async () => {
-    const authData = await getAuthData();
-    if (authData && authData.role_id) {
-      console.log("Fetched role_id from storage:", authData.role_id); // ✅ log role_id
-      setStudentId(authData.role_id); 
-    } else {
-      console.warn("No auth data found in storage");
-      setStudentId(null);
-    }
-  };
-  fetchStudentId();
-}, []);
+  // Fetch studentId from AsyncStorage
+  useEffect(() => {
+    const fetchStudentId = async () => {
+      const authData = await getAuthData();
+      if (authData && authData.role_id) setStudentId(authData.role_id);
+      else setStudentId(null);
+    };
+    fetchStudentId();
+  }, []);
 
-
-  // ✅ Fetch videos once studentId is available
+  // Fetch videos and infographics
   useEffect(() => {
     if (!studentId) return;
 
-    const fetchVideos = async () => {
+    const fetchData = async () => {
+      setLoading(true);
       try {
-       const response = await fetch(
-  `${API_BASE_URL}/get-topics?student_id=${studentId}`
-);
+        const videosRes = await fetch(
+          `${API_BASE_URL}/get-topics?student_id=${studentId}`
+        );
+        const videosData = await videosRes.json();
+        if (Array.isArray(videosData)) setVideos(videosData);
 
-        const data = await response.json();
-
-        // ✅ Log the API response
-        console.log("Fetched videos data:", data);
-
-        if (Array.isArray(data)) {
-          setVideos(data); // ✅ Save to Zustand
-        } else {
-          console.warn("API response is not an array:", data);
-        }
-      } catch (error) {
-        console.error("Error fetching videos:", error);
+        const infoRes = await fetch(
+          `${API_BASE_URL}/get-infographic?student_id=${studentId}`
+        );
+        const infoData = await infoRes.json();
+        if (Array.isArray(infoData)) setInfographics(infoData);
+      } catch (err) {
+        console.error("Error fetching learning data:", err);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchVideos();
-  }, [studentId, setVideos]);
+    fetchData();
+  }, [studentId, setVideos, setInfographics]);
 
-  // ✅ Memoized filtered lists
   const videos = useMemo(
     () => videosStore.filter((v) => v.topic === topic),
     [videosStore, topic]
@@ -98,19 +87,17 @@ useEffect(() => {
     [quizzesStore, topic]
   );
 
-  // ✅ Progress calculation
   const allItems = [...videos, ...infographics, ...quizzes];
   const totalItems = allItems.length;
   const completedItems = allItems.filter((item) => item.isViewed).length;
   const progress = totalItems > 0 ? (completedItems / totalItems) * 100 : 0;
 
-  // Video card
   const renderVideo = ({ item, index }) => (
     <TouchableOpacity
       style={styles.card}
-      onPress={() => {
-        navigation.navigate("Veiwvideo", { videos, currentIndex: index });
-      }}
+      onPress={() =>
+        navigation.navigate("Veiwvideo", { videos, currentIndex: index })
+      }
     >
       <Image source={{ uri: item.image }} style={styles.cardImage} />
       <Text style={styles.cardTitle}>{item.title}</Text>
@@ -124,7 +111,6 @@ useEffect(() => {
     </TouchableOpacity>
   );
 
-  // Infographic card
   const renderInfographic = ({ item }) => (
     <View style={styles.infoCard}>
       <Image source={{ uri: item.image }} style={styles.infoImage} />
@@ -134,7 +120,6 @@ useEffect(() => {
         <TouchableOpacity
           style={[styles.viewBtn, item.isViewed && styles.completedBtn]}
           onPress={() => {
-            markInfographicViewed(item.id);
             navigation.navigate("Infographics", { infographic: item });
           }}
         >
@@ -146,7 +131,6 @@ useEffect(() => {
     </View>
   );
 
-  // Quiz card
   const renderQuiz = ({ item }) => (
     <View style={styles.quizCard}>
       <Image source={{ uri: item.image }} style={styles.quizImage} />
@@ -158,7 +142,6 @@ useEffect(() => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* ✅ Loader while fetching */}
       {loading ? (
         <View style={styles.loaderContainer}>
           <ActivityIndicator size="large" color="#E85A2A" />
@@ -166,7 +149,6 @@ useEffect(() => {
         </View>
       ) : (
         <ScrollView showsVerticalScrollIndicator={false}>
-          {/* Header */}
           <View style={styles.header}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <Arrowback width={24} height={24} fill="#fff" />
@@ -174,7 +156,6 @@ useEffect(() => {
             <Text style={styles.headerTitle}>{topic.toUpperCase()} Module</Text>
           </View>
 
-          {/* Progress */}
           <View style={styles.progressSection}>
             <Text style={styles.progressText}>
               Completed percentage: {progress.toFixed(0)}%
@@ -184,7 +165,6 @@ useEffect(() => {
             </View>
           </View>
 
-          {/* Videos */}
           <Text style={styles.sectionTitle}>VIDEOS</Text>
           <FlatList
             data={videos}
@@ -194,7 +174,6 @@ useEffect(() => {
             showsHorizontalScrollIndicator={false}
           />
 
-          {/* Infographics */}
           <Text style={styles.sectionTitle}>INFOGRAPHICS</Text>
           <FlatList
             data={infographics}
@@ -204,7 +183,6 @@ useEffect(() => {
             showsHorizontalScrollIndicator={false}
           />
 
-          {/* Quizzes */}
           <Text style={styles.sectionTitle}>QUIZZES</Text>
           <FlatList
             data={quizzes}
