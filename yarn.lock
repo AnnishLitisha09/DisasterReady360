@@ -2992,6 +2992,7 @@ __metadata:
     react-native-webview: ^13.16.0
     react-native-youtube-iframe: ^2.4.1
     react-test-renderer: 18.3.1
+    react-viro: ^2.17.0
     typescript: 5.0.4
     zustand: ^5.0.8
   languageName: unknown
@@ -8090,7 +8091,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.8.1":
+"prop-types@npm:^15.5.10, prop-types@npm:^15.8.1":
   version: 15.8.1
   resolution: "prop-types@npm:15.8.1"
   dependencies:
@@ -8390,6 +8391,18 @@ __metadata:
   peerDependencies:
     react: ^18.3.1
   checksum: e8e58e738835fab3801afb63f6bfe0fcf6e68ea39619fae5bdf47feefc36b1e4acb48c9dd139c7533611466eff1dfce6ffdda4b317e06aee663dda7d91438f26
+  languageName: node
+  linkType: hard
+
+"react-viro@npm:^2.17.0":
+  version: 2.17.0
+  resolution: "react-viro@npm:2.17.0"
+  dependencies:
+    prop-types: ^15.5.10
+  peerDependencies:
+    react: 16.8.3
+    react-native: 0.59.9
+  checksum: 1372d3eee0f7f323cfe796b1441f81ef0bf565caca8d7e36ccde707dde17fc4df1357645d3ff4ff0920a485f216bbbf0910f00ac75c1ced9ecd9998e0497c3fc
   languageName: node
   linkType: hard
 
