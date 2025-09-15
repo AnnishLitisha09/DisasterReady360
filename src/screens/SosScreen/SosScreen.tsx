@@ -139,7 +139,8 @@ useEffect(() => {
           console.error("Initial GPS error:", error);
           setAddress("Unable to get GPS location");
         },
-        { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+        { enableHighAccuracy: false, timeout: 30000, maximumAge: 10000 }
+
       );
 
       // Watch position
