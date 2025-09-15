@@ -1,3 +1,4 @@
+// screens/Dashboard.tsx
 import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView, Alert, TouchableOpacity, Linking } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { moderateScale } from '../../utils/scalingUtils';
@@ -5,22 +6,52 @@ import { EventCard, LearningModuleCard, PracticeModuleCard } from '../../compone
 import { useNavigation } from '@react-navigation/native';
 import { getAuthData } from '../../store/authStorage';
 import { Addicon, PersonIcon } from '../../assets/icons';
+import axios from 'axios';
 
+interface UserData {
+  user_id: number;
+  user_name: string;
+  email: string;
+  role: string;
+  student_id?: number;
+  institute_id?: number;
+  institute_name?: string;
+  address?: string;
+  rank?: number;
+  badge?: number;
+  total_avg?: number;
+  student_level?: number;
+}
 
 export const Dashboard = () => {
   const navigation = useNavigation();
   const [name, setName] = useState<string>('User');
   const [avatar, setAvatar] = useState<string | null>(null);
   const [role, setRole] = useState<string>('student');
+  const [userData, setUserData] = useState<UserData | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const authData = await getAuthData();
-      if (authData?.name) setName(authData.name);
-      if (authData?.avatar) setAvatar(authData.avatar);
-      if (authData?.role) setRole(authData.role);
+    const fetchUserData = async () => {
+      try {
+        const authData = await getAuthData();
+        if (!authData) return;
+
+        const userId = authData.user_id;
+
+        const response = await axios.get<UserData>(`http://10.10.189.191:8000/api/user-role/student/${userId}`);
+        const data = response.data;
+
+        setUserData(data);
+        setName(data.user_name || 'User');
+        setRole(data.role || 'student');
+        // Avatar can come from backend if available
+        setAvatar(authData.avatar || null);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
     };
-    fetchData();
+
+    fetchUserData();
   }, []);
 
   return (
@@ -52,15 +83,15 @@ export const Dashboard = () => {
               <View style={styles.achievementsRow}>
                 <View style={styles.item}>
                   <Image source={require('../../assets/images/badge.png')} style={styles.icon} />
-                  <Text style={styles.infoText}>3 Badges</Text>
+                  <Text style={styles.infoText}>{userData?.badge || 0} Badges</Text>
                 </View>
                 <View style={styles.item}>
                   <Image source={require('../../assets/images/rank.png')} style={styles.icon} />
-                  <Text style={styles.infoText}>300 Points</Text>
+                  <Text style={styles.infoText}>{userData?.total_avg || 0} Points</Text>
                 </View>
                 <View style={styles.item}>
                   <Image source={require('../../assets/images/star.png')} style={styles.icon} />
-                  <Text style={styles.infoText}>1st Rank</Text>
+                  <Text style={styles.infoText}>{userData?.rank || 0} Rank</Text>
                 </View>
               </View>
             )}
@@ -142,7 +173,6 @@ export const Dashboard = () => {
               venue="Main Auditorium"
               imageUrl="https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg"
               onJoin={() => Linking.openURL("https://mywebar.com/p/Project_3_e6gr9l6but")}
-              // onJoin={() => navigation.navigate("ArExperienceScreen")}
             />
             <PracticeModuleCard
               title="Fire Safety Drill"
@@ -179,42 +209,35 @@ export const Dashboard = () => {
               </TouchableOpacity>
             </View>
 
-            {/* Two Buttons in a row */}
             <View style={styles.teacherButtonsRow}>
-             <TouchableOpacity 
-  style={styles.teacherButton} 
-  onPress={() => navigation.navigate("AssignDrillScreen")}
->
-  <Addicon width={25} height={24} />
-  <Text style={styles.teacherButtonText}>Assign New Drill</Text>
-</TouchableOpacity>
-
+              <TouchableOpacity 
+                style={styles.teacherButton} 
+                onPress={() => navigation.navigate("AssignDrillScreen")}
+              >
+                <Addicon width={25} height={24} />
+                <Text style={styles.teacherButtonText}>Assign New Drill</Text>
+              </TouchableOpacity>
 
               <TouchableOpacity style={styles.teacherButton} onPress={() => navigation.navigate("ViewStudentsAccount")}>
-                 <PersonIcon/>
+                <PersonIcon/>
                 <Text style={styles.teacherButtonText}>View Student’s Account</Text>
               </TouchableOpacity>
             </View>
+
             <View style={styles.learningHeader1}>
               <View>
-                <Text style={styles.learningText}>UPCOMMING DRILLS</Text>
+                <Text style={styles.learningText}>UPCOMING DRILLS</Text>
               </View>
               <View>
                 <Text style={styles.viewAll}>View all</Text>
               </View>
             </View>
             <View>
-              <EventCard title={'Earthquake'} totalJoined={0} venue={' bit auditorium'} type={'Level 1 '} time={'12:00'} buttonOption={'editDelete'} date={'16-09-2025'} />
-               <EventCard title={'Earthquake'} totalJoined={0} venue={' bit auditorium'} type={'Level 1 '} time={'12:00'} buttonOption={'editDelete'} date={'16-09-2025'} />
-                <EventCard title={'Earthquake'} totalJoined={0} venue={' bit auditorium'} type={'Level 1 '} time={'12:00'} buttonOption={'editDelete'} date={'16-09-2025'} />
-                 <EventCard title={'Earthquake'} totalJoined={0} venue={' bit auditorium'} type={'Level 1 '} time={'12:00'} buttonOption={'editDelete'} date={'16-09-2025'} />
-                  <EventCard title={'Earthquake'} totalJoined={0} venue={' bit auditorium'} type={'Level 1 '} time={'12:00'} buttonOption={'editDelete'} date={'16-09-2025'} />
-                   <EventCard title={'Earthquake'} totalJoined={0} venue={' bit auditorium'} type={'Level 1 '} time={'12:00'} buttonOption={'editDelete'} date={'16-09-2025'} />
+              <EventCard title={'Earthquake'} totalJoined={0} venue={'bit auditorium'} type={'Level 1 '} time={'12:00'} buttonOption={'editDelete'} date={'16-09-2025'} />
+              <EventCard title={'Fire Drill'} totalJoined={0} venue={'bit auditorium'} type={'Level 2 '} time={'14:00'} buttonOption={'editDelete'} date={'17-09-2025'} />
             </View>
           </View>
-          
         )}
-
       </ScrollView>
 
       {role === 'student' && (
@@ -229,6 +252,7 @@ export const Dashboard = () => {
   );
 };
 
+// Styles remain the same as your previous code
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#F9F9F9' },
   header: {
@@ -288,37 +312,9 @@ const styles = StyleSheet.create({
   },
   teacherQuickActionIcon: { width: moderateScale(20), height: moderateScale(20), marginRight: moderateScale(5) },
   teacherQuickActionText: { fontSize: moderateScale(14), fontWeight: '700', color: '#000' },
-  teacherButtonsRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: moderateScale(15),
-  },
-  teacherButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#E35B33',
-    width: moderateScale(172),
-    height: moderateScale(57),
-    borderRadius: moderateScale(20),
-    elevation: 6,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    paddingHorizontal: moderateScale(10),
-    gap:moderateScale(6)
-  },
-  teacherButtonIcon: {
-    width: moderateScale(20),
-    height: moderateScale(20),
-    marginRight: moderateScale(8),
-  },
-  teacherButtonText: {
-    fontSize: moderateScale(16),
-    fontWeight: '700',
-    color: 'white',
-  },
+  teacherButtonsRow: { flexDirection: 'row', justifyContent: 'space-between', marginTop: moderateScale(15) },
+  teacherButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', backgroundColor: '#E35B33', width: moderateScale(172), height: moderateScale(57), borderRadius: moderateScale(20), elevation: 6, shadowColor: '#000', shadowOffset: { width: 0, height: 3 }, shadowOpacity: 0.2, shadowRadius: 4, paddingHorizontal: moderateScale(10), gap:moderateScale(6) },
+  teacherButtonText: { fontSize: moderateScale(16), fontWeight: '700', color: 'white' },
   sosButton: { position: 'absolute', bottom: moderateScale(30), right: moderateScale(20), backgroundColor: 'red', width: moderateScale(60), height: moderateScale(60), borderRadius: moderateScale(30), justifyContent: 'center', alignItems: 'center', elevation: 6, shadowColor: '#000', shadowOffset: { width: 0, height: 3 }, shadowOpacity: 0.3, shadowRadius: 4 },
   sosText: { color: '#fff', fontWeight: 'bold', fontSize: moderateScale(18) },
-}); 
+});
