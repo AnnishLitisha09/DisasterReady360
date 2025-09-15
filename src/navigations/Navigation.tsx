@@ -10,6 +10,7 @@ import { AssignDrillScreen, Dashboard, Getstarted, Infographics, LeaderboardPage
 import { getAuthData } from '../store/authStorage';
 
 import SosScreen from '../screens/SosScreen/SosScreen';
+import ArExperienceScreen from '../screens/Ar/ArExperienceScreen';
 
 const RootStack = createNativeStackNavigator();
 
@@ -56,6 +57,7 @@ export const Navigation = () => {
         <RootStack.Screen name="LeaderboardPage" component={LeaderboardPage} options={{ headerShown: false }}/>
         <RootStack.Screen name="ViewStudentsAccount" component={ViewStudentsAccount} options={{ headerShown: false }}/>
         <RootStack.Screen name="StudentTeacherDrill" component={StudentTeacherDrill} options={{ headerShown: false }}/>
+         <RootStack.Screen name="ArExperienceScreen" component={ArExperienceScreen} options={{ headerShown: false }}/>
       </RootStack.Navigator>
     </NavigationContainer>
   );

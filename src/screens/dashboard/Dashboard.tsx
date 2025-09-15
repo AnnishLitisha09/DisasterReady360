@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView, Alert, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView, Alert, TouchableOpacity, Linking } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { moderateScale } from '../../utils/scalingUtils';
 import { EventCard, LearningModuleCard, PracticeModuleCard } from '../../components';
@@ -11,7 +11,7 @@ export const Dashboard = () => {
   const navigation = useNavigation();
   const [name, setName] = useState<string>('User');
   const [avatar, setAvatar] = useState<string | null>(null);
-  const [role, setRole] = useState<string>('student'); // default to student
+  const [role, setRole] = useState<string>('student');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -141,7 +141,8 @@ export const Dashboard = () => {
               time="10:00 AM - 11:00 AM"
               venue="Main Auditorium"
               imageUrl="https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg"
-              onJoin={() => Alert.alert('Joined Earthquake Drill!')}
+              onJoin={() => Linking.openURL("https://mywebar.com/p/Project_3_e6gr9l6but")}
+              // onJoin={() => navigation.navigate("ArExperienceScreen")}
             />
             <PracticeModuleCard
               title="Fire Safety Drill"

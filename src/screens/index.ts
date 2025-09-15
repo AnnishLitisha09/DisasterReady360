@@ -10,4 +10,5 @@ export * from './Infographics';
 export * from './AssignDrillScreen';
 export * from './LeaderboardPage';
 export * from './StudentTeacherDrill';
+export * from './Ar';
 

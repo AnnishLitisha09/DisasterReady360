@@ -76,7 +76,7 @@ export const Otppage = () => {
       const data = await response.json();
 
       if (response.ok && data.message === 'Login successful') {
-        const { user_id, token, role } = data;
+        const { user_id, token, role, role_id} = data;
 
         // Step 2: Fetch user info to get name
         const userResponse = await fetch(`${API_BASE_URL}/users/${user_id}`);
@@ -87,6 +87,7 @@ export const Otppage = () => {
           token,
           role,
           user_id,
+          role_id,
           email,
           name: userData.name,
         });
