@@ -20,7 +20,7 @@ import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import { Camera } from "../../assets/icons/camera";
 import { Arrowback } from "../../assets/icons";
 import { moderateScale } from "../../utils/scalingUtils";
-import { getAuthData, saveAuthData } from "../../store/authStorage";
+import { getAuthData, saveAuthData, clearAuthData } from "../../store/authStorage";
 import { useNavigation } from "@react-navigation/native";
 
 const defaultAvatar = {
@@ -53,7 +53,6 @@ export default function Profile(): JSX.Element {
   const [avatarUri, setAvatarUri] = useState<any>(defaultAvatar);
   const [showCitySuggestions, setShowCitySuggestions] = useState(false);
 
-  // Load auth data including avatar
   useEffect(() => {
     const loadProfile = async () => {
       try {
@@ -116,8 +115,6 @@ export default function Profile(): JSX.Element {
     if (result.assets?.length) {
       const uri = result.assets[0].uri;
       setAvatarUri({ uri });
-
-      // Update AsyncStorage immediately
       const authData = await getAuthData();
       if (authData) await saveAuthData({ ...authData, avatar: uri });
     }
@@ -140,6 +137,18 @@ export default function Profile(): JSX.Element {
     });
   };
 
+  const onLogout = async () => {
+    try {
+      await clearAuthData();
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Getstarted" as never }],
+      });
+    } catch (e) {
+      console.warn("Failed to logout", e);
+    }
+  };
+
   return (
     <SafeAreaView style={styles.safe}>
       <StatusBar barStyle="dark-content" backgroundColor="#F5F5F6" />
@@ -149,6 +158,10 @@ export default function Profile(): JSX.Element {
             <Arrowback />
           </TouchableOpacity>
           <Text style={styles.screenTitle}>Edit Profile</Text>
+
+          <TouchableOpacity onPress={onLogout} style={styles.logoutButton}>
+            <Text style={styles.logoutText}>Logout</Text>
+          </TouchableOpacity>
         </View>
 
         <View style={styles.avatarWrap}>
@@ -228,9 +241,29 @@ export default function Profile(): JSX.Element {
 
 const styles = StyleSheet.create({
   safe: { flex: 1, backgroundColor: "#F5F5F6" },
-  container: { paddingHorizontal: moderateScale(20), paddingBottom: moderateScale(50), paddingTop: moderateScale(18), alignItems: "center", marginTop: moderateScale(30) },
-  headerRow: { flexDirection: "row", alignItems: "center", width: "100%", marginBottom: moderateScale(30) },
-  screenTitle: { fontSize: moderateScale(18), fontWeight: "700", color: "#111111", marginLeft: moderateScale(12) },
+  container: {
+    paddingHorizontal: moderateScale(20),
+    paddingBottom: moderateScale(50),
+    paddingTop: moderateScale(18),
+    alignItems: "center",
+    marginTop: moderateScale(30),
+  },
+  headerRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+    marginBottom: moderateScale(30),
+    justifyContent: "space-between",
+  },
+  screenTitle: {
+    fontSize: moderateScale(18),
+    fontWeight: "700",
+    color: "#111111",
+    marginLeft: moderateScale(12),
+    flex: 1,
+  },
+  logoutButton: { paddingHorizontal: moderateScale(8), paddingVertical: moderateScale(4) },
+  logoutText: { color: "red", fontSize: moderateScale(14), fontWeight: "600" },
   avatarWrap: { marginBottom: moderateScale(18), alignItems: "center", width: "100%" },
   avatarTouchable: { position: "relative" },
   avatarBorder: {
@@ -267,8 +300,34 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   form: { width: "100%", marginTop: moderateScale(6) },
-  saveButton: { marginTop: moderateScale(22), width: "100%", backgroundColor: "#FF6B3A", paddingVertical: moderateScale(14), borderRadius: moderateScale(12), alignItems: "center", justifyContent: "center", shadowColor: "#000", shadowOpacity: 0.12, shadowRadius: moderateScale(8), shadowOffset: { width: 0, height: moderateScale(6) }, elevation: 4 },
+  saveButton: {
+    marginTop: moderateScale(22),
+    width: "100%",
+    backgroundColor: "#FF6B3A",
+    paddingVertical: moderateScale(14),
+    borderRadius: moderateScale(12),
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
+    shadowOpacity: 0.12,
+    shadowRadius: moderateScale(8),
+    shadowOffset: { width: 0, height: moderateScale(6) },
+    elevation: 4,
+  },
   saveButtonText: { color: "#FFFFFF", fontSize: moderateScale(16), fontWeight: "700" },
-  cityItem: { padding: moderateScale(10), backgroundColor: "#fff", borderBottomWidth: 1, borderColor: "#eee" },
-  cityList: { maxHeight: moderateScale(120), borderWidth: 1, borderColor: "#ccc", marginTop: -moderateScale(8), marginBottom: moderateScale(10), borderRadius: moderateScale(6), backgroundColor: "#fff" },
+  cityItem: {
+    padding: moderateScale(10),
+    backgroundColor: "#fff",
+    borderBottomWidth: 1,
+    borderColor: "#eee",
+  },
+  cityList: {
+    maxHeight: moderateScale(120),
+    borderWidth: 1,
+    borderColor: "#ccc",
+    marginTop: -moderateScale(8),
+    marginBottom: moderateScale(10),
+    borderRadius: moderateScale(6),
+    backgroundColor: "#fff",
+  },
 });

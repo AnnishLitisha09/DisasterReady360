@@ -40,7 +40,7 @@ const initialVideos = [
   duration: '8:40 min',
   videoId: 'hWSu4l1RxLg',
   image: 'https://imgs.search.brave.com/Z7nRcfYYRNCgkmokNf77HuQVUqfyilACG4H0mEwBqBA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZndkLmNvbS5waC9p/bWFnZXMvdjMvYXNz/ZXRzL2JsdDlkMjQ1/MDU1OTcyZmRlNGUv/Ymx0MzI2YWRkMzhh/MGUxYmYxOC82ODA5/ZTRiMWU0MWIxZjI4/MmFiYmFkYTQvRWFy/dGhxdWFrZV9TYWZl/dHkucG5n',
-  isViewed: false,
+  isViewed: true,
 },
 {
   id: '3',
@@ -60,7 +60,7 @@ const initialVideos = [
   duration: '17:27 min',
   videoId: 'S6BFw4ZURZQ',
   image: 'https://imgs.search.brave.com/i5eUhRVnCf7_l2a_lGPzU-KSgtjmQQyXMavq9_YGvpY/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/c2h1dHRlcnN0b2Nr/LmNvbS9pbWFnZS12/ZWN0b3IvZWFydGhx/dWFrZS1zYWZldHkt/cnVsZXMtaW5zdHJ1/Y3Rpb24tY2FzZS0y/NjBudy0yMTUyMjYx/OTA3LmpwZw',
-  isViewed: false,
+  isViewed: true,
 },
 {
   id: '4',
@@ -80,7 +80,7 @@ const initialVideos = [
   duration: '5:54 min',
   videoId: 'MllUVQM3KVk',
   image: 'https://imgs.search.brave.com/S-Qxt9hRo3pyowJD9FI4OrvL__dVuVZLnde7GTZENTA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/Zm9vdHByaW50c2Vk/dWNhdGlvbi5pbi9i/bG9nL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDI0LzA4L0VhcnRo/cXVha2Utc2FmZXR5/LWZvci1jaGlsZHJl/bi0xMjAweDY3OC5q/cGc',
-  isViewed: false,
+  isViewed: true,
 },
 {
   id: '5',
@@ -100,7 +100,7 @@ const initialVideos = [
   duration: '6:23 min',
   videoId: 'd3K_5ZSyEBA',
   image: 'https://imgs.search.brave.com/HIKDu-ibFfmoDfXcPJaUBnQ5nOr53FLQ34hueOk82wI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/c2xpZGVzaGFyZWNk/bi5jb20vc3NfdGh1/bWJuYWlscy9lYXJ0/aHF1YWtlc2FmZXR5/ZmluYWwtMjUwNDI4/MDQyMjEwLWI3NjMw/NTc0LXRodW1ibmFp/bC5qcGc_d2lkdGg9/NTYwJmZpdD1ib3Vu/ZHM',
-  isViewed: false,
+  isViewed: true,
 },
 {
   id: '6',
@@ -120,7 +120,7 @@ const initialVideos = [
   duration: '4:32 min',
   videoId: 'xqbQ-CFgrbQ',
   image: 'https://imgs.search.brave.com/Hd32HdDtVTA4KK8_plO945tKzXu8EeQXzZwytadf5X4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hbGxo/YW5kc2FuZGhlYXJ0/cy5vcmcvd3AtY29u/dGVudC91cGxvYWRz/LzIwMjUvMDcvTWV4/aWNvX0VhcnRocXVh/a2VfUmVsaWVmX0dh/bGxlcnlfMy1zY2Fs/ZWQud2VicA',
-  isViewed: false,
+  isViewed: true,
 },
   {
     id: '1',
@@ -485,7 +485,7 @@ const initialInfographics = [
     title: 'Drop, Cover, Hold on',
     subtitle: 'Cover the topic properly',
     image:
-      'https://imgs.search.brave.com/0kxTBcvuYmqfNI97wGmL9SsNbMYXNoCrQFYWZMQaJoY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTQz/NjQ0ODg4L3Bob3Rv/L2VhcnRocXVha2Uu/anBnP3M9NjEyeDYx/MiZ3PTAmaz0yMCZj/PWFhZGFkM1U2S2Ey/dTk5YWhXQk9Ndkxl/bjJpS0daM2oxQ09Y/eHBQTjJndE09',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIUN1zYayHpkivisKlND5-YcOQBHTu4vTJGQ&s',
     isViewed: true,
     description:
       'This infographic teaches the correct procedure during an earthquake to minimize injuries and stay safe.',
@@ -497,12 +497,11 @@ const initialInfographics = [
       'Avoid windows and heavy objects.',
     ],
     infographicsImages: [
-      'https://imgs.search.brave.com/kcT1M1USBhWqKxOfvI8FQFw5qcCNzbN0mY2heyn6gZA/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9lYXJ0/aHF1YWtlLWFoZWFk/LXZpZXctaG91c2Ut/ZGlzdHJveWVkLXNp/Z24tMzc3NjIxNjMu/anBn',
-      'https://imgs.search.brave.com/XKF7YfU1t4HH8TwxABm0YirEXK7_7Oen66dH0zJFvrQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/c2h1dHRlcnN0b2Nr/LmNvbS9pbWFnZS1w/aG90by9lYXJ0aHF1/YWtlLXdhdmUtbW9y/b2Njby1tYXAtMjYw/bnctMjM1OTI4NzA4/Ny5qcGc',
-      'https://imgs.search.brave.com/4mIbwcKoKQny86YZtNxLgKkMpHPI2wfCI81KIbk8I_k/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTIw/MTIwNzUwOC9waG90/by9kZXN0cm95ZWQt/Y2l0eXNjYXBlLmpw/Zz9zPTYxMng2MTIm/dz0wJms9MjAmYz1X/QWhlMUZ6Q1Ffb0RZ/LVU1bzZYLWdmSllN/UU83cXdSQk1VQzNf/UkVIT3pZPQ',
-      'https://imgs.search.brave.com/8ZRF6n9DrJ4qav8AcS7AQyUX2xWMecBgzdie0bavIJ4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTM0/NDUwMjUzNi9waG90/by9hZXJpYWwtdmll/dy1vZi1jaXR5LXN0/cmVldC5qcGc_cz02/MTJ4NjEyJnc9MCZr/PTIwJmM9UnJwUE4x/Q2FvbmFxcHE1S3VX/T1lZSVYwYVdYLUta/OGZHbFloZ1VIa1U4/MD0',
-      'https://imgs.search.brave.com/Wm8tM-gHmLVbbvWJ1wcYR-wMr7wRKJZecdhP6B6fRSo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy9k/L2RiL1F1YWtlX2Vw/aWNlbnRlcnNfMTk2/My05OC5wbmc',
-      'https://imgs.search.brave.com/u7d2Ew9cJd90ao2Qz0dUsBy0Nbe7v4EN7KltCp3NZX8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJzLmNvbS9p/bWFnZXMvaGQvZWFy/dGhxdWFrZS1waWN0/dXJlcy1zNGFueXJt/YWtpZG5zOThxLmpw/Zw',
+      'https://cusec.org/wp-content/uploads/Drop_ENG_Blue_Orange.png',
+      'https://www.earthquakecountry.org/library/DCHo_B_Cover_EN_BlueOrange_RGB.png',
+      'https://cusec.org/wp-content/uploads/HoldOn_ENG_Blue_Orange.png',
+      'https://www.civildefence.govt.nz/assets/Uploads/documents/publications/consistent-messages/earthquake/drop-cover-hold__ResizedImageWzMwMCwyNjJd.png',
+      'https://www.wikihow.com/images/thumb/a/a2/React-During-an-Earthquake-Step-2.jpg/v4-460px-React-During-an-Earthquake-Step-2.jpg',
     ],
   },
     {
@@ -511,7 +510,7 @@ const initialInfographics = [
     title: 'If You’re Indoors',
     subtitle: 'Cover the topic properly',
     image:
-      'https://imgs.search.brave.com/K-19lU9EO6oMvooV3g6GIcRPImb2qWq8BO8SvhYvMIs/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTQ5/MDQ0MzY0Ny92ZWN0/b3IvY2hhcmFjdGVy/cy1vYnNlcnZlLWVh/cnRocXVha2Utc2Fm/ZXR5LXJ1bGVzLWRy/b3AtY292ZXItaG9s/ZC1vbi1zdGF5LWF3/YXktZnJvbS13aW5k/b3dzLXVzZS5qcGc_/cz02MTJ4NjEyJnc9/MCZrPTIwJmM9OGwy/NFl5aTlyMUVENUE5/OHMwMmJyUTJGRFN5/eXZsSTM5cDYxMzd0/eGdqdz0',
+      'https://thumb.ac-illust.com/99/9938f3314af59dcb3357f28b9c220806_t.jpeg',
     isViewed: true,
     description:
       'This infographic teaches the correct procedure during an earthquake to minimize injuries and stay safe.',
@@ -523,10 +522,10 @@ const initialInfographics = [
       'Stay in a safe room if possible.',
     ],
     infographicsImages: [
-    'https://imgs.search.brave.com/n-FxoG0nipXoC77j-4XVLJwblpGBpXEGzUQw780f2E4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTI0/MzYzMTAwMy9waG90/by9wYXNzZW5nZXJz/LXJhbi1vdXQtb2Yt/dGhlLWludGVybmF0/aW9uYWwtdGVybWlu/YWwtYWlycG9ydC1i/dWlsZGluZy1kdXJp/bmctdGhlLWVhcnRo/cXVha2UuanBnP3M9/NjEyeDYxMiZ3PTAm/az0yMCZjPU9Lb0t5/QXFxVGlnOEhrekhn/d2kxMTJvM3VUczQ1/VU4yZ0JTcktsWEJQ/OHc9',
-    'https://imgs.search.brave.com/7BOngF6vYC4RMSjRgS5m7KjqiF15zy8ruPZBMTNIEpo/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTcy/MTQ3MjY3My9waG90/by93dXhpLWNoaW5h/LW9jdG9iZXItMTMt/MjAyMy1wcmltYXJ5/LXNjaG9vbC1zdHVk/ZW50cy10YWtlLXBh/cnQtaW4tYW4tZWFy/dGhxdWFrZS1zaW11/bGF0aW9uLmpwZz9z/PTYxMng2MTImdz0w/Jms9MjAmYz1UN0hy/Wk9SdVpSQXZPcFJz/VzM3aDM5SzFKZFlY/d2pQbXFRZHhkMHlB/WFNnPQ',
-    'https://imgs.search.brave.com/zRpq6qtzOYhMNdTlVXP_whSIKWUsXUHLVwGBf0QCB0E/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTM0/Nzk1MTE3Ny9waG90/by9tYW5oYXR0YW4t/YmVhY2gtY2EtdGhp/cmQtZ3JhZGUtc3R1/ZGVudHMtaW4tbXJz/LWpvcmRhbi11MjAx/OXMtY2xhc3MtdW5k/ZXItdGhlaXItZGVz/a3MtYXMtdGhleS5q/cGc_cz02MTJ4NjEy/Jnc9MCZrPTIwJmM9/OG5OdkxUdUJHQ240/UHlKU3NQOTZ2Vm5L/amk3cVpENGtVWHBx/SGdpQ3BBbz0',
-   
+      'https://www.wikihow.com/images/thumb/2/2a/React-During-an-Earthquake-Step-4.jpg/v4-460px-React-During-an-Earthquake-Step-4.jpg',
+    'https://en.pimg.jp/108/234/352/1/108234352.jpg',
+    'https://t4.ftcdn.net/jpg/06/32/25/85/360_F_632258589_fHQIsIXfXCPtLITflcVlO0aly7fS64hm.jpg',
+    'https://www.wikihow.com/images/thumb/2/29/React-During-an-Earthquake-Step-9.jpg/v4-460px-React-During-an-Earthquake-Step-9.jpg',
     ],
   },
 
@@ -548,10 +547,10 @@ const initialInfographics = [
       'Wait for the shaking to completely stop.',
     ],
     infographicsImages: [
-    'https://imgs.search.brave.com/efePxXgRXrbgWbT9WjQjFH-UbMo0FKr_01brBpR7Ncg/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jYXNz/ZXR0ZS5zcGhkaWdp/dGFsLmNvbS5zZy9p/bWFnZS9zdHJhaXRz/dGltZXMvMjQ4ZjYz/NjRmYmI2ZTNiZTcx/OGU0MzE0NzRjOWNk/MTA1Y2I2YzliZjA5/YTNlNDQ3ZTFmY2E0/Mjk1NWRlNDFlYw',
-    'https://imgs.search.brave.com/famvXWytEkDlY2tdscUIuikw19Ddej1Lpm7LIGzFyBQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jYS10/aW1lcy5icmlnaHRz/cG90Y2RuLmNvbS9k/aW1zNC9kZWZhdWx0/L2Y1NDcxNjkvMjE0/NzQ4MzY0Ny9zdHJp/cC90cnVlL2Nyb3Av/NjAwMHg0MDAwKzAr/MC9yZXNpemUvODQw/eDU2MCEvcXVhbGl0/eS83NS8_dXJsPWh0/dHBzOi8vY2FsaWZv/cm5pYS10aW1lcy1i/cmlnaHRzcG90LnMz/LmFtYXpvbmF3cy5j/b20vNjgvMGUvODQ4/N2M2ZjM0ZDhjYjZj/NDZjMmZiYjllNjll/OS9hcDI1MjQ0NDU1/NzEwMjIwLmpwZw',
-    'https://imgs.search.brave.com/MgGYrACsSQzqqkTO9kLtNEhzccGGsjYVqUDmGU6B-ns/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9kaW1z/LmFwbmV3cy5jb20v/ZGltczQvZGVmYXVs/dC9jODM4NWQ0LzIx/NDc0ODM2NDcvc3Ry/aXAvdHJ1ZS9jcm9w/LzMzNzh4MjI1MCsw/KzEvcmVzaXplLzU5/OXgzOTkhL3F1YWxp/dHkvOTAvP3VybD1o/dHRwczovL2Fzc2V0/cy5hcG5ld3MuY29t/LzRiLzc0LzM5ZTBm/ZmJkZDQxNWNiYjZi/Y2EzNWUyODI1YmUv/MmJjYzU1NjUyOTdi/NDNlZTg4ZDAxOGJj/MzcyZjczYmU',
-   
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5MIS23PXwaTgq71CaU9GaNcFgU4HicMgPOPusGZfgxRBQvpW3zN4BPBs0vDGY5VTVJxM&usqp=CAU',
+    'https://tabunka.tokyo-tsunagari.or.jp/information/images/study/event_of_earthquake_03.jpg',
+    'https://www.csueastbay.edu/riskmanagement/files/images/emergency-management/outside-during-earthquake-image.png',
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5piGfuV5UML1uKTu1Yymfd--ObdcMonItkKp3DZ2w3idtgLQrpah44KkkAcKaKMMOvB8&usqp=CAU',
     ],
   },
 
@@ -562,7 +561,7 @@ const initialInfographics = [
     subtitle: 'Cover the topic properly',
     image:
       'https://imgs.search.brave.com/8DbFviGMS_fiwRbBxd49_E7DWwkhStm6MKScB8cPZrc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pLm5h/dGdlb2ZlLmNvbS9u/LzEyN2NiZjhiLTNl/NDQtNDY1OC05MTYy/LWIwYjEyNWM0MDE3/Mi8yMTY5NS5qcGc',
-    isViewed: false,
+    isViewed: true,
     description:
       'This infographic teaches the correct procedure during an earthquake to minimize injuries and stay safe.',
     keyPoints: [
@@ -573,10 +572,12 @@ const initialInfographics = [
       'Prepare for aftershocks.',
     ],
     infographicsImages: [
-   'https://www.shutterstock.com/image-photo/adana-turkey-february-6th-2023-earthquake-2259123939',
-   'https://www.shutterstock.com/image-photo/disaster-supply-kit-earthquake-on-white-2135418785',
-   'https://www.shutterstock.com/image-photo/search-rescue-forces-through-destroyed-building-607347791',
-    ],
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmti7JYO2OKJmxblxUuW831mAWCvn3zE4Y9tCwNrnQw6V9zHOwDjzrWZJb1JrpBSQOlDY&usqp=CAU',
+      'https://img.freepik.com/premium-vector/vector-illustration-earthquake-natural-disaster-evacuation_149195-96.jpg',
+      'https://media.istockphoto.com/id/505553013/vector/earthquake-evacuation-parent-and-child-preparation.jpg?s=612x612&w=0&k=20&c=dkwz4mNA46VbM07V96T9GEuGuwndBgRwqehuBBnjCmk=',
+   'https://t.pimg.jp/082/083/348/1/82083348.jpg',
+  'https://media.istockphoto.com/id/510997857/vector/rescue-teams-searching-through-the-destroyed-buildings.jpg?s=612x612&w=0&k=20&c=ROyryGVFL4egbOe74GRqR4iDiOgXujk4Hl13vlLjok0=',
+  ],
   },
 
   {
@@ -597,11 +598,11 @@ const initialInfographics = [
       'Prepare for aftershocks.',
     ],
     infographicsImages: [
-  'https://www.shutterstock.com/image-vector/people-preparing-earthquake-japanese-kanji-characterjishinearthquakebousaidisaster-2414757647',
-  'https://imgs.search.brave.com/GDcwdUxZRQQD2HO6msDbm4uogMBRiQGq2rY_Gk6AZaw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTQy/NTI5NzMxNi9waG90/by9wZW9wbGUtZ2F0/aGVyLW91dHNpZGUt/YW5kLXJlY2VpdmUt/bWVkaWNhbC1hdHRl/bnRpb24tYWZ0ZXIt/YS03LTctbWFnbml0/dWRlLXF1YWtlLXRo/YXQtc3RydWNrLmpw/Zz9zPTYxMng2MTIm/dz0wJms9MjAmYz1C/RkRETlFubXBiUWc2/dWxwNFRkWEp5NTJs/M1VaODZDMEVIRFVL/YzRkeFJVPQ',
-  'https://imgs.search.brave.com/3GL4eCaupzLSVFcoK106avt5G2jXRXdlwBUPin_Q7oU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/c2h1dHRlcnN0b2Nr/LmNvbS9pbWFnZS1w/aG90by9kaXNhc3Rl/ci1wcmVwYXJlZG5l/c3MtY2hlY2tsaXN0/LW9uLWNsaXBib2Fy/ZC0yNjBudy0xNDI3/NTY0OTQyLmpwZw'
-
-    ],
+      'https://www.fdma.go.jp/relocation/bousai_manual/e/images_lat/20.jpg',
+  'https://media.istockphoto.com/id/524374394/vector/emergency-disaster-kit.jpg?s=612x612&w=0&k=20&c=9ei7-Qk-l21PqdyTiu8hcJnQbszwXyhqw9LFX52fuaM=',
+'https://thumbs.dreamstime.com/b/case-earthquake-emergency-plan-icons-set-human-pictogram-representing-action-preparedness-48834877.jpg',
+   'https://www.wikihow.com/images/thumb/f/fc/Act-After-an-Earthquake-Step-2-Version-2.jpg/v4-460px-Act-After-an-Earthquake-Step-2-Version-2.jpg',
+],
   },
 
   {
@@ -994,7 +995,17 @@ const initialQuizzes = [
     points: '500 points',
     image:
       'https://png.pngtree.com/thumb_back/fh260/background/20250205/pngtree-soft-pastel-floral-design-light-blue-background-image_16896113.jpg',
-    isViewed: true,
+    isViewed: false,
+  },
+    {
+    id: '10',
+    topic: 'earthquake',
+    title: 'Earthquake Safety Quiz',
+    questions: '20 questions',
+    points: '500 points',
+    image:
+      'https://png.pngtree.com/thumb_back/fh260/background/20250205/pngtree-soft-pastel-floral-design-light-blue-background-image_16896113.jpg',
+    isViewed: false,
   },
   {
     id: '2',
