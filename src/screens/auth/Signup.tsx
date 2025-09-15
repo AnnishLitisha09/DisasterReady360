@@ -9,8 +9,12 @@ import {
   SafeAreaView,
   Alert,
   ActivityIndicator,
+  PermissionsAndroid,
+  Platform,
 } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
+import Geolocation from "@react-native-community/geolocation";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { moderateScale } from "../../utils/scalingUtils";
 import { useNavigation } from "@react-navigation/native";
 import { Arrowback } from "../../assets/icons";
@@ -26,16 +30,128 @@ export const Signup = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // ✅ Location state (only city)
+  const [location, setLocation] = useState("");
+  const [locLoading, setLocLoading] = useState(false);
+
   const { districts, selectedDistrict, fetchDistricts, setDistrict } =
     useDistrictStore();
-  const { institutes, selectedInstitute, fetchInstitutes, setSelectedInstitute } =
-    useInstituteStore();
+  const {
+    institutes,
+    selectedInstitute,
+    fetchInstitutes,
+    setSelectedInstitute,
+  } = useInstituteStore();
 
+  // 🔹 Ask for location permission
+  const requestLocationPermission = async () => {
+    if (Platform.OS === "android") {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: "Location Permission",
+          message: "We need access to your location to fetch your city",
+          buttonPositive: "OK",
+        }
+      );
+      return granted === PermissionsAndroid.RESULTS.GRANTED;
+    }
+    return true;
+  };
+
+  // 🔹 Fetch only city using OpenStreetMap
+  const fetchCity = async (lat, lon) => {
+    try {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&addressdetails=1`,
+        {
+          headers: {
+            "User-Agent": "DisasterReady360/1.0 (support@dr360.com)",
+          },
+        }
+      );
+      const data = await response.json();
+      if (data && data.address) {
+        const cityName =
+          data.address.city ||
+          data.address.town ||
+          data.address.village ||
+          data.address.hamlet ||
+          data.address.state || // fallback
+          "";
+        setLocation(cityName || "City not found");
+        if (cityName) await AsyncStorage.setItem("lastCity", cityName);
+      } else {
+        setLocation("City not found");
+      }
+    } catch (error) {
+      console.error("OSM fetch error", error);
+      setLocation("Unable to fetch city");
+    } finally {
+      setLocLoading(false);
+    }
+  };
+
+  // 🔹 Load last city instantly if available
+  useEffect(() => {
+    AsyncStorage.getItem("lastCity").then((savedCity) => {
+      if (savedCity) setLocation(savedCity);
+    });
+  }, []);
+
+  // 🔹 Location updates only for student role
   useEffect(() => {
     if (role === "community") fetchDistricts();
     if (role === "student" || role === "teacher") fetchInstitutes();
+
+    let watchId;
+
+    const startLocationUpdates = async () => {
+      setLocLoading(true);
+      const granted = await requestLocationPermission();
+      if (!granted) {
+        setLocLoading(false);
+        Alert.alert("Permission denied", "Location permission is required");
+        return;
+      }
+
+      // First quick fetch (coarse location)
+      Geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          fetchCity(latitude, longitude);
+        },
+        (error) => {
+          console.error("Location error", error);
+          setLocLoading(false);
+          setLocation("Unable to fetch city");
+        },
+        { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 }
+      );
+
+      // Start watching for refined updates
+      watchId = Geolocation.watchPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          fetchCity(latitude, longitude);
+        },
+        (error) => {
+          console.error("Watch error", error);
+        },
+        { enableHighAccuracy: true, distanceFilter: 50, interval: 60000 }
+      );
+    };
+
+    if (role === "student") startLocationUpdates();
+
+    return () => {
+      if (watchId != null) {
+        Geolocation.clearWatch(watchId);
+      }
+    };
   }, [role]);
 
+  // 🔹 Handle Signup
   const handleSignup = async () => {
     if (!role || !name || !email) {
       Alert.alert("Error", "Please fill all required fields");
@@ -44,7 +160,16 @@ export const Signup = () => {
 
     let payload = { name, email, role };
 
-    if (role === "student" || role === "teacher") {
+    if (role === "student") {
+      payload.location = location; // ✅ sending city
+      if (!selectedInstitute) {
+        Alert.alert("Error", "Please select an institution");
+        return;
+      }
+      payload.institute_id = selectedInstitute;
+    }
+
+    if (role === "teacher") {
       if (!selectedInstitute) {
         Alert.alert("Error", "Please select an institution");
         return;
@@ -144,11 +269,29 @@ export const Signup = () => {
                 <Text style={styles.label}>Select Institution</Text>
                 <RNPickerSelect
                   onValueChange={(value) => setSelectedInstitute(value)}
-                  items={institutes} // ✅ already normalized in store
+                  items={institutes}
                   value={selectedInstitute}
                   placeholder={{ label: "Select Institution", value: null }}
                   style={pickerStyle}
                 />
+              </>
+            )}
+
+            {/* Auto Location field for student */}
+            {role === "student" && (
+              <>
+                <Text style={styles.label}>City</Text>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <TextInput
+                    style={[styles.input, { flex: 1 }]}
+                    value={locLoading ? "" : location}
+                    editable={false}
+                    placeholder="Fetching city..."
+                  />
+                  {locLoading && (
+                    <ActivityIndicator style={{ marginLeft: 10 }} />
+                  )}
+                </View>
               </>
             )}
 
@@ -157,7 +300,7 @@ export const Signup = () => {
                 <Text style={styles.label}>Select District</Text>
                 <RNPickerSelect
                   onValueChange={(value) => setDistrict(value)}
-                  items={districts} // ✅ already formatted in store
+                  items={districts}
                   value={selectedDistrict}
                   placeholder={{ label: "Select District", value: null }}
                   style={pickerStyle}
