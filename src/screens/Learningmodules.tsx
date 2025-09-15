@@ -32,38 +32,38 @@ export const Learningmodules = () => {
 
   const setVideos = useLearningStore((state) => state.setVideos);
   const setInfographics = useLearningStore((state) => state.setInfographics);
-  const markInfographicViewed = useLearningStore(
-    (state) => state.markInfographicViewed
-  );
+  const setQuizzes = useLearningStore((state) => state.setQuizzes);
 
   // Fetch studentId from AsyncStorage
   useEffect(() => {
     const fetchStudentId = async () => {
       const authData = await getAuthData();
-      if (authData && authData.role_id) setStudentId(authData.role_id);
+      if (authData && authData.user_id) setStudentId(authData.user_id);
       else setStudentId(null);
     };
     fetchStudentId();
   }, []);
 
-  // Fetch videos and infographics
+  // Fetch videos, infographics, and quizzes
   useEffect(() => {
     if (!studentId) return;
 
     const fetchData = async () => {
       setLoading(true);
       try {
-        const videosRes = await fetch(
-          `${API_BASE_URL}/get-topics?student_id=${studentId}`
-        );
-        const videosData = await videosRes.json();
-        if (Array.isArray(videosData)) setVideos(videosData);
+        const [videosRes, infoRes, quizzesRes] = await Promise.all([
+          fetch(`${API_BASE_URL}/get-topics?student_id=${studentId}`),
+          fetch(`${API_BASE_URL}/get-infographic?student_id=${studentId}`),
+          fetch(`${API_BASE_URL}/get-quizzes?student_id=${studentId}`),
+        ]);
 
-        const infoRes = await fetch(
-          `${API_BASE_URL}/get-infographic?student_id=${studentId}`
-        );
+        const videosData = await videosRes.json();
         const infoData = await infoRes.json();
+        const quizzesData = await quizzesRes.json();
+
+        if (Array.isArray(videosData)) setVideos(videosData);
         if (Array.isArray(infoData)) setInfographics(infoData);
+        if (Array.isArray(quizzesData)) setQuizzes(quizzesData);
       } catch (err) {
         console.error("Error fetching learning data:", err);
       } finally {
@@ -72,7 +72,7 @@ export const Learningmodules = () => {
     };
 
     fetchData();
-  }, [studentId, setVideos, setInfographics]);
+  }, [studentId, setVideos, setInfographics, setQuizzes]);
 
   const videos = useMemo(
     () => videosStore.filter((v) => v.topic === topic),

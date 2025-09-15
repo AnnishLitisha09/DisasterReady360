@@ -5,22 +5,12 @@ import axios from "axios";
 // ✅ Centralized API Base URL
 import { API_BASE_URL } from "../config/apiConfig";
 
-// Use base URL for endpoints
+// Endpoints
 const VIDEOS_API_URL = `${API_BASE_URL}/get-topics`;
 const INFO_API_URL = `${API_BASE_URL}/get-infographic`;
+const QUIZZES_API_URL = `${API_BASE_URL}/get-quizzes`;
 
-const initialQuizzes = [
-  {
-    id: "1",
-    topic: "earthquake",
-    title: "Earthquake Safety Quiz",
-    questions: "20 questions",
-    points: "500 points",
-    image:
-      "https://png.pngtree.com/thumb_back/fh260/background/20250205/pngtree-soft-pastel-floral-design-light-blue-background-image_16896113.jpg",
-    isViewed: false,
-  },
-];
+const initialQuizzes = [];
 
 export const useLearningStore = create((set) => ({
   videos: [],
@@ -53,9 +43,23 @@ export const useLearningStore = create((set) => ({
     }
   },
 
+  // ✅ Fetch quizzes
+  fetchQuizzes: async (student_id: number) => {
+    set({ loading: true, error: null });
+    try {
+      const res = await axios.get(`${QUIZZES_API_URL}?student_id=${student_id}`);
+      set({ quizzes: res.data, loading: false });
+    } catch (err) {
+      console.error("Error fetching quizzes:", err);
+      set({ error: err.message, loading: false });
+    }
+  },
+
   // ✅ Mutations
   setVideos: (videos) => set({ videos }),
   setInfographics: (infographics) => set({ infographics }),
+  setQuizzes: (quizzes) => set({ quizzes }),
+
   markVideoViewed: (videoId) =>
     set((state) => ({
       videos: state.videos.map((v) =>
@@ -66,6 +70,12 @@ export const useLearningStore = create((set) => ({
     set((state) => ({
       infographics: state.infographics.map((i) =>
         i.id === id ? { ...i, isViewed: true } : i
+      ),
+    })),
+  markQuizViewed: (id) =>
+    set((state) => ({
+      quizzes: state.quizzes.map((q) =>
+        q.id === id ? { ...q, isViewed: true } : q
       ),
     })),
 
