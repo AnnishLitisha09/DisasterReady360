@@ -38,7 +38,7 @@ export const Dashboard = () => {
 
         const userId = authData.user_id;
 
-        const response = await axios.get<UserData>(`http://10.10.189.191:8000/api/user-role/student/${userId}`);
+        const response = await axios.get<UserData>(`http://10.10.118.165:8000/api/user-role/student/${userId}`);
         const data = response.data;
 
         setUserData(data);

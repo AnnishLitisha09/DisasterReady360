@@ -62,7 +62,7 @@ const handleMarkCompleted = async () => {
 
   // Log CURL equivalent
   const curlCommand = `
-curl -X POST http://10.10.189.191:8000/api/update-infographic-progress \\
+curl -X POST http://10.10.118.165:8000/api/update-infographic-progress \\
 -H "Content-Type: application/json" \\
 -d '${JSON.stringify(payload)}'
   `;
@@ -70,7 +70,7 @@ curl -X POST http://10.10.189.191:8000/api/update-infographic-progress \\
 
   try {
     await axios.post(
-      "http://10.10.189.191:8000/api/update-infographic-progress",
+      "http://10.10.118.165:8000/api/update-infographic-progress",
       payload
     );
 
