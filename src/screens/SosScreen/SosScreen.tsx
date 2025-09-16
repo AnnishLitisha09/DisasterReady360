@@ -1,4 +1,3 @@
-// screens/SosScreen.tsx
 import React, { useState, useEffect } from "react";
 import {
   View,
@@ -11,7 +10,7 @@ import {
 import Geolocation from "@react-native-community/geolocation";
 import { SosButton } from "../../components";
 import { Arrowback } from "../../assets/icons";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useIsFocused } from "@react-navigation/native"; // ✅ added useIsFocused
 import { moderateScale } from "../../utils/scalingUtils";
 import Sound from "react-native-sound";
 import { getAuthData } from "../../store/authStorage";
@@ -24,6 +23,7 @@ let sosSound: Sound | null = null;
 
 export default function SosScreen() {
   const navigation = useNavigation();
+  const isFocused = useIsFocused(); // ✅ detect if screen focused
   const [sosPressed, setSosPressed] = useState(false);
   const [location, setLocation] = useState<any>(null);
   const [address, setAddress] = useState<string>("Fetching location...");
@@ -41,7 +41,6 @@ export default function SosScreen() {
         console.log("✅ Siren loaded from bundle");
       }
     );
-
     return () => {
       sosSound?.release();
     };
@@ -60,6 +59,14 @@ export default function SosScreen() {
     sosSound?.stop();
   };
 
+  // ✅ Auto-stop SOS when screen loses focus
+  useEffect(() => {
+    if (!isFocused) {
+      stopSOS();
+      setSosPressed(false); // reset color to orange
+    }
+  }, [isFocused]);
+
   // 🔹 Send location to backend
   const updateUserLocation = async (location: string) => {
     try {
@@ -68,19 +75,16 @@ export default function SosScreen() {
         console.warn("⚠️ No user_id found in storage");
         return;
       }
-
-const response = await fetch(`${API_BASE_URL}/update-location`, {
-  method: "PUT",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    user_id: authData.user_id,
-    location,
-  }),
-});
-
-
+      const response = await fetch(`${API_BASE_URL}/update-location`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_id: authData.user_id,
+          location,
+        }),
+      });
       if (!response.ok) {
         console.error("❌ Failed to update location:", await response.text());
       } else {
@@ -186,8 +190,6 @@ const response = await fetch(`${API_BASE_URL}/update-location`, {
       watchId = Geolocation.watchPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-
-          // ✅ Only update if coordinates changed significantly (~11m)
           if (
             lastLat === null ||
             lastLng === null ||
@@ -202,7 +204,12 @@ const response = await fetch(`${API_BASE_URL}/update-location`, {
           }
         },
         (error) => console.error("GPS watch error:", error),
-        { enableHighAccuracy: true, distanceFilter: 0, interval: 5000, fastestInterval: 2000 }
+        {
+          enableHighAccuracy: true,
+          distanceFilter: 0,
+          interval: 5000,
+          fastestInterval: 2000,
+        }
       );
     })();
 
@@ -258,7 +265,7 @@ const response = await fetch(`${API_BASE_URL}/update-location`, {
         <SosButton
           onPress={handleSOSPress}
           size={200}
-          color={sosPressed ? "#333333" : "#ef5908ff"}
+          color={sosPressed ? "#333333" : "#ef5908ff"} // ✅ orange when not pressed
           iconColor={sosPressed ? "#ef5908ff" : "#fff"}
           textColor="#fff"
         />
