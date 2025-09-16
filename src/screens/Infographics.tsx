@@ -16,6 +16,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import axios from "axios";
 import { getAuthData } from "../store/authStorage";
 import { useLearningStore } from "../store/LearningStore";
+import { API_BASE_URL } from "../config/apiConfig";
 
 const { width } = Dimensions.get("window");
 
@@ -70,7 +71,7 @@ curl -X POST http://10.10.189.191:8000/api/update-infographic-progress \\
 
   try {
     await axios.post(
-      "http://10.10.189.191:8000/api/update-infographic-progress",
+     `${API_BASE_URL}/update-infographic-progress`,
       payload
     );
 
