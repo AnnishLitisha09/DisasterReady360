@@ -163,24 +163,29 @@ useEffect(() => {
                   title="Earthquake"
                   imageUrl="https://cdn-icons-png.flaticon.com/512/854/854929.png"
                   progress={calculateProgress("earthquake")}
+                  bannerText="Important" 
+                  // disabled
                   onPress={() => navigation.navigate('Learningmodules', { topic: 'earthquake' })}
                 />
                 <LearningModuleCard
                   title="Fire"
                   imageUrl="https://t3.ftcdn.net/jpg/02/35/26/30/360_F_235263034_miJw2igmixo7ymCqhHZ7c8wp9kaujzfM.jpg"
                   progress={calculateProgress("fire")}
+                  disabled
                   onPress={() => navigation.navigate('Learningmodules', { topic: 'fire' })}
                 />
                 <LearningModuleCard
                   title="Flood"
                   imageUrl="https://cdn-icons-png.flaticon.com/512/3439/3439089.png"
                    progress={calculateProgress("flood")}
+                   disabled
                   onPress={() => navigation.navigate('Learningmodules', { topic: 'flood' })}
                 />
                 <LearningModuleCard
                   title="Cyclone"
                   imageUrl="https://www.shutterstock.com/image-vector/icon-tornadoes-linear-flat-style-600nw-552867940.jpg"
                   progress={calculateProgress("cyclone")}
+                  disabled
                   onPress={() => navigation.navigate('Learningmodules', { topic: 'cyclone' })}
                 />
               </ScrollView>
