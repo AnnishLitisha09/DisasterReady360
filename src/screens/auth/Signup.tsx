@@ -30,8 +30,8 @@ export const Signup = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // ✅ Location state (only city)
-  const [location, setLocation] = useState("");
+  // ✅ Only House + Road state
+  const [address, setAddress] = useState("");
   const [locLoading, setLocLoading] = useState(false);
 
   const { districts, selectedDistrict, fetchDistricts, setDistrict } =
@@ -50,7 +50,7 @@ export const Signup = () => {
         PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
         {
           title: "Location Permission",
-          message: "We need access to your location to fetch your city",
+          message: "We need access to your location to fetch your address",
           buttonPositive: "OK",
         }
       );
@@ -59,8 +59,8 @@ export const Signup = () => {
     return true;
   };
 
-  // 🔹 Fetch only city using OpenStreetMap
-  const fetchCity = async (lat, lon) => {
+  // 🔹 Fetch only House + Road using OpenStreetMap (road trimmed at first hyphen)
+  const fetchAddress = async (lat, lon) => {
     try {
       const response = await fetch(
         `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json&addressdetails=1`,
@@ -71,31 +71,38 @@ export const Signup = () => {
         }
       );
       const data = await response.json();
+
       if (data && data.address) {
-        const cityName =
-          data.address.city ||
-          data.address.town ||
-          data.address.village ||
-          data.address.hamlet ||
-          data.address.state || // fallback
-          "";
-        setLocation(cityName || "City not found");
-        if (cityName) await AsyncStorage.setItem("lastCity", cityName);
+        let { house_number, road } = data.address;
+
+        // ✅ Trim the road at first hyphen
+        if (road && road.includes("-")) {
+          road = road.split("-")[0].trim();
+        }
+
+        // Combine house number + road
+        let addr = "";
+        if (house_number || road) {
+          addr = `${house_number || ""} ${road || ""}`.trim();
+        }
+
+        setAddress(addr || "Address not found");
+        if (addr) await AsyncStorage.setItem("lastAddress", addr);
       } else {
-        setLocation("City not found");
+        setAddress("Address not found");
       }
     } catch (error) {
       console.error("OSM fetch error", error);
-      setLocation("Unable to fetch city");
+      setAddress("Unable to fetch address");
     } finally {
       setLocLoading(false);
     }
   };
 
-  // 🔹 Load last city instantly if available
+  // 🔹 Load last address instantly if available
   useEffect(() => {
-    AsyncStorage.getItem("lastCity").then((savedCity) => {
-      if (savedCity) setLocation(savedCity);
+    AsyncStorage.getItem("lastAddress").then((savedAddress) => {
+      if (savedAddress) setAddress(savedAddress);
     });
   }, []);
 
@@ -115,25 +122,25 @@ export const Signup = () => {
         return;
       }
 
-      // First quick fetch (coarse location)
+      // Quick one-time fetch
       Geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          fetchCity(latitude, longitude);
+          fetchAddress(latitude, longitude);
         },
         (error) => {
           console.error("Location error", error);
           setLocLoading(false);
-          setLocation("Unable to fetch city");
+          setAddress("Unable to fetch address");
         },
         { enableHighAccuracy: false, timeout: 10000, maximumAge: 60000 }
       );
 
-      // Start watching for refined updates
+      // Continuous updates
       watchId = Geolocation.watchPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          fetchCity(latitude, longitude);
+          fetchAddress(latitude, longitude);
         },
         (error) => {
           console.error("Watch error", error);
@@ -161,7 +168,7 @@ export const Signup = () => {
     let payload = { name, email, role };
 
     if (role === "student") {
-      payload.location = location; // ✅ sending city
+      payload.location = address; // ✅ only house + road
       if (!selectedInstitute) {
         Alert.alert("Error", "Please select an institution");
         return;
@@ -215,14 +222,8 @@ export const Signup = () => {
 
   return (
     <SafeAreaView style={styles.safeContainer}>
-      <ScrollView
-        contentContainerStyle={styles.container}
-        keyboardShouldPersistTaps="handled"
-      >
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => navigation.goBack()}
-        >
+      <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
+        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <Arrowback width={moderateScale(24)} height={moderateScale(24)} />
         </TouchableOpacity>
 
@@ -277,20 +278,18 @@ export const Signup = () => {
               </>
             )}
 
-            {/* Auto Location field for student */}
+            {/* Auto Address for student */}
             {role === "student" && (
               <>
-                <Text style={styles.label}>City</Text>
+                <Text style={styles.label}>Location</Text>
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
                   <TextInput
                     style={[styles.input, { flex: 1 }]}
-                    value={locLoading ? "" : location}
+                    value={locLoading ? "" : address}
                     editable={false}
-                    placeholder="Fetching city..."
+                    placeholder="Fetching address..."
                   />
-                  {locLoading && (
-                    <ActivityIndicator style={{ marginLeft: 10 }} />
-                  )}
+                  {locLoading && <ActivityIndicator style={{ marginLeft: 10 }} />}
                 </View>
               </>
             )}
@@ -338,6 +337,7 @@ export const Signup = () => {
   );
 };
 
+// 🔹 Styles remain same
 const styles = StyleSheet.create({
   safeContainer: {
     flex: 1,
