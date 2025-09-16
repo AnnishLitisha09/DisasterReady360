@@ -38,7 +38,7 @@ export const Learningmodules = () => {
   useEffect(() => {
     const fetchStudentId = async () => {
       const authData = await getAuthData();
-      if (authData && authData.user_id) setStudentId(authData.user_id);
+      if (authData && authData.user_id) setStudentId(authData.role_id);
       else setStudentId(null);
     };
     fetchStudentId();

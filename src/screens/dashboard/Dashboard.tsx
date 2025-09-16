@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { getAuthData } from '../../store/authStorage';
 import { Addicon, PersonIcon } from '../../assets/icons';
 import axios from 'axios';
+import { useLearningStore } from '../../store/LearningStore';
 
 interface UserData {
   user_id: number;
@@ -29,30 +30,52 @@ export const Dashboard = () => {
   const [avatar, setAvatar] = useState<string | null>(null);
   const [role, setRole] = useState<string>('student');
   const [userData, setUserData] = useState<UserData | null>(null);
+  // ✅ Progress calculation for a topic
+const calculateProgress = (topic: string) => {
+  const { videos, infographics, quizzes } = useLearningStore.getState();
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const authData = await getAuthData();
-        if (!authData) return;
+  const items = [
+    ...videos.filter((v) => v.topic === topic),
+    ...infographics.filter((i) => i.topic === topic),
+    ...quizzes.filter((q) => q.topic === topic),
+  ];
 
+  const totalItems = items.length;
+  const completedItems = items.filter((item) => item.isViewed).length;
+
+  return totalItems > 0 ? Math.round((completedItems / totalItems) * 100) : 0;
+};
+
+
+
+useEffect(() => {
+  const fetchUserData = async () => {
+    try {
+      const authData = await getAuthData();
+      if (!authData) return;
+
+      // ✅ Always set from auth storage
+      setName(authData.name || 'User');
+      setRole(authData.role || 'student');
+      setAvatar(authData.avatar || null);
+
+      // 👉 Only fetch student data if role is student
+      if (authData.role === 'student') {
         const userId = authData.user_id;
-
-        const response = await axios.get<UserData>(`http://10.10.118.165:8000/api/user-role/student/${userId}`);
+        const response = await axios.get<UserData>(
+          `http://10.10.189.191:8000/api/user-role/student/${userId}`
+        );
         const data = response.data;
-
         setUserData(data);
-        setName(data.user_name || 'User');
-        setRole(data.role || 'student');
-        // Avatar can come from backend if available
-        setAvatar(authData.avatar || null);
-      } catch (error) {
-        console.error('Error fetching user data:', error);
       }
-    };
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  };
 
-    fetchUserData();
-  }, []);
+  fetchUserData();
+}, []);
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -138,25 +161,25 @@ export const Dashboard = () => {
                 <LearningModuleCard
                   title="Earthquake"
                   imageUrl="https://cdn-icons-png.flaticon.com/512/854/854929.png"
-                  progress={65}
+                  progress={calculateProgress("earthquake")}
                   onPress={() => navigation.navigate('Learningmodules', { topic: 'earthquake' })}
                 />
                 <LearningModuleCard
                   title="Fire"
                   imageUrl="https://t3.ftcdn.net/jpg/02/35/26/30/360_F_235263034_miJw2igmixo7ymCqhHZ7c8wp9kaujzfM.jpg"
-                  progress={40}
+                  progress={calculateProgress("fire")}
                   onPress={() => navigation.navigate('Learningmodules', { topic: 'fire' })}
                 />
                 <LearningModuleCard
                   title="Flood"
                   imageUrl="https://cdn-icons-png.flaticon.com/512/3439/3439089.png"
-                  progress={80}
+                   progress={calculateProgress("flood")}
                   onPress={() => navigation.navigate('Learningmodules', { topic: 'flood' })}
                 />
                 <LearningModuleCard
                   title="Cyclone"
                   imageUrl="https://www.shutterstock.com/image-vector/icon-tornadoes-linear-flat-style-600nw-552867940.jpg"
-                  progress={55}
+                  progress={calculateProgress("cyclone")}
                   onPress={() => navigation.navigate('Learningmodules', { topic: 'cyclone' })}
                 />
               </ScrollView>
