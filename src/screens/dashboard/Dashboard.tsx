@@ -8,6 +8,7 @@ import { getAuthData } from '../../store/authStorage';
 import { Addicon, PersonIcon } from '../../assets/icons';
 import axios from 'axios';
 import { useLearningStore } from '../../store/LearningStore';
+import { API_BASE_URL } from '../../config/apiConfig';
 
 interface UserData {
   user_id: number;
@@ -63,7 +64,7 @@ useEffect(() => {
       if (authData.role === 'student') {
         const userId = authData.user_id;
         const response = await axios.get<UserData>(
-          `http://10.10.189.191:8000/api/user-role/student/${userId}`
+          `${API_BASE_URL}/user-role/student/${userId}`
         );
         const data = response.data;
         setUserData(data);
