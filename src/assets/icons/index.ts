@@ -18,3 +18,5 @@ export * from './copyicon';
 export * from  './Deleteicon';
 export * from './Check';
 export * from './Down';
+export * from './generateQuizIcon';
+export * from './Clockicon';

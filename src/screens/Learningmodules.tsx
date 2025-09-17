@@ -132,12 +132,22 @@ export const Learningmodules = () => {
   );
 
   const renderQuiz = ({ item }) => (
-    <View style={styles.quizCard}>
+    <TouchableOpacity
+      style={styles.quizCard}
+      onPress={() =>
+        navigation.navigate("GeneratingQuizScreen", {
+          topic: item.title, // pass module/topic
+          quizId: item.id, // assuming item.id is your quiz id
+          studentId,       // we already fetched this in state
+          name: item.title,
+        })
+      }
+    >
       <Image source={{ uri: item.image }} style={styles.quizImage} />
       <Text style={styles.cardTitle}>{item.title}</Text>
       <Text style={styles.quizSubtitle}>{item.questions}</Text>
       <Text style={styles.points}>{item.points}</Text>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
