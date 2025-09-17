@@ -4,11 +4,14 @@ import React, { useEffect, useState } from 'react';
 import { moderateScale } from '../../utils/scalingUtils';
 import { EventCard, LearningModuleCard, PracticeModuleCard } from '../../components';
 import { useNavigation } from '@react-navigation/native';
-import { getAuthData } from '../../store/authStorage';
+import { getAuthData, saveAuthData } from '../../store/authStorage';
 import { Addicon, PersonIcon } from '../../assets/icons';
 import axios from 'axios';
 import { useLearningStore } from '../../store/LearningStore';
 import { API_BASE_URL } from '../../config/apiConfig';
+import { useFocusEffect } from '@react-navigation/native';
+import { useCallback } from 'react';
+
 
 interface UserData {
   user_id: number;
@@ -31,8 +34,7 @@ export const Dashboard = () => {
   const [avatar, setAvatar] = useState<string | null>(null);
   const [role, setRole] = useState<string>('student');
   const [userData, setUserData] = useState<UserData | null>(null);
-  // ✅ Progress calculation for a topic
-const calculateProgress = (topic: string) => {
+  const calculateProgress = (topic: string) => {
   const { videos, infographics, quizzes } = useLearningStore.getState();
 
   const items = [
@@ -49,33 +51,38 @@ const calculateProgress = (topic: string) => {
 
 
 
-useEffect(() => {
-  const fetchUserData = async () => {
-    try {
-      const authData = await getAuthData();
-      if (!authData) return;
+useFocusEffect(
+  useCallback(() => {
+    const fetchUserData = async () => {
+      try {
+        const authData = await getAuthData();
+        if (!authData) return;
 
-      // ✅ Always set from auth storage
-      setName(authData.name || 'User');
-      setRole(authData.role || 'student');
-      setAvatar(authData.avatar || null);
+        setName(authData.name || 'User');
+        setRole(authData.role || 'student');
+        setAvatar(authData.avatar || null);
 
-      // 👉 Only fetch student data if role is student
-      if (authData.role === 'student') {
-        const userId = authData.user_id;
-        const response = await axios.get<UserData>(
-          `${API_BASE_URL}/user-role/student/${userId}`
-        );
-        const data = response.data;
-        setUserData(data);
+        if (authData.role === 'student') {
+          const userId = authData.user_id;
+          const response = await axios.get<UserData>(
+            `${API_BASE_URL}/user-role/student/${userId}`
+          );
+
+          setUserData(response.data);
+
+          await saveAuthData({
+            ...authData,
+            ...response.data, // ensures badge, rank, total_avg, etc. are updated
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
       }
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    }
-  };
+    };
 
-  fetchUserData();
-}, []);
+    fetchUserData();
+  }, [])
+);
 
 
   return (
@@ -150,7 +157,6 @@ useEffect(() => {
           </View>
         </View>
 
-        {/* Learning & Practice Sections for Students */}
         {role === 'student' && (
           <View style={styles.learningWrapper}>
             <View style={styles.learningHeader}>
@@ -172,6 +178,7 @@ useEffect(() => {
                   imageUrl="https://t3.ftcdn.net/jpg/02/35/26/30/360_F_235263034_miJw2igmixo7ymCqhHZ7c8wp9kaujzfM.jpg"
                   progress={calculateProgress("fire")}
                   disabled
+                  
                   onPress={() => navigation.navigate('Learningmodules', { topic: 'fire' })}
                 />
                 <LearningModuleCard
@@ -341,8 +348,8 @@ const styles = StyleSheet.create({
   },
   teacherQuickActionIcon: { width: moderateScale(20), height: moderateScale(20), marginRight: moderateScale(5) },
   teacherQuickActionText: { fontSize: moderateScale(14), fontWeight: '700', color: '#000' },
-  teacherButtonsRow: { flexDirection: 'row', justifyContent: 'space-between', marginTop: moderateScale(15) },
-  teacherButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', backgroundColor: '#E35B33', width: moderateScale(172), height: moderateScale(57), borderRadius: moderateScale(20), elevation: 6, shadowColor: '#000', shadowOffset: { width: 0, height: 3 }, shadowOpacity: 0.2, shadowRadius: 4, paddingHorizontal: moderateScale(10), gap:moderateScale(6) },
+  teacherButtonsRow: { flexDirection: 'row', justifyContent: 'space-between', marginTop: moderateScale(15), gap:moderateScale(10) },
+  teacherButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', backgroundColor: '#E35B33', width: moderateScale(162), height: moderateScale(57), borderRadius: moderateScale(20), elevation: 6, shadowColor: '#000', shadowOffset: { width: 0, height: 3 }, shadowOpacity: 0.2, shadowRadius: 4, paddingHorizontal: moderateScale(10), gap:moderateScale(6) },
   teacherButtonText: { fontSize: moderateScale(16), fontWeight: '700', color: 'white' },
   sosButton: { position: 'absolute', bottom: moderateScale(30), right: moderateScale(20), backgroundColor: 'red', width: moderateScale(60), height: moderateScale(60), borderRadius: moderateScale(30), justifyContent: 'center', alignItems: 'center', elevation: 6, shadowColor: '#000', shadowOffset: { width: 0, height: 3 }, shadowOpacity: 0.3, shadowRadius: 4 },
   sosText: { color: '#fff', fontWeight: 'bold', fontSize: moderateScale(18) },

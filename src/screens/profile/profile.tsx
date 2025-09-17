@@ -53,25 +53,31 @@ export default function Profile(): JSX.Element {
   const [avatarUri, setAvatarUri] = useState<any>(defaultAvatar);
   const [showCitySuggestions, setShowCitySuggestions] = useState(false);
 
-  useEffect(() => {
-    const loadProfile = async () => {
-      try {
-        const authData = await getAuthData();
-        if (authData) {
-          setFormData((prev) => ({
-            ...prev,
-            Name: authData.name || prev.Name,
-            Email: authData.email || prev.Email,
-          }));
-          if (authData.avatar) setAvatarUri({ uri: authData.avatar });
-          if (authData.role) setRole(authData.role as Role);
-        }
-      } catch (e) {
-        console.warn("Failed to load profile", e);
+useEffect(() => {
+  const loadProfile = async () => {
+    try {
+      const authData = await getAuthData();
+      if (authData) {
+        setFormData((prev) => ({
+          ...prev,
+          Name: authData.name || prev.Name,
+          "Institution Name": authData.institute_name || prev["Institution Name"],
+          Email: authData.email || prev.Email,
+        }));
+
+        // 👇 Console the Institution Name
+        // console.log("Institution Name from authData:", authData.institute_id);
+
+        if (authData.avatar) setAvatarUri({ uri: authData.avatar });
+        if (authData.role) setRole(authData.role as Role);
       }
-    };
-    loadProfile();
-  }, []);
+    } catch (e) {
+      console.warn("Failed to load profile", e);
+    }
+  };
+  loadProfile();
+}, []);
+
 
   const handleChange = (field: string, value: string) => {
     setFormData((p) => ({ ...p, [field]: value }));
