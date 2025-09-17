@@ -26,21 +26,21 @@ useEffect(() => {
     }
 
     const payload = {
-    student_id: studentId,
-    quiz_id: quizId,
-    earned_points: score * 20,
-  };
+      quiz_id: quizId,
+      points: score * 20,
+      isViewed: true,
+    };
 
-  const curlCommand = `
-  curl -X POST \\
-    ${API_BASE_URL}/update-quiz-progress \\
-    -H "Content-Type: application/json" \\
-    -d '${JSON.stringify(payload)}'
-  `;
-  console.log('CURL Request:\n', curlCommand);
+    const curlCommand = `
+      curl -X POST \\
+        ${API_BASE_URL}/update-quiz-progress/${studentId} \\
+        -H "Content-Type: application/json" \\
+        -d '${JSON.stringify(payload)}'
+    `;
+    console.log('CURL Request:\n', curlCommand);
 
     try {
-      const res = await fetch(`${API_BASE_URL}/update-quiz-progress`, {
+      const res = await fetch(`${API_BASE_URL}/update-quiz-progress/${studentId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -54,7 +54,7 @@ useEffect(() => {
       const data = await res.json();
       console.log('✅ Progress updated:', data);
 
-      // TODO: If you use Zustand for quizzes, call markQuizCompleted(quizId) here
+      // TODO: mark quiz completed in Zustand if needed
     } catch (err) {
       console.error('❌ Error marking quiz completed:', err);
       Alert.alert('Error', 'Failed to update quiz progress.');

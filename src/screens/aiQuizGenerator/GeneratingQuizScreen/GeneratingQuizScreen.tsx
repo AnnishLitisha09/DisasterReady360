@@ -18,8 +18,8 @@ export const GeneratingQuizScreen: React.FC = () => {
       console.warn('⚠️ No topic provided!');
     }
   }, [topic]);
-const OPENAI_API_KEY =
-  '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';
+// const OPENAI_API_KEY =
+//   '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';
 
     const fetchWithRetry = async (url: string, options: any, retries = 3, delay = 2000) => {
     for (let i = 0; i < retries; i++) {
