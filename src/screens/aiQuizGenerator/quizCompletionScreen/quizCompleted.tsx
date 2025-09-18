@@ -25,10 +25,11 @@ useEffect(() => {
       return;
     }
 
+    const points = score * 20;
     const payload = {
       quiz_id: quizId,
-      points: score * 20,
-      isViewed: true,
+      points,
+      isViewed: points >= 240, // ✅ true if >= 240 else false
     };
 
     const curlCommand = `
@@ -53,8 +54,6 @@ useEffect(() => {
 
       const data = await res.json();
       console.log('✅ Progress updated:', data);
-
-      // TODO: mark quiz completed in Zustand if needed
     } catch (err) {
       console.error('❌ Error marking quiz completed:', err);
       Alert.alert('Error', 'Failed to update quiz progress.');
@@ -63,6 +62,7 @@ useEffect(() => {
 
   updateProgress();
 }, []);
+
 
   const handleBackToHome = () => navigation.navigate('Dashboard');
 
